@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/data/models/specialist_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,7 +12,7 @@ class SpecalistDatasource {
   Future<Either<String, List<SpecialistModel>>> getSpecalist() async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.baseUrl}/api/specialists'),
+        Uri.parse('${dotenv.env['BASE_URL']}/api/specialists'),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

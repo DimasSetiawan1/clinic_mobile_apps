@@ -12,7 +12,8 @@ part of 'add_doctor_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AddDoctorEvent {
@@ -20,47 +21,42 @@ mixin _$AddDoctorEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(DoctorRequestModel doctor) addDoctor,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(DoctorRequestModel doctor)? addDoctor,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(DoctorRequestModel doctor)? addDoctor,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_addDoctor value) addDoctor,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_addDoctor value)? addDoctor,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_addDoctor value)? addDoctor,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AddDoctorEventCopyWith<$Res> {
   factory $AddDoctorEventCopyWith(
-          AddDoctorEvent value, $Res Function(AddDoctorEvent) then) =
-      _$AddDoctorEventCopyWithImpl<$Res, AddDoctorEvent>;
+    AddDoctorEvent value,
+    $Res Function(AddDoctorEvent) then,
+  ) = _$AddDoctorEventCopyWithImpl<$Res, AddDoctorEvent>;
 }
 
 /// @nodoc
@@ -80,8 +76,9 @@ class _$AddDoctorEventCopyWithImpl<$Res, $Val extends AddDoctorEvent>
 /// @nodoc
 abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+    _$StartedImpl value,
+    $Res Function(_$StartedImpl) then,
+  ) = __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -89,8 +86,9 @@ class __$$StartedImplCopyWithImpl<$Res>
     extends _$AddDoctorEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+    _$StartedImpl _value,
+    $Res Function(_$StartedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -185,8 +183,9 @@ abstract class _Started implements AddDoctorEvent {
 /// @nodoc
 abstract class _$$addDoctorImplCopyWith<$Res> {
   factory _$$addDoctorImplCopyWith(
-          _$addDoctorImpl value, $Res Function(_$addDoctorImpl) then) =
-      __$$addDoctorImplCopyWithImpl<$Res>;
+    _$addDoctorImpl value,
+    $Res Function(_$addDoctorImpl) then,
+  ) = __$$addDoctorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DoctorRequestModel doctor});
 }
@@ -196,22 +195,23 @@ class __$$addDoctorImplCopyWithImpl<$Res>
     extends _$AddDoctorEventCopyWithImpl<$Res, _$addDoctorImpl>
     implements _$$addDoctorImplCopyWith<$Res> {
   __$$addDoctorImplCopyWithImpl(
-      _$addDoctorImpl _value, $Res Function(_$addDoctorImpl) _then)
-      : super(_value, _then);
+    _$addDoctorImpl _value,
+    $Res Function(_$addDoctorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? doctor = null,
-  }) {
-    return _then(_$addDoctorImpl(
-      null == doctor
-          ? _value.doctor
-          : doctor // ignore: cast_nullable_to_non_nullable
-              as DoctorRequestModel,
-    ));
+  $Res call({Object? doctor = null}) {
+    return _then(
+      _$addDoctorImpl(
+        null == doctor
+            ? _value.doctor
+            : doctor // ignore: cast_nullable_to_non_nullable
+                as DoctorRequestModel,
+      ),
+    );
   }
 }
 
@@ -330,16 +330,14 @@ mixin _$AddDoctorState {
     required TResult Function() loading,
     required TResult Function(String doctor) success,
     required TResult Function(String errorMessage) failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String doctor)? success,
     TResult? Function(String errorMessage)? failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -347,24 +345,21 @@ mixin _$AddDoctorState {
     TResult Function(String doctor)? success,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -372,15 +367,15 @@ mixin _$AddDoctorState {
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AddDoctorStateCopyWith<$Res> {
   factory $AddDoctorStateCopyWith(
-          AddDoctorState value, $Res Function(AddDoctorState) then) =
-      _$AddDoctorStateCopyWithImpl<$Res, AddDoctorState>;
+    AddDoctorState value,
+    $Res Function(AddDoctorState) then,
+  ) = _$AddDoctorStateCopyWithImpl<$Res, AddDoctorState>;
 }
 
 /// @nodoc
@@ -400,8 +395,9 @@ class _$AddDoctorStateCopyWithImpl<$Res, $Val extends AddDoctorState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -409,8 +405,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$AddDoctorStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorState
   /// with the given fields replaced by the non-null parameter values.
@@ -517,8 +514,9 @@ abstract class _Initial implements AddDoctorState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+    _$LoadingImpl value,
+    $Res Function(_$LoadingImpl) then,
+  ) = __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -526,8 +524,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$AddDoctorStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
+    _$LoadingImpl _value,
+    $Res Function(_$LoadingImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorState
   /// with the given fields replaced by the non-null parameter values.
@@ -634,8 +633,9 @@ abstract class _Loading implements AddDoctorState {
 /// @nodoc
 abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+    _$SuccessImpl value,
+    $Res Function(_$SuccessImpl) then,
+  ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String doctor});
 }
@@ -645,22 +645,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
     extends _$AddDoctorStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
-      : super(_value, _then);
+    _$SuccessImpl _value,
+    $Res Function(_$SuccessImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? doctor = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == doctor
-          ? _value.doctor
-          : doctor // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? doctor = null}) {
+    return _then(
+      _$SuccessImpl(
+        null == doctor
+            ? _value.doctor
+            : doctor // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 
@@ -786,8 +787,9 @@ abstract class _Success implements AddDoctorState {
 /// @nodoc
 abstract class _$$FailureImplCopyWith<$Res> {
   factory _$$FailureImplCopyWith(
-          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
-      __$$FailureImplCopyWithImpl<$Res>;
+    _$FailureImpl value,
+    $Res Function(_$FailureImpl) then,
+  ) = __$$FailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String errorMessage});
 }
@@ -797,22 +799,23 @@ class __$$FailureImplCopyWithImpl<$Res>
     extends _$AddDoctorStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
-      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
-      : super(_value, _then);
+    _$FailureImpl _value,
+    $Res Function(_$FailureImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AddDoctorState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? errorMessage = null,
-  }) {
-    return _then(_$FailureImpl(
-      null == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? errorMessage = null}) {
+    return _then(
+      _$FailureImpl(
+        null == errorMessage
+            ? _value.errorMessage
+            : errorMessage // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 

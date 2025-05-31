@@ -12,7 +12,8 @@ part of 'login_google_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$LoginGoogleEvent {
@@ -20,53 +21,42 @@ mixin _$LoginGoogleEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String idToken) loginGoogle,
-    required TResult Function(String idToken) checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String idToken)? loginGoogle,
-    TResult? Function(String idToken)? checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String idToken)? loginGoogle,
-    TResult Function(String idToken)? checkAuth,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoginGoogle value) loginGoogle,
-    required TResult Function(_LoginGoogle value) checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoginGoogle value)? loginGoogle,
-    TResult? Function(_LoginGoogle value)? checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoginGoogle value)? loginGoogle,
-    TResult Function(_LoginGoogle value)? checkAuth,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LoginGoogleEventCopyWith<$Res> {
   factory $LoginGoogleEventCopyWith(
-          LoginGoogleEvent value, $Res Function(LoginGoogleEvent) then) =
-      _$LoginGoogleEventCopyWithImpl<$Res, LoginGoogleEvent>;
+    LoginGoogleEvent value,
+    $Res Function(LoginGoogleEvent) then,
+  ) = _$LoginGoogleEventCopyWithImpl<$Res, LoginGoogleEvent>;
 }
 
 /// @nodoc
@@ -86,8 +76,9 @@ class _$LoginGoogleEventCopyWithImpl<$Res, $Val extends LoginGoogleEvent>
 /// @nodoc
 abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+    _$StartedImpl value,
+    $Res Function(_$StartedImpl) then,
+  ) = __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -95,8 +86,9 @@ class __$$StartedImplCopyWithImpl<$Res>
     extends _$LoginGoogleEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+    _$StartedImpl _value,
+    $Res Function(_$StartedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -126,7 +118,6 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String idToken) loginGoogle,
-    required TResult Function(String idToken) checkAuth,
   }) {
     return started();
   }
@@ -136,7 +127,6 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String idToken)? loginGoogle,
-    TResult? Function(String idToken)? checkAuth,
   }) {
     return started?.call();
   }
@@ -146,7 +136,6 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String idToken)? loginGoogle,
-    TResult Function(String idToken)? checkAuth,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -160,7 +149,6 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoginGoogle value) loginGoogle,
-    required TResult Function(_LoginGoogle value) checkAuth,
   }) {
     return started(this);
   }
@@ -170,7 +158,6 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoginGoogle value)? loginGoogle,
-    TResult? Function(_LoginGoogle value)? checkAuth,
   }) {
     return started?.call(this);
   }
@@ -180,7 +167,6 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoginGoogle value)? loginGoogle,
-    TResult Function(_LoginGoogle value)? checkAuth,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -197,8 +183,9 @@ abstract class _Started implements LoginGoogleEvent {
 /// @nodoc
 abstract class _$$LoginGoogleImplCopyWith<$Res> {
   factory _$$LoginGoogleImplCopyWith(
-          _$LoginGoogleImpl value, $Res Function(_$LoginGoogleImpl) then) =
-      __$$LoginGoogleImplCopyWithImpl<$Res>;
+    _$LoginGoogleImpl value,
+    $Res Function(_$LoginGoogleImpl) then,
+  ) = __$$LoginGoogleImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String idToken});
 }
@@ -208,22 +195,23 @@ class __$$LoginGoogleImplCopyWithImpl<$Res>
     extends _$LoginGoogleEventCopyWithImpl<$Res, _$LoginGoogleImpl>
     implements _$$LoginGoogleImplCopyWith<$Res> {
   __$$LoginGoogleImplCopyWithImpl(
-      _$LoginGoogleImpl _value, $Res Function(_$LoginGoogleImpl) _then)
-      : super(_value, _then);
+    _$LoginGoogleImpl _value,
+    $Res Function(_$LoginGoogleImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? idToken = null,
-  }) {
-    return _then(_$LoginGoogleImpl(
-      null == idToken
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? idToken = null}) {
+    return _then(
+      _$LoginGoogleImpl(
+        null == idToken
+            ? _value.idToken
+            : idToken // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 
@@ -264,7 +252,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String idToken) loginGoogle,
-    required TResult Function(String idToken) checkAuth,
   }) {
     return loginGoogle(idToken);
   }
@@ -274,7 +261,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String idToken)? loginGoogle,
-    TResult? Function(String idToken)? checkAuth,
   }) {
     return loginGoogle?.call(idToken);
   }
@@ -284,7 +270,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String idToken)? loginGoogle,
-    TResult Function(String idToken)? checkAuth,
     required TResult orElse(),
   }) {
     if (loginGoogle != null) {
@@ -298,7 +283,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_LoginGoogle value) loginGoogle,
-    required TResult Function(_LoginGoogle value) checkAuth,
   }) {
     return loginGoogle(this);
   }
@@ -308,7 +292,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_LoginGoogle value)? loginGoogle,
-    TResult? Function(_LoginGoogle value)? checkAuth,
   }) {
     return loginGoogle?.call(this);
   }
@@ -318,7 +301,6 @@ class _$LoginGoogleImpl implements _LoginGoogle {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_LoginGoogle value)? loginGoogle,
-    TResult Function(_LoginGoogle value)? checkAuth,
     required TResult orElse(),
   }) {
     if (loginGoogle != null) {
@@ -348,16 +330,14 @@ mixin _$LoginGoogleState {
     required TResult Function() loading,
     required TResult Function(LoginResponseModel data) success,
     required TResult Function(String errorMessage) error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(LoginResponseModel data)? success,
     TResult? Function(String errorMessage)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -365,24 +345,21 @@ mixin _$LoginGoogleState {
     TResult Function(LoginResponseModel data)? success,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -390,15 +367,15 @@ mixin _$LoginGoogleState {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LoginGoogleStateCopyWith<$Res> {
   factory $LoginGoogleStateCopyWith(
-          LoginGoogleState value, $Res Function(LoginGoogleState) then) =
-      _$LoginGoogleStateCopyWithImpl<$Res, LoginGoogleState>;
+    LoginGoogleState value,
+    $Res Function(LoginGoogleState) then,
+  ) = _$LoginGoogleStateCopyWithImpl<$Res, LoginGoogleState>;
 }
 
 /// @nodoc
@@ -418,8 +395,9 @@ class _$LoginGoogleStateCopyWithImpl<$Res, $Val extends LoginGoogleState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -427,8 +405,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$LoginGoogleStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleState
   /// with the given fields replaced by the non-null parameter values.
@@ -535,8 +514,9 @@ abstract class _Initial implements LoginGoogleState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+    _$LoadingImpl value,
+    $Res Function(_$LoadingImpl) then,
+  ) = __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -544,8 +524,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$LoginGoogleStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
+    _$LoadingImpl _value,
+    $Res Function(_$LoadingImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleState
   /// with the given fields replaced by the non-null parameter values.
@@ -652,8 +633,9 @@ abstract class _Loading implements LoginGoogleState {
 /// @nodoc
 abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+    _$SuccessImpl value,
+    $Res Function(_$SuccessImpl) then,
+  ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({LoginResponseModel data});
 }
@@ -663,22 +645,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
     extends _$LoginGoogleStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
-      : super(_value, _then);
+    _$SuccessImpl _value,
+    $Res Function(_$SuccessImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? data = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as LoginResponseModel,
-    ));
+  $Res call({Object? data = null}) {
+    return _then(
+      _$SuccessImpl(
+        null == data
+            ? _value.data
+            : data // ignore: cast_nullable_to_non_nullable
+                as LoginResponseModel,
+      ),
+    );
   }
 }
 
@@ -804,8 +787,9 @@ abstract class _Success implements LoginGoogleState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+    _$ErrorImpl value,
+    $Res Function(_$ErrorImpl) then,
+  ) = __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String errorMessage});
 }
@@ -815,22 +799,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$LoginGoogleStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
+    _$ErrorImpl _value,
+    $Res Function(_$ErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LoginGoogleState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? errorMessage = null,
-  }) {
-    return _then(_$ErrorImpl(
-      null == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? errorMessage = null}) {
+    return _then(
+      _$ErrorImpl(
+        null == errorMessage
+            ? _value.errorMessage
+            : errorMessage // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 

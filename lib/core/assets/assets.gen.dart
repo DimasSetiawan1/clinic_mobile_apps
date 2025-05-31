@@ -69,22 +69,22 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
-        chat,
-        clockPrimary,
-        doctor,
-        document,
-        emptyWallet,
-        hand,
-        help,
-        home,
-        hospitalPrimary,
-        likeShapes,
-        logout,
-        note,
-        personHistory,
-        profileCircle,
-        telemedis
-      ];
+    chat,
+    clockPrimary,
+    doctor,
+    document,
+    emptyWallet,
+    hand,
+    help,
+    home,
+    hospitalPrimary,
+    likeShapes,
+    logout,
+    note,
+    personHistory,
+    profileCircle,
+    telemedis,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -140,6 +140,10 @@ class $AssetsImagesGen {
   AssetGenImage get doctorVidcall =>
       const AssetGenImage('assets/images/doctor-vidcall.png');
 
+  /// File path: assets/images/empty_history.svg
+  SvgGenImage get emptyHistory =>
+      const SvgGenImage('assets/images/empty_history.svg');
+
   /// File path: assets/images/empty_transaksi.png
   AssetGenImage get emptyTransaksi =>
       const AssetGenImage('assets/images/empty_transaksi.png');
@@ -170,44 +174,41 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/webview-xendit.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-        jf4,
-        cwb,
-        doctor1,
-        doctor2,
-        doctor3,
-        doctor4,
-        doctor5,
-        doctor6,
-        doctorCircle,
-        doctorVidcall2,
-        doctorVidcall3,
-        doctorVidcall4,
-        doctorVidcall,
-        emptyTransaksi,
-        google,
-        klinik,
-        logoHorizontal,
-        logo,
-        onboardingDoctor,
-        paymentSuccess,
-        webviewXendit
-      ];
+  List<dynamic> get values => [
+    jf4,
+    cwb,
+    doctor1,
+    doctor2,
+    doctor3,
+    doctor4,
+    doctor5,
+    doctor6,
+    doctorCircle,
+    doctorVidcall2,
+    doctorVidcall3,
+    doctorVidcall4,
+    doctorVidcall,
+    emptyHistory,
+    emptyTransaksi,
+    google,
+    klinik,
+    logoHorizontal,
+    logo,
+    onboardingDoctor,
+    paymentSuccess,
+    webviewXendit,
+  ];
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -235,7 +236,7 @@ class AssetGenImage {
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
-    FilterQuality filterQuality = FilterQuality.low,
+    FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
   }) {
@@ -267,15 +268,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
@@ -284,17 +278,11 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
 
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -348,7 +336,8 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
+      colorFilter:
+          colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,

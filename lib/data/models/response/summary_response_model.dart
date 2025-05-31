@@ -43,7 +43,7 @@ class SummaryResponseModel {
 class Data {
   String clinicName;
   String clinicImage;
-  int totalIncome;
+  BigInt totalIncome;
   int totalDoctor;
   int totalPatient;
 
@@ -58,7 +58,7 @@ class Data {
   Data copyWith({
     String? clinicName,
     String? clinicImage,
-    int? totalIncome,
+    BigInt? totalIncome,
     int? totalDoctor,
     int? totalPatient,
   }) =>
@@ -73,7 +73,7 @@ class Data {
   factory Data.fromMap(Map<String, dynamic> json) => Data(
         clinicName: json["clinic_name"],
         clinicImage: json["clinic_image"],
-        totalIncome: json["total_income"],
+        totalIncome: BigInt.parse(json["total_income"] ?? '0'),
         totalDoctor: json["total_doctor"],
         totalPatient: json["total_patient"],
       );

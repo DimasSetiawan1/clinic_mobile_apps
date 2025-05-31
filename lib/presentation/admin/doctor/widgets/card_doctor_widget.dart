@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/extensions/time_ext.dart';
 import 'package:clinic_mobile_apps/data/models/response/doctor_response_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
@@ -11,10 +13,7 @@ import 'package:clinic_mobile_apps/presentation/admin/doctor/pages/edit_doctor_p
 
 class CardDoctorWidget extends StatelessWidget {
   final User doctor;
-  const CardDoctorWidget({
-    super.key,
-    required this.doctor,
-  });
+  const CardDoctorWidget({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +22,7 @@ class CardDoctorWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: const BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(16.0),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
         boxShadow: [
           BoxShadow(
             color: Color(0x19000000),
@@ -44,32 +41,33 @@ class CardDoctorWidget extends StatelessWidget {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: doctor.image != null
-                    ? doctor.image.toString().contains('https://')
-                        ? Image.network(
-                            '${doctor.image}',
-                            width: 87.0,
-                            height: 87.0,
-                            fit: BoxFit.cover,
-                          )
-                        : Image.network(
-                            '${GlobalVariable.baseUrl}${doctor.image}',
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                Assets.images.doctor1.path,
-                                width: 87.0,
-                                height: 87.0,
-                              );
-                            },
-                            width: 87.0,
-                            height: 87.0,
-                            fit: BoxFit.cover,
-                          )
-                    : Image.asset(
-                        Assets.images.doctor1.path,
-                        width: 87.0,
-                        height: 87.0,
-                      ),
+                child:
+                    doctor.image != null
+                        ? doctor.image.toString().contains('https://')
+                            ? Image.network(
+                              '${doctor.image}',
+                              width: 87.0,
+                              height: 87.0,
+                              fit: BoxFit.cover,
+                            )
+                            : Image.network(
+                              '${dotenv.env['BASE_URL']}${doctor.image}',
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  Assets.images.doctor1.path,
+                                  width: 87.0,
+                                  height: 87.0,
+                                );
+                              },
+                              width: 87.0,
+                              height: 87.0,
+                              fit: BoxFit.cover,
+                            )
+                        : Image.asset(
+                          Assets.images.doctor1.path,
+                          width: 87.0,
+                          height: 87.0,
+                        ),
               ),
               const SpaceWidth(20),
               Expanded(
@@ -110,9 +108,7 @@ class CardDoctorWidget extends StatelessWidget {
               const SpaceWidth(8),
               GestureDetector(
                 onTap: () {
-                  context.push(EditDoctorPage(
-                    doctor: doctor,
-                  ));
+                  context.push(EditDoctorPage(doctor: doctor));
                 },
                 child: const Text(
                   "Edit",
@@ -139,51 +135,53 @@ class CardDoctorWidget extends StatelessWidget {
               ),
               doctor.status == "active"
                   ? Container(
-                      width: 80,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        border: Border.all(
-                            color: const Color(0xffE0E8F2).withOpacity(0.6)),
-                        gradient: const LinearGradient(
-                          colors: [
-                            AppColors.secondary,
-                            Color(0xff1469F0),
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
+                    width: 80,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: const Color(0xffE0E8F2).withOpacity(0.6),
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Aktif",
-                          style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.white),
-                        ),
+                      gradient: const LinearGradient(
+                        colors: [AppColors.secondary, Color(0xff1469F0)],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
-                    )
-                  : Container(
-                      width: 80,
-                      height: 34,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: Border.all(
-                              color: const Color(0xffE0E8F2).withOpacity(0.6)),
-                          color: AppColors.white),
-                      child: const Center(
-                        child: Text(
-                          "Non Aktif",
-                          style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Aktif",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.white,
                         ),
                       ),
                     ),
+                  )
+                  : Container(
+                    width: 80,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: const Color(0xffE0E8F2).withOpacity(0.6),
+                      ),
+                      color: AppColors.white,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Non Aktif",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -192,15 +190,8 @@ class CardDoctorWidget extends StatelessWidget {
   Widget _itemRow(String icon, String value) {
     return Row(
       children: [
-        Image.asset(
-          icon,
-          width: 18.0,
-          height: 18.0,
-          fit: BoxFit.cover,
-        ),
-        const SpaceWidth(
-          13,
-        ),
+        Image.asset(icon, width: 18.0, height: 18.0, fit: BoxFit.cover),
+        const SpaceWidth(13),
         Expanded(
           child: Text(
             value,

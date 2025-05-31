@@ -12,7 +12,8 @@ part of 'get_history_order_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$GetHistoryOrderEvent {
@@ -20,52 +21,49 @@ mixin _$GetHistoryOrderEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getHistoryOrders,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getHistoryOrders,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getHistoryOrders,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getHistoryOrders value) getHistoryOrders,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getHistoryOrders value)? getHistoryOrders,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getHistoryOrders value)? getHistoryOrders,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GetHistoryOrderEventCopyWith<$Res> {
-  factory $GetHistoryOrderEventCopyWith(GetHistoryOrderEvent value,
-          $Res Function(GetHistoryOrderEvent) then) =
-      _$GetHistoryOrderEventCopyWithImpl<$Res, GetHistoryOrderEvent>;
+  factory $GetHistoryOrderEventCopyWith(
+    GetHistoryOrderEvent value,
+    $Res Function(GetHistoryOrderEvent) then,
+  ) = _$GetHistoryOrderEventCopyWithImpl<$Res, GetHistoryOrderEvent>;
 }
 
 /// @nodoc
-class _$GetHistoryOrderEventCopyWithImpl<$Res,
-        $Val extends GetHistoryOrderEvent>
+class _$GetHistoryOrderEventCopyWithImpl<
+  $Res,
+  $Val extends GetHistoryOrderEvent
+>
     implements $GetHistoryOrderEventCopyWith<$Res> {
   _$GetHistoryOrderEventCopyWithImpl(this._value, this._then);
 
@@ -81,8 +79,9 @@ class _$GetHistoryOrderEventCopyWithImpl<$Res,
 /// @nodoc
 abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+    _$StartedImpl value,
+    $Res Function(_$StartedImpl) then,
+  ) = __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -90,8 +89,9 @@ class __$$StartedImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+    _$StartedImpl _value,
+    $Res Function(_$StartedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -185,18 +185,20 @@ abstract class _Started implements GetHistoryOrderEvent {
 
 /// @nodoc
 abstract class _$$getHistoryOrdersImplCopyWith<$Res> {
-  factory _$$getHistoryOrdersImplCopyWith(_$getHistoryOrdersImpl value,
-          $Res Function(_$getHistoryOrdersImpl) then) =
-      __$$getHistoryOrdersImplCopyWithImpl<$Res>;
+  factory _$$getHistoryOrdersImplCopyWith(
+    _$getHistoryOrdersImpl value,
+    $Res Function(_$getHistoryOrdersImpl) then,
+  ) = __$$getHistoryOrdersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$getHistoryOrdersImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderEventCopyWithImpl<$Res, _$getHistoryOrdersImpl>
     implements _$$getHistoryOrdersImplCopyWith<$Res> {
-  __$$getHistoryOrdersImplCopyWithImpl(_$getHistoryOrdersImpl _value,
-      $Res Function(_$getHistoryOrdersImpl) _then)
-      : super(_value, _then);
+  __$$getHistoryOrdersImplCopyWithImpl(
+    _$getHistoryOrdersImpl _value,
+    $Res Function(_$getHistoryOrdersImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -296,16 +298,14 @@ mixin _$GetHistoryOrderState {
     required TResult Function() loading,
     required TResult Function(OrdersResponseModel orders) success,
     required TResult Function(String errorMessage) error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(OrdersResponseModel orders)? success,
     TResult? Function(String errorMessage)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -313,24 +313,21 @@ mixin _$GetHistoryOrderState {
     TResult Function(OrdersResponseModel orders)? success,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -338,20 +335,22 @@ mixin _$GetHistoryOrderState {
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GetHistoryOrderStateCopyWith<$Res> {
-  factory $GetHistoryOrderStateCopyWith(GetHistoryOrderState value,
-          $Res Function(GetHistoryOrderState) then) =
-      _$GetHistoryOrderStateCopyWithImpl<$Res, GetHistoryOrderState>;
+  factory $GetHistoryOrderStateCopyWith(
+    GetHistoryOrderState value,
+    $Res Function(GetHistoryOrderState) then,
+  ) = _$GetHistoryOrderStateCopyWithImpl<$Res, GetHistoryOrderState>;
 }
 
 /// @nodoc
-class _$GetHistoryOrderStateCopyWithImpl<$Res,
-        $Val extends GetHistoryOrderState>
+class _$GetHistoryOrderStateCopyWithImpl<
+  $Res,
+  $Val extends GetHistoryOrderState
+>
     implements $GetHistoryOrderStateCopyWith<$Res> {
   _$GetHistoryOrderStateCopyWithImpl(this._value, this._then);
 
@@ -367,8 +366,9 @@ class _$GetHistoryOrderStateCopyWithImpl<$Res,
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -376,8 +376,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderState
   /// with the given fields replaced by the non-null parameter values.
@@ -484,8 +485,9 @@ abstract class _Initial implements GetHistoryOrderState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+    _$LoadingImpl value,
+    $Res Function(_$LoadingImpl) then,
+  ) = __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -493,8 +495,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
+    _$LoadingImpl _value,
+    $Res Function(_$LoadingImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderState
   /// with the given fields replaced by the non-null parameter values.
@@ -601,8 +604,9 @@ abstract class _Loading implements GetHistoryOrderState {
 /// @nodoc
 abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+    _$SuccessImpl value,
+    $Res Function(_$SuccessImpl) then,
+  ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrdersResponseModel orders});
 }
@@ -612,22 +616,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
-      : super(_value, _then);
+    _$SuccessImpl _value,
+    $Res Function(_$SuccessImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? orders = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == orders
-          ? _value.orders
-          : orders // ignore: cast_nullable_to_non_nullable
-              as OrdersResponseModel,
-    ));
+  $Res call({Object? orders = null}) {
+    return _then(
+      _$SuccessImpl(
+        null == orders
+            ? _value.orders
+            : orders // ignore: cast_nullable_to_non_nullable
+                as OrdersResponseModel,
+      ),
+    );
   }
 }
 
@@ -753,8 +758,9 @@ abstract class _Success implements GetHistoryOrderState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+    _$ErrorImpl value,
+    $Res Function(_$ErrorImpl) then,
+  ) = __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String errorMessage});
 }
@@ -764,22 +770,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$GetHistoryOrderStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
+    _$ErrorImpl _value,
+    $Res Function(_$ErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetHistoryOrderState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? errorMessage = null,
-  }) {
-    return _then(_$ErrorImpl(
-      null == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? errorMessage = null}) {
+    return _then(
+      _$ErrorImpl(
+        null == errorMessage
+            ? _value.errorMessage
+            : errorMessage // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 

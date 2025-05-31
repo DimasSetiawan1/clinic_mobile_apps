@@ -46,7 +46,7 @@ class HistoryOrders {
   int patientId;
   int doctorId;
   String service;
-  int price;
+  BigInt price;
   String paymentUrl;
   String status;
   int duration;
@@ -59,6 +59,7 @@ class HistoryOrders {
   Doctor patient;
   Doctor doctor;
   Clinic clinic;
+  ChatRooms chatRooms;
 
   HistoryOrders({
     required this.id,
@@ -78,6 +79,7 @@ class HistoryOrders {
     required this.patient,
     required this.doctor,
     required this.clinic,
+    required this.chatRooms,
   });
 
   HistoryOrders copyWith({
@@ -85,7 +87,7 @@ class HistoryOrders {
     int? patientId,
     int? doctorId,
     String? service,
-    int? price,
+    BigInt? price,
     String? paymentUrl,
     String? status,
     int? duration,
@@ -98,6 +100,7 @@ class HistoryOrders {
     Doctor? patient,
     Doctor? doctor,
     Clinic? clinic,
+    ChatRooms? chatRooms,
   }) =>
       HistoryOrders(
         id: id ?? this.id,
@@ -117,27 +120,28 @@ class HistoryOrders {
         patient: patient ?? this.patient,
         doctor: doctor ?? this.doctor,
         clinic: clinic ?? this.clinic,
+        chatRooms: chatRooms ?? this.chatRooms,
       );
 
   factory HistoryOrders.fromMap(Map<String, dynamic> json) => HistoryOrders(
-        id: json["id"] ?? 0,
-        patientId: json["patient_id"] ?? 0,
-        doctorId: json["doctor_id"] ?? 0,
-        service: json["service"],
-        price: json["price"],
-        paymentUrl: json["payment_url"] ?? "",
-        status: json["status"],
-        duration: json["duration"] ?? 0,
-        clinicId: json["clinic_id"] ?? 0,
-        schedule: json["schedule"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
-        statusService: json["status_service"] ?? "",
-        birthDate: json["birth_date"] ?? "",
-        patient: Doctor.fromMap(json["patient"]),
-        doctor: Doctor.fromMap(json["doctor"]),
-        clinic: Clinic.fromMap(json["clinic"]),
-      );
+      id: json["id"] ?? 0,
+      patientId: json["patient_id"] ?? 0,
+      doctorId: json["doctor_id"] ?? 0,
+      service: json["service"],
+      price: BigInt.from(json["price"] ?? 0),
+      paymentUrl: json["payment_url"] ?? "",
+      status: json["status"],
+      duration: json["duration"] ?? 0,
+      clinicId: json["clinic_id"] ?? 0,
+      schedule: json["schedule"],
+      createdAt: json["created_at"],
+      updatedAt: json["updated_at"],
+      statusService: json["status_service"] ?? "",
+      birthDate: json["birth_date"] ?? "",
+      patient: Doctor.fromMap(json["patient"]),
+      doctor: Doctor.fromMap(json["doctor"]),
+      clinic: Clinic.fromMap(json["clinic"]),
+      chatRooms: ChatRooms.fromMap(json["chat_rooms"]));
 
   Map<String, dynamic> toMap() => {
         "id": id,
@@ -157,6 +161,7 @@ class HistoryOrders {
         "patient": patient.toMap(),
         "doctor": doctor.toMap(),
         "clinic": clinic.toMap(),
+        "chat_rooms": chatRooms.toMap(),
       };
 }
 
@@ -264,7 +269,7 @@ class Doctor {
   String createdAt;
   String updatedAt;
   String role;
-  String googleId;
+  BigInt googleId;
   String ktpNumber;
   String phoneNumber;
   String address;
@@ -315,7 +320,7 @@ class Doctor {
     String? createdAt,
     String? updatedAt,
     String? role,
-    String? googleId,
+    BigInt? googleId,
     String? ktpNumber,
     String? phoneNumber,
     String? address,
@@ -366,7 +371,7 @@ class Doctor {
         createdAt: json["created_at"] ?? "",
         updatedAt: json["updated_at"] ?? "",
         role: json["role"] ?? "",
-        googleId: json["google_id"] ?? 0,
+        googleId: BigInt.parse(json["google_id"] ?? "0"),
         ktpNumber: json["ktp_number"] ?? "",
         phoneNumber: json["phone_number"] ?? "",
         address: json["address"] ?? "",
@@ -407,5 +412,76 @@ class Doctor {
         "image": image,
         "specialist_id": specialistId,
         "one_signal_token": oneSignalToken,
+      };
+}
+
+class ChatRooms {
+  String id;
+  int ordersId;
+  int usersId;
+  int doctorsId;
+  String status;
+  String? closedAt;
+  String? closedBy;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  ChatRooms({
+    required this.id,
+    required this.ordersId,
+    required this.usersId,
+    required this.doctorsId,
+    required this.status,
+    this.closedAt,
+    this.closedBy,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  ChatRooms copyWith({
+    String? id,
+    int? ordersId,
+    int? usersId,
+    int? doctorsId,
+    String? status,
+    String? closedAt,
+    String? closedBy,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      ChatRooms(
+        id: id ?? this.id,
+        ordersId: ordersId ?? this.ordersId,
+        usersId: usersId ?? this.usersId,
+        doctorsId: doctorsId ?? this.doctorsId,
+        status: status ?? this.status,
+        closedAt: closedAt ?? this.closedAt,
+        closedBy: closedBy ?? this.closedBy,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+
+  factory ChatRooms.fromMap(Map<String, dynamic> json) => ChatRooms(
+        id: json["id"] ?? "",
+        ordersId: json["orders_id"] ?? 0,
+        usersId: json["users_id"] ?? 0,
+        doctorsId: json["doctors_id"] ?? 0,
+        status: json["status"] ?? "",
+        closedAt: json["closed_at"],
+        closedBy: json["closed_by"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "orders_id": ordersId,
+        "users_id": usersId,
+        "doctors_id": doctorsId,
+        "status": status,
+        "closed_at": closedAt,
+        "closed_by": closedBy,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }

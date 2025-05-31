@@ -1,4 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
+import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
+import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -7,16 +11,18 @@ import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/telemedis/pages/vidcall_dcotor_page.dart';
+import 'package:intl/intl.dart';
 
 class CardTelemedisDoctor extends StatelessWidget {
-  final bool isActive;
+  final HistoryOrders order;
   const CardTelemedisDoctor({
     super.key,
-    required this.isActive,
+    required this.order,
   });
 
   @override
   Widget build(BuildContext context) {
+    log('CardTelemedisDoctor: ${order.statusService}');
     return Container(
       width: context.deviceWidth,
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
@@ -60,8 +66,8 @@ class CardTelemedisDoctor extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                const Text(
-                  "Sintia",
+                Text(
+                  order.patient.name,
                   style: TextStyle(
                       fontSize: 10.0,
                       fontWeight: FontWeight.w400,
@@ -70,8 +76,9 @@ class CardTelemedisDoctor extends StatelessWidget {
                       )),
                 ),
                 const SpaceHeight(8),
-                const Text(
-                  '20 November 2024, Pukul 17:45',
+                Text(
+                  DateFormat('dd MMMM yyyy, HH:mm a')
+                      .format(DateTime.parse(order.createdAt)),
                   style: TextStyle(
                     fontSize: 10.0,
                     fontWeight: FontWeight.w400,
@@ -82,7 +89,7 @@ class CardTelemedisDoctor extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -95,7 +102,7 @@ class CardTelemedisDoctor extends StatelessWidget {
                         ),
                         SpaceHeight(4),
                         Text(
-                          'Rp. 19.000',
+                          order.price.toString().currencyFormatRpV2,
                           style: TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.w600,
@@ -104,7 +111,7 @@ class CardTelemedisDoctor extends StatelessWidget {
                         ),
                       ],
                     ),
-                    isActive
+                    order.statusService!.toLowerCase() == 'active'
                         ? SizedBox(
                             width: 83,
                             height: 25,

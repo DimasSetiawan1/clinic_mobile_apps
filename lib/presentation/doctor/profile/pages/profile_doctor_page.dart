@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
@@ -8,16 +10,19 @@ import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileDoctorPage extends StatefulWidget {
   const ProfileDoctorPage({super.key});
 
   @override
-  State<ProfileDoctorPage> createState() => _ProfilePageDoctorState();
+  State<ProfileDoctorPage> createState() => _ProfileDoctorPageState();
 }
 
-class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
+class _ProfileDoctorPageState extends State<ProfileDoctorPage> {
   UserModel? _user;
 
   @override
@@ -28,10 +33,13 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff1469F0),
-      statusBarBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff1469F0),
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
+
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
       body: SafeArea(
@@ -42,10 +50,7 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    AppColors.secondary,
-                    Color(0xff1469F0),
-                  ],
+                  colors: [AppColors.secondary, Color(0xff1469F0)],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
@@ -63,47 +68,49 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
             ),
             const SpaceHeight(14),
             Padding(
-              padding: const EdgeInsets.all(
-                20,
-              ),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
                   _user?.image != null
                       ? Image.network(
-                          _user!.image!.contains("http")
-                              ? _user!.image!
-                              : GlobalVariable.baseUrl + _user!.image!,
-                          width: 72.0,
-                          height: 72.0,
-                          fit: BoxFit.cover,
-                        )
+                        _user!.image!.contains("http")
+                            ? _user!.image!
+                            : dotenv.env['BASE_URL']! + _user!.image!,
+                        width: 72.0,
+                        height: 72.0,
+                        fit: BoxFit.cover,
+                      )
                       : Image.asset(
-                          Assets.images.doctor1.path,
-                          width: 72.0,
-                          height: 72.0,
-                          fit: BoxFit.cover,
-                        ),
-                  const SpaceWidth(
-                    16,
-                  ),
+                        Assets.images.doctor1.path,
+                        width: 72.0,
+                        height: 72.0,
+                        fit: BoxFit.cover,
+                      ),
+                  const SpaceWidth(16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _user?.name ?? 'User',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          _user?.name ?? 'User',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                      Text(
-                        _user?.email ?? 'email@example.com',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Color(
-                            0xff8C8C8C,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          _user?.email ?? 'email@example.com',
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            overflow: TextOverflow.ellipsis,
+                            color: Color(0xff8C8C8C),
                           ),
                         ),
                       ),
@@ -112,21 +119,28 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
                 ],
               ),
             ),
-            const SpaceHeight(
-              12,
-            ),
+            const SpaceHeight(12),
             _menuItem(Assets.icons.document.path, 'Kebijakan Layanan'),
             const SpaceHeight(16),
             _menuItem(Assets.icons.help.path, 'Bantuan'), const SpaceHeight(16),
             InkWell(
-                onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) {
-                    return OnboardingPage();
-                  }), ModalRoute.withName('/'));
-                },
-                child: _menuItem(Assets.icons.logout.path, 'Keluar')),
+              onTap: () async {
+                FirebaseAuth.instance.signOut();
+                await GoogleSignIn().signOut();
+                await AuthLocalDatasource().removeUserData();
+
+                context.mounted
+                    ? Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OnboardingPage(),
+                      ),
+                      (route) => false,
+                    )
+                    : null;
+              },
+              child: _menuItem(Assets.icons.logout.path, 'Keluar'),
+            ),
             const SpaceHeight(16),
             // Padding(
             //   padding: EdgeInsets.only(top: context.deviceHeight * 0.2, left: 20, right: 20),
@@ -140,16 +154,12 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
 
   Widget _menuItem(final String image, final String title) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: const Color(
-              0xff677294,
-            ).withOpacity(0.16),
+            color: const Color(0xff677294).withOpacity(0.16),
             width: 1,
           ),
         ),
@@ -160,9 +170,7 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
             height: 50,
             width: 50,
             decoration: const BoxDecoration(
-              color: Color(
-                0xffF5F5F5,
-              ),
+              color: Color(0xffF5F5F5),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -180,9 +188,7 @@ class _ProfilePageDoctorState extends State<ProfileDoctorPage> {
             style: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
-              color: Color(
-                0xff000000,
-              ),
+              color: Color(0xff000000),
             ),
           ),
           const Spacer(),

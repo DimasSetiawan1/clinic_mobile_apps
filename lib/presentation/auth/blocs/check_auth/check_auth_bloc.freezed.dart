@@ -12,7 +12,8 @@ part of 'check_auth_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$CheckAuthEvent {
@@ -20,47 +21,42 @@ mixin _$CheckAuthEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String idToken) checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String idToken)? checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String idToken)? checkAuth,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_CheckAuth value) checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_CheckAuth value)? checkAuth,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_CheckAuth value)? checkAuth,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CheckAuthEventCopyWith<$Res> {
   factory $CheckAuthEventCopyWith(
-          CheckAuthEvent value, $Res Function(CheckAuthEvent) then) =
-      _$CheckAuthEventCopyWithImpl<$Res, CheckAuthEvent>;
+    CheckAuthEvent value,
+    $Res Function(CheckAuthEvent) then,
+  ) = _$CheckAuthEventCopyWithImpl<$Res, CheckAuthEvent>;
 }
 
 /// @nodoc
@@ -80,8 +76,9 @@ class _$CheckAuthEventCopyWithImpl<$Res, $Val extends CheckAuthEvent>
 /// @nodoc
 abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+    _$StartedImpl value,
+    $Res Function(_$StartedImpl) then,
+  ) = __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -89,8 +86,9 @@ class __$$StartedImplCopyWithImpl<$Res>
     extends _$CheckAuthEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+    _$StartedImpl _value,
+    $Res Function(_$StartedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CheckAuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -185,8 +183,9 @@ abstract class _Started implements CheckAuthEvent {
 /// @nodoc
 abstract class _$$CheckAuthImplCopyWith<$Res> {
   factory _$$CheckAuthImplCopyWith(
-          _$CheckAuthImpl value, $Res Function(_$CheckAuthImpl) then) =
-      __$$CheckAuthImplCopyWithImpl<$Res>;
+    _$CheckAuthImpl value,
+    $Res Function(_$CheckAuthImpl) then,
+  ) = __$$CheckAuthImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String idToken});
 }
@@ -196,22 +195,23 @@ class __$$CheckAuthImplCopyWithImpl<$Res>
     extends _$CheckAuthEventCopyWithImpl<$Res, _$CheckAuthImpl>
     implements _$$CheckAuthImplCopyWith<$Res> {
   __$$CheckAuthImplCopyWithImpl(
-      _$CheckAuthImpl _value, $Res Function(_$CheckAuthImpl) _then)
-      : super(_value, _then);
+    _$CheckAuthImpl _value,
+    $Res Function(_$CheckAuthImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CheckAuthEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? idToken = null,
-  }) {
-    return _then(_$CheckAuthImpl(
-      null == idToken
-          ? _value.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? idToken = null}) {
+    return _then(
+      _$CheckAuthImpl(
+        null == idToken
+            ? _value.idToken
+            : idToken // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 
@@ -329,52 +329,47 @@ mixin _$CheckAuthState {
     required TResult Function() initial,
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
     TResult? Function()? unauthenticated,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authenticated value) authenticated,
     required TResult Function(_Unauthenticated value) unauthenticated,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authenticated value)? authenticated,
     TResult? Function(_Unauthenticated value)? unauthenticated,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authenticated value)? authenticated,
     TResult Function(_Unauthenticated value)? unauthenticated,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CheckAuthStateCopyWith<$Res> {
   factory $CheckAuthStateCopyWith(
-          CheckAuthState value, $Res Function(CheckAuthState) then) =
-      _$CheckAuthStateCopyWithImpl<$Res, CheckAuthState>;
+    CheckAuthState value,
+    $Res Function(CheckAuthState) then,
+  ) = _$CheckAuthStateCopyWithImpl<$Res, CheckAuthState>;
 }
 
 /// @nodoc
@@ -394,8 +389,9 @@ class _$CheckAuthStateCopyWithImpl<$Res, $Val extends CheckAuthState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -403,8 +399,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$CheckAuthStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CheckAuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -505,8 +502,9 @@ abstract class _Initial implements CheckAuthState {
 /// @nodoc
 abstract class _$$AuthenticatedImplCopyWith<$Res> {
   factory _$$AuthenticatedImplCopyWith(
-          _$AuthenticatedImpl value, $Res Function(_$AuthenticatedImpl) then) =
-      __$$AuthenticatedImplCopyWithImpl<$Res>;
+    _$AuthenticatedImpl value,
+    $Res Function(_$AuthenticatedImpl) then,
+  ) = __$$AuthenticatedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -514,8 +512,9 @@ class __$$AuthenticatedImplCopyWithImpl<$Res>
     extends _$CheckAuthStateCopyWithImpl<$Res, _$AuthenticatedImpl>
     implements _$$AuthenticatedImplCopyWith<$Res> {
   __$$AuthenticatedImplCopyWithImpl(
-      _$AuthenticatedImpl _value, $Res Function(_$AuthenticatedImpl) _then)
-      : super(_value, _then);
+    _$AuthenticatedImpl _value,
+    $Res Function(_$AuthenticatedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CheckAuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -615,9 +614,10 @@ abstract class _Authenticated implements CheckAuthState {
 
 /// @nodoc
 abstract class _$$UnauthenticatedImplCopyWith<$Res> {
-  factory _$$UnauthenticatedImplCopyWith(_$UnauthenticatedImpl value,
-          $Res Function(_$UnauthenticatedImpl) then) =
-      __$$UnauthenticatedImplCopyWithImpl<$Res>;
+  factory _$$UnauthenticatedImplCopyWith(
+    _$UnauthenticatedImpl value,
+    $Res Function(_$UnauthenticatedImpl) then,
+  ) = __$$UnauthenticatedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -625,8 +625,9 @@ class __$$UnauthenticatedImplCopyWithImpl<$Res>
     extends _$CheckAuthStateCopyWithImpl<$Res, _$UnauthenticatedImpl>
     implements _$$UnauthenticatedImplCopyWith<$Res> {
   __$$UnauthenticatedImplCopyWithImpl(
-      _$UnauthenticatedImpl _value, $Res Function(_$UnauthenticatedImpl) _then)
-      : super(_value, _then);
+    _$UnauthenticatedImpl _value,
+    $Res Function(_$UnauthenticatedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CheckAuthState
   /// with the given fields replaced by the non-null parameter values.

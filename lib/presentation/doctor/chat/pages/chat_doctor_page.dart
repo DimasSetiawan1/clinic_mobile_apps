@@ -1,3 +1,5 @@
+import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
+import 'package:clinic_mobile_apps/presentation/doctor/blocs/get_order_doctor/get_order_doctor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -5,6 +7,7 @@ import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/chat/widgets/card_chat.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatDoctorPage extends StatefulWidget {
   const ChatDoctorPage({super.key});
@@ -14,7 +17,18 @@ class ChatDoctorPage extends StatefulWidget {
 }
 
 class _ChatDoctorPageState extends State<ChatDoctorPage> {
-  bool isActive = true;
+  @override
+  void initState() {
+    final doctorId = AuthLocalDatasource().getUserData()?.data?.user?.id;
+    context.read<GetOrderDoctorBloc>().add(
+          GetOrderDoctorEvent.getOrderDoctor(
+            doctorId,
+            "Telemedicine",
+            'active',
+          ),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,44 +90,96 @@ class _ChatDoctorPageState extends State<ChatDoctorPage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                isActive
-                    ? menuActive("Aktif", () {
-                        setState(() {
-                          isActive = true;
-                        });
-                      })
-                    : menuDisable("Aktif", () {
-                        setState(() {
-                          isActive = true;
-                        });
-                      }),
-                const SpaceWidth(12),
-                !isActive
-                    ? menuActive("Selesai", () {
-                        setState(() {
-                          isActive = false;
-                        });
-                      })
-                    : menuDisable("Selesai", () {
-                        setState(() {
-                          isActive = false;
-                        });
-                      }),
+                // isActive
+                //     ? menuActive("Aktif", () {
+                //         setState(() {
+                //           isActive = true;
+                //         });
+                //       })
+                //     : menuDisable("Aktif", () {
+                //         setState(() {
+                //           isActive = true;
+                //         });
+                //       }),
+                // const SpaceWidth(12),
+                // !isActive
+                //     ? menuActive("Selesai", () {
+                //         setState(() {
+                //           isActive = false;
+                //         });
+                //       })
+                //     : menuDisable("Selesai", () {
+                //         setState(() {
+                //           isActive = false;
+                //         });
+                //       }),
               ],
             ),
           ),
-          ListView.separated(
-            padding: const EdgeInsets.all(20),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 2,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SpaceHeight(10);
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return CardChat(isActive: isActive);
-            },
-          ),
+          // ListView.separated(
+          //   padding: const EdgeInsets.all(20),
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   itemCount: 2,
+          //   separatorBuilder: (BuildContext context, int index) {
+          //     return const SpaceHeight(10);
+          //   },
+          //   itemBuilder: (BuildContext context, int index) {
+          //     return CardChat(isActive: isActive);
+          //   },
+          // ),
+          // TODO : KITA BUAT DULU SKENARIO UNTUK CHAT DAN TELPON
+          // BlocBuilder<GetOrderDoctorBloc, GetOrderDoctorState>(
+          //   builder: (context, state) {
+          //     return state.maybeWhen(
+          //       orElse: () => const Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //       loaded: (patient) {
+          //         final orders = patient.data;
+          //         if (orders.isEmpty) {
+          //           return const Center(
+          //             child: Text(
+          //               "Tidak ada data",
+          //               style: TextStyle(
+          //                 fontSize: 16.0,
+          //                 fontWeight: FontWeight.w500,
+          //               ),
+          //             ),
+          //           );
+          //         }
+          //         return ListView.separated(
+          //           padding: const EdgeInsets.all(20),
+          //           shrinkWrap: true,
+          //           physics: const NeverScrollableScrollPhysics(),
+          //           itemCount: 2,
+          //           separatorBuilder: (BuildContext context, int index) {
+          //             return const SpaceHeight(10);
+          //           },
+          //           itemBuilder: (BuildContext context, int index) {
+          //             final order = orders[index];
+          //             if (order.statusService!.toLowerCase() == 'active' &&
+          //                 order.service.toLowerCase() == 'telemedicine') {
+          //               return CardChat(
+          //                 order: orders[index],
+          //               );
+          //             }
+          //             return Center(
+          //               child: Text(
+          //                 "Tidak ada data",
+          //                 style: TextStyle(
+          //                   fontSize: 16.0,
+          //                   fontWeight: FontWeight.w500,
+          //                   color: AppColors.grey,
+          //                 ),
+          //               ),
+          //             );
+          //           },
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

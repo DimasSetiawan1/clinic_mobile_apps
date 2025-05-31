@@ -5,5 +5,4 @@ class LoginGoogleEvent with _$LoginGoogleEvent {
   const factory LoginGoogleEvent.started() = _Started;
 
   const factory LoginGoogleEvent.loginGoogle(String idToken) = _LoginGoogle;
-  const factory LoginGoogleEvent.checkAuth(String idToken) = _LoginGoogle;
 }

@@ -5,7 +5,7 @@ import 'package:clinic_mobile_apps/presentation/admin/doctor/pages/admin_doctor_
 import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_home_page.dart';
 import 'package:clinic_mobile_apps/presentation/admin/profile/pages/profile_admin_page.dart';
 
-import '../../../home/widgets/nav_item.dart';
+import '../../../patient/home/widgets/nav_item.dart';
 
 // ignore: must_be_immutable
 class AdminMainPage extends StatefulWidget {

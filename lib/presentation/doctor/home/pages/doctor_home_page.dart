@@ -6,7 +6,7 @@ import 'package:clinic_mobile_apps/presentation/doctor/history/pages/history_doc
 import 'package:clinic_mobile_apps/presentation/doctor/profile/pages/profile_doctor_page.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/telemedis/pages/telemedis_doctor_page.dart';
 
-import '../../../home/widgets/nav_item.dart';
+import '../../../patient/home/widgets/nav_item.dart';
 
 class DoctorHomePage extends StatefulWidget {
   const DoctorHomePage({super.key});

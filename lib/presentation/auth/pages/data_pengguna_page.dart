@@ -6,7 +6,7 @@ import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/home/pages/home_page.dart';
+import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
 
 class DataPenggunaPage extends StatefulWidget {
   const DataPenggunaPage({super.key});

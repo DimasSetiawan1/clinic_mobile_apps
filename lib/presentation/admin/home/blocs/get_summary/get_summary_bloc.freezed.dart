@@ -12,7 +12,8 @@ part of 'get_summary_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$GetSummaryEvent {
@@ -20,47 +21,42 @@ mixin _$GetSummaryEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() summaryFetched,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? summaryFetched,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? summaryFetched,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SummaryFetched value) summaryFetched,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SummaryFetched value)? summaryFetched,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SummaryFetched value)? summaryFetched,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GetSummaryEventCopyWith<$Res> {
   factory $GetSummaryEventCopyWith(
-          GetSummaryEvent value, $Res Function(GetSummaryEvent) then) =
-      _$GetSummaryEventCopyWithImpl<$Res, GetSummaryEvent>;
+    GetSummaryEvent value,
+    $Res Function(GetSummaryEvent) then,
+  ) = _$GetSummaryEventCopyWithImpl<$Res, GetSummaryEvent>;
 }
 
 /// @nodoc
@@ -80,8 +76,9 @@ class _$GetSummaryEventCopyWithImpl<$Res, $Val extends GetSummaryEvent>
 /// @nodoc
 abstract class _$$StartedImplCopyWith<$Res> {
   factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+    _$StartedImpl value,
+    $Res Function(_$StartedImpl) then,
+  ) = __$$StartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -89,8 +86,9 @@ class __$$StartedImplCopyWithImpl<$Res>
     extends _$GetSummaryEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
-      : super(_value, _then);
+    _$StartedImpl _value,
+    $Res Function(_$StartedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -109,7 +107,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'GetSummaryEvent.started'));
+    properties..add(DiagnosticsProperty('type', 'GetSummaryEvent.started'));
   }
 
   @override
@@ -190,9 +188,10 @@ abstract class _Started implements GetSummaryEvent {
 
 /// @nodoc
 abstract class _$$SummaryFetchedImplCopyWith<$Res> {
-  factory _$$SummaryFetchedImplCopyWith(_$SummaryFetchedImpl value,
-          $Res Function(_$SummaryFetchedImpl) then) =
-      __$$SummaryFetchedImplCopyWithImpl<$Res>;
+  factory _$$SummaryFetchedImplCopyWith(
+    _$SummaryFetchedImpl value,
+    $Res Function(_$SummaryFetchedImpl) then,
+  ) = __$$SummaryFetchedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -200,8 +199,9 @@ class __$$SummaryFetchedImplCopyWithImpl<$Res>
     extends _$GetSummaryEventCopyWithImpl<$Res, _$SummaryFetchedImpl>
     implements _$$SummaryFetchedImplCopyWith<$Res> {
   __$$SummaryFetchedImplCopyWithImpl(
-      _$SummaryFetchedImpl _value, $Res Function(_$SummaryFetchedImpl) _then)
-      : super(_value, _then);
+    _$SummaryFetchedImpl _value,
+    $Res Function(_$SummaryFetchedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -223,7 +223,7 @@ class _$SummaryFetchedImpl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'GetSummaryEvent.summaryFetched'));
+      ..add(DiagnosticsProperty('type', 'GetSummaryEvent.summaryFetched'));
   }
 
   @override
@@ -310,16 +310,14 @@ mixin _$GetSummaryState {
     required TResult Function(SummaryResponseModel summary) success,
     required TResult Function(String error) error,
     required TResult Function() loading,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(SummaryResponseModel summary)? success,
     TResult? Function(String error)? error,
     TResult? Function()? loading,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -327,24 +325,21 @@ mixin _$GetSummaryState {
     TResult Function(String error)? error,
     TResult Function()? loading,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loading,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loading,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -352,15 +347,15 @@ mixin _$GetSummaryState {
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loading,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GetSummaryStateCopyWith<$Res> {
   factory $GetSummaryStateCopyWith(
-          GetSummaryState value, $Res Function(GetSummaryState) then) =
-      _$GetSummaryStateCopyWithImpl<$Res, GetSummaryState>;
+    GetSummaryState value,
+    $Res Function(GetSummaryState) then,
+  ) = _$GetSummaryStateCopyWithImpl<$Res, GetSummaryState>;
 }
 
 /// @nodoc
@@ -380,8 +375,9 @@ class _$GetSummaryStateCopyWithImpl<$Res, $Val extends GetSummaryState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -389,8 +385,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$GetSummaryStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryState
   /// with the given fields replaced by the non-null parameter values.
@@ -409,7 +406,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'GetSummaryState.initial'));
+    properties..add(DiagnosticsProperty('type', 'GetSummaryState.initial'));
   }
 
   @override
@@ -503,8 +500,9 @@ abstract class _Initial implements GetSummaryState {
 /// @nodoc
 abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
-          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
-      __$$SuccessImplCopyWithImpl<$Res>;
+    _$SuccessImpl value,
+    $Res Function(_$SuccessImpl) then,
+  ) = __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SummaryResponseModel summary});
 }
@@ -514,22 +512,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
     extends _$GetSummaryStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
-      : super(_value, _then);
+    _$SuccessImpl _value,
+    $Res Function(_$SuccessImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? summary = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == summary
-          ? _value.summary
-          : summary // ignore: cast_nullable_to_non_nullable
-              as SummaryResponseModel,
-    ));
+  $Res call({Object? summary = null}) {
+    return _then(
+      _$SuccessImpl(
+        null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                as SummaryResponseModel,
+      ),
+    );
   }
 }
 
@@ -663,8 +662,9 @@ abstract class _Success implements GetSummaryState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+    _$ErrorImpl value,
+    $Res Function(_$ErrorImpl) then,
+  ) = __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
@@ -674,22 +674,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$GetSummaryStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
+    _$ErrorImpl _value,
+    $Res Function(_$ErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? error = null,
-  }) {
-    return _then(_$ErrorImpl(
-      null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? error = null}) {
+    return _then(
+      _$ErrorImpl(
+        null == error
+            ? _value.error
+            : error // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 
@@ -823,8 +824,9 @@ abstract class _Error implements GetSummaryState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+    _$LoadingImpl value,
+    $Res Function(_$LoadingImpl) then,
+  ) = __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -832,8 +834,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$GetSummaryStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
+    _$LoadingImpl _value,
+    $Res Function(_$LoadingImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of GetSummaryState
   /// with the given fields replaced by the non-null parameter values.
@@ -852,7 +855,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'GetSummaryState.loading'));
+    properties..add(DiagnosticsProperty('type', 'GetSummaryState.loading'));
   }
 
   @override

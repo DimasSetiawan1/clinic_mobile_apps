@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
+import 'package:clinic_mobile_apps/presentation/doctor/blocs/get_order_doctor/get_order_doctor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -5,6 +9,7 @@ import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/telemedis/widgets/card_telemedis_doctor.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TelemedisDoctorPage extends StatefulWidget {
   const TelemedisDoctorPage({super.key});
@@ -14,7 +19,18 @@ class TelemedisDoctorPage extends StatefulWidget {
 }
 
 class _TelemedisDoctorPageState extends State<TelemedisDoctorPage> {
-  bool isActive = true;
+  @override
+  void initState() {
+    final doctorId = AuthLocalDatasource().getUserData()?.data?.user?.id;
+    context.read<GetOrderDoctorBloc>().add(
+          GetOrderDoctorEvent.getOrderDoctor(
+            doctorId,
+            "Telemedicine",
+            'active',
+          ),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,99 +38,151 @@ class _TelemedisDoctorPageState extends State<TelemedisDoctorPage> {
       statusBarColor: Color(0xff1469F0),
       statusBarBrightness: Brightness.dark,
     ));
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: 80,
-            width: context.deviceWidth,
-            padding: const EdgeInsets.all(20.0),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.secondary,
-                  Color(0xff1469F0),
-                ],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+    return RefreshIndicator(
+      onRefresh: () async {
+        final doctorId = AuthLocalDatasource().getUserData()?.data?.user?.id;
+        context.read<GetOrderDoctorBloc>().add(
+              GetOrderDoctorEvent.getOrderDoctor(
+                doctorId,
+                "Telemedicine",
+                'active',
               ),
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      Assets.images.logoHorizontal.path,
-                      width: 104.0,
-                      height: 22.0,
-                      fit: BoxFit.cover,
-                    ),
-                    Container(
-                      width: 40.0,
-                      height: 40.0,
-                      decoration: const BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
+            );
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              height: 80,
+              width: context.deviceWidth,
+              padding: const EdgeInsets.all(20.0),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.secondary,
+                    Color(0xff1469F0),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        Assets.images.logoHorizontal.path,
+                        width: 104.0,
+                        height: 22.0,
+                        fit: BoxFit.cover,
                       ),
-                      child: Center(
-                        child: Image.asset(
-                          Assets.images.doctor1.path,
-                          width: 32.0,
-                          height: 32.0,
-                          fit: BoxFit.fill,
+                      Container(
+                        width: 40.0,
+                        height: 40.0,
+                        decoration: const BoxDecoration(
+                          color: AppColors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            Assets.images.doctor1.path,
+                            width: 32.0,
+                            height: 32.0,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SpaceHeight(8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                isActive
-                    ? menuActive("Aktif", () {
-                        setState(() {
-                          isActive = true;
-                        });
-                      })
-                    : menuDisable("Aktif", () {
-                        setState(() {
-                          isActive = true;
-                        });
-                      }),
-                const SpaceWidth(12),
-                !isActive
-                    ? menuActive("Selesai", () {
-                        setState(() {
-                          isActive = false;
-                        });
-                      })
-                    : menuDisable("Selesai", () {
-                        setState(() {
-                          isActive = false;
-                        });
-                      }),
-              ],
+            const SpaceHeight(8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  // isActive
+                  //     ? menuActive("Aktif", () {
+                  //         setState(() {
+                  //           isActive = true;
+                  //         });
+                  //       })
+                  //     : menuDisable("Aktif", () {
+                  //         setState(() {
+                  //           isActive = true;
+                  //         });
+                  //       }),
+                  // const SpaceWidth(12),
+                  // !isActive
+                  //     ? menuActive("Selesai", () {
+                  //         setState(() {
+                  //           isActive = false;
+                  //         });
+                  //       })
+                  //     : menuDisable("Selesai", () {
+                  //         setState(() {
+                  //           isActive = false;
+                  //         });
+                  //       }),
+                ],
+              ),
             ),
-          ),
-          ListView.separated(
-            padding: const EdgeInsets.all(20),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 2,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SpaceHeight(10);
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return CardTelemedisDoctor(isActive: isActive);
-            },
-          ),
-        ],
+            BlocBuilder<GetOrderDoctorBloc, GetOrderDoctorState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  loaded: (patient) {
+                    final orders = patient.data;
+                    if (orders.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          "Tidak ada data",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    }
+                    return ListView.separated(
+                      padding: const EdgeInsets.all(20),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: orders.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SpaceHeight(10);
+                      },
+                      itemBuilder: (BuildContext context, int index) {
+                        final order = orders[index];
+                        if (order.statusService!.toLowerCase() == 'active' &&
+                            order.service.toLowerCase() == 'telemedicine') {
+                          return CardTelemedisDoctor(
+                            order: orders[index],
+                          );
+                        }
+                        return Center(
+                          child: Text(
+                            "Tidak ada data",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.grey,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,48 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:176119905533:android:d6be0391c025970ad59294",
-        "android_client_info": {
-          "package_name": "com.example.clinic"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "176119905533-2j37dvtba4bga1a4l4gnecvci8ureu80.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD2zMHZWpGEWNmJulakxy06cMuCPddPeWo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "176119905533-2j37dvtba4bga1a4l4gnecvci8ureu80.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "176119905533-7moi7t2hnis7713a6rqunudfk2v7hq2f.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.clinicMobileApps"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:176119905533:android:60b5ee7dcc79e797d59294",
         "android_client_info": {
           "package_name": "com.example.clinic_mobile_apps"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "176119905533-im8c4o3f2d4j078r1qc0obrd2mqc8cl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clinic_mobile_apps",
+            "certificate_hash": "627249ac6e98c6b2ad1e3d3a1c2d36547d05c443"
+          }
+        },
         {
           "client_id": "176119905533-2j37dvtba4bga1a4l4gnecvci8ureu80.apps.googleusercontent.com",
           "client_type": 3

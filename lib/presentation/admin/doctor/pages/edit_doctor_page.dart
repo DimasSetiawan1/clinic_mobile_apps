@@ -21,16 +21,14 @@ import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
 import 'package:clinic_mobile_apps/core/components/custom_text_field_height.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditDoctorPage extends StatefulWidget {
   final User doctor;
-  const EditDoctorPage({
-    super.key,
-    required this.doctor,
-  });
+  const EditDoctorPage({super.key, required this.doctor});
 
   @override
   State<EditDoctorPage> createState() => _EditDoctorPageState();
@@ -68,15 +66,18 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
     _nameController = TextEditingController(text: widget.doctor.name);
     _emailController = TextEditingController(text: widget.doctor.email);
     _passwordController = TextEditingController();
-    _sertifikasiController =
-        TextEditingController(text: widget.doctor.certification);
-    _telemedisFeeController =
-        TextEditingController(text: "${widget.doctor.telemedicineFee ?? 0}");
-    _chatPremiumController =
-        TextEditingController(text: "${widget.doctor.chatFee ?? 0}");
-    context
-        .read<SpecalistDoctorBloc>()
-        .add(SpecalistDoctorEvent.getSpecalist());
+    _sertifikasiController = TextEditingController(
+      text: widget.doctor.certification,
+    );
+    _telemedisFeeController = TextEditingController(
+      text: "${widget.doctor.telemedicineFee ?? 0}",
+    );
+    _chatPremiumController = TextEditingController(
+      text: "${widget.doctor.chatFee ?? 0}",
+    );
+    context.read<SpecalistDoctorBloc>().add(
+      SpecalistDoctorEvent.getSpecalist(),
+    );
     super.initState();
   }
 
@@ -113,10 +114,12 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff1469F0),
-      statusBarBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff1469F0),
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
 
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
@@ -127,8 +130,9 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
         child: BlocConsumer<EditDoctorBloc, EditDoctorState>(
           listener: (context, state) {
             state.maybeWhen(
-                orElse: () {},
-                success: (doctor) {
+              orElse: () {},
+              success: (doctor) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -146,12 +150,14 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                       );
                     },
                   );
-                },
-                loading: () => CircularProgressIndicator(),
-                error: (message) {
-                  log(message);
-                  return context.showSnackBar(message, Colors.red);
                 });
+              },
+              loading: () => CircularProgressIndicator(),
+              error: (message) {
+                log(message);
+                return context.showSnackBar(message, Colors.red);
+              },
+            );
           },
           builder: (context, state) {
             return state.maybeWhen(
@@ -163,8 +169,8 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                         _chatPremiumController?.text == "0") {
                       if (mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Fee tidak boleh 0.')));
+                          const SnackBar(content: Text('Fee tidak boleh 0.')),
+                        );
                       }
                     }
                     if (_doctorFormKey.currentState != null &&
@@ -187,12 +193,13 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                         image: imageFile,
                       );
                       context.read<EditDoctorBloc>().add(
-                            EditDoctorEvent.editDataDoctor(data),
-                          );
+                        EditDoctorEvent.editDataDoctor(data),
+                      );
                     } else {
                       context.showSnackBar(
-                          'Formulir tidak valid. Silahkan cek kembali isian formulir.',
-                          Colors.orangeAccent);
+                        'Formulir tidak valid. Silahkan cek kembali isian formulir.',
+                        Colors.orangeAccent,
+                      );
                     }
                   },
                   label: 'Simpan',
@@ -214,10 +221,7 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    AppColors.secondary,
-                    Color(0xff1469F0),
-                  ],
+                  colors: [AppColors.secondary, Color(0xff1469F0)],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
@@ -225,13 +229,14 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
               child: Row(
                 children: [
                   IconButton(
-                      onPressed: () {
-                        context.pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.white,
-                      )),
+                    onPressed: () {
+                      context.pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.white,
+                    ),
+                  ),
                   SpaceWidth(context.deviceWidth * 0.2),
                   const Text(
                     "Edit Dokter",
@@ -248,8 +253,10 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
             Form(
               key: _doctorFormKey,
               child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 10,
+                ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 16,
@@ -272,100 +279,99 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                     const Text(
                       "Nama Dokter",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: _nameController!,
                       label: 'Masukkan nama Dokter',
                       textInputAction: TextInputAction.next,
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Email Dokter",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: _emailController!,
                       label: 'Masukkan email Dokter',
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Password Dokter",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: _passwordController!,
                       label: 'Masukkan Password Dokter',
                       textInputAction: TextInputAction.next,
                       suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _visible = !_visible;
-                            });
-                          },
-                          icon: _visible
-                              ? Icon(Icons.visibility)
-                              : Icon(Icons.visibility_off)),
+                        onPressed: () {
+                          setState(() {
+                            _visible = !_visible;
+                          });
+                        },
+                        icon:
+                            _visible
+                                ? Icon(Icons.visibility)
+                                : Icon(Icons.visibility_off),
+                      ),
                       // keyboardType: ,
                       obscureText: !_visible,
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Sertifikasi",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextFieldHeight(
                       controller: _sertifikasiController!,
                       label: 'Masukkan Sertifikasi',
                     ),
                     const SpaceHeight(16),
-                    buildRadioOptions('Jenis Kelamin', ['Pria', 'Wanita'],
-                        _selectedGender, _updateGender),
+                    buildRadioOptions(
+                      'Jenis Kelamin',
+                      ['Pria', 'Wanita'],
+                      _selectedGender,
+                      _updateGender,
+                    ),
                     const SpaceHeight(16),
-                    buildRadioOptions('Status Dokter', ['Aktif', 'Inactive'],
-                        _selectedStatus, _updateStatus),
+                    buildRadioOptions(
+                      'Status Dokter',
+                      ['Aktif', 'Inactive'],
+                      _selectedStatus,
+                      _updateStatus,
+                    ),
                     const SpaceHeight(16),
                     const Text(
                       "Spesialisasi",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     BlocBuilder<SpecalistDoctorBloc, SpecalistDoctorState>(
                       builder: (context, state) {
                         return state.maybeWhen(
@@ -382,22 +388,25 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                               orElse: () => doctor.first,
                             );
                             return DropdownButtonFormField<SpecialistModel>(
-                              validator: (value) =>
-                                  value == null ? 'Field is required' : null,
+                              validator:
+                                  (value) =>
+                                      value == null
+                                          ? 'Field is required'
+                                          : null,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(13),
-                                      borderSide: BorderSide(width: 2))),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13),
+                                  borderSide: BorderSide(width: 2),
+                                ),
+                              ),
                               hint: const Text(
                                 "Pilih Spesialisasi",
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(
-                                    0xff677294,
-                                  ),
+                                  color: Color(0xff677294),
                                 ),
                               ),
                               isExpanded: true,
@@ -407,68 +416,64 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                                   setState(() {});
                                 }
                               },
-                              items: doctor
-                                  .map<DropdownMenuItem<SpecialistModel>>(
-                                      (SpecialistModel specialation) {
-                                return DropdownMenuItem<SpecialistModel>(
-                                  value: specialation,
-                                  child: Text(
-                                    specialation.name!,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(
-                                        0xff677294,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                              items:
+                                  doctor.map<DropdownMenuItem<SpecialistModel>>(
+                                    (SpecialistModel specialation) {
+                                      return DropdownMenuItem<SpecialistModel>(
+                                        value: specialation,
+                                        child: Text(
+                                          specialation.name!,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff677294),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).toList(),
                             );
                           },
                         );
                       },
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Tarif Telemedis",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
-                        controller: _telemedisFeeController!,
-                        label: 'Masukkan tarif telemedis ',
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          final int priceValue = value.toIntegerFromText;
-                          _telemedisFeeController!.text =
-                              priceValue.toString().currencyFormatRpV2;
-                          // _telemedisFeeController!.text = priceValue.toString();
-                          _telemedisFeeController!.selection =
-                              TextSelection.fromPosition(TextPosition(
-                                  offset:
-                                      _telemedisFeeController!.text.length));
-                        }),
-                    const SpaceHeight(
-                      16,
+                      controller: _telemedisFeeController!,
+                      label: 'Masukkan tarif telemedis ',
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        final int priceValue = value.toIntegerFromText;
+                        _telemedisFeeController!.text =
+                            priceValue.toString().currencyFormatRpV2;
+                        // _telemedisFeeController!.text = priceValue.toString();
+                        _telemedisFeeController!
+                            .selection = TextSelection.fromPosition(
+                          TextPosition(
+                            offset: _telemedisFeeController!.text.length,
+                          ),
+                        );
+                      },
                     ),
+                    const SpaceHeight(16),
                     const Text(
                       "Tarif Chat Premium",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: _chatPremiumController!,
                       label: 'Masukkan tarif chat premium',
@@ -477,27 +482,24 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                         final int priceValue = value.toIntegerFromText;
                         _chatPremiumController!.text =
                             priceValue.toString().currencyFormatRpV2;
-                        _chatPremiumController!.selection =
-                            TextSelection.fromPosition(
+                        _chatPremiumController!
+                            .selection = TextSelection.fromPosition(
                           TextPosition(
                             offset: _chatPremiumController!.text.length,
                           ),
                         );
                       },
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Jadwal Praktik",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -525,27 +527,27 @@ class _EditDoctorPageState extends State<EditDoctorPage> {
                     widget.doctor.image != null
                         ? widget.doctor.image.toString().contains('http')
                             ? Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Image.network(
-                                  widget.doctor.image!,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
+                              padding: EdgeInsets.all(16),
+                              child: Image.network(
+                                widget.doctor.image!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
                             : Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Image.network(
-                                  GlobalVariable.baseUrl + widget.doctor.image!,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
+                              padding: EdgeInsets.all(16),
+                              child: Image.network(
+                                dotenv.env['BASE_URL']! + widget.doctor.image!,
+                                fit: BoxFit.cover,
+                              ),
+                            )
                         : CustomPickImage(
-                            onChanged: (file) {
-                              if (file == null) {
-                                return;
-                              }
-                              imageFile = file;
-                            },
-                          ),
+                          onChanged: (file) {
+                            if (file == null) {
+                              return;
+                            }
+                            imageFile = file;
+                          },
+                        ),
                     const SpaceHeight(24),
                   ],
                 ),

@@ -10,15 +10,14 @@ part 'login_google_bloc.freezed.dart';
 class LoginGoogleBloc extends Bloc<LoginGoogleEvent, LoginGoogleState> {
   final AuthRemoteDatasource _authRemoteDatasource;
   LoginGoogleBloc(this._authRemoteDatasource) : super(_Initial()) {
-    on<_LoginGoogle>(
-      (event, emit) async {
+    on<_LoginGoogle>((event, emit) async {
         emit(_Loading());
         final result =
             await _authRemoteDatasource.loginGoogleBackend(event.idToken);
         result.fold((l) {
           emit(_Error('Error during login: $l'));
         }, (r) => emit(_Success(r)));
-      },
+      }
     );
   }
 }

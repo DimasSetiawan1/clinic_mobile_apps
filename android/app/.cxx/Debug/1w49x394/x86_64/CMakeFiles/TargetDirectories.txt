@@ -1,2 +1,0 @@
-C:/project/FIC 21/clinic_mobile_apps/android/app/.cxx/Debug/1w49x394/x86_64/CMakeFiles/edit_cache.dir
-C:/project/FIC 21/clinic_mobile_apps/android/app/.cxx/Debug/1w49x394/x86_64/CMakeFiles/rebuild_cache.dir

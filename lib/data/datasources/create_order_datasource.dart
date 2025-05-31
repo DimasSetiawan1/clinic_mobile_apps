@@ -5,14 +5,17 @@ import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/request/create_order_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/create_order_response_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:http/http.dart' as http;
 
 class CreateOrderDatasource {
   Future<Either<String, CreateOrderResponseModel>> createOrder(
-      CreateOrderRequestModel requestModel) async {
+    CreateOrderRequestModel requestModel,
+  ) async {
     final localData = AuthLocalDatasource().getUserData();
     final request = await http.post(
-      Uri.parse('${GlobalVariable.baseUrl}/api/orders'),
+      Uri.parse('${dotenv.env['BASE_URL']}/api/orders'),
       headers: {
         'Authorization': 'Bearer ${localData?.data?.token}',
         'Content-Type': 'application/json',
@@ -21,8 +24,9 @@ class CreateOrderDatasource {
       body: json.encode(requestModel.toMap()),
     );
     if (request.statusCode == 201) {
-      final response =
-          CreateOrderResponseModel.fromMap(json.decode(request.body));
+      final response = CreateOrderResponseModel.fromMap(
+        json.decode(request.body),
+      );
       return Right(response);
     } else {
       return Left("${request.statusCode}");

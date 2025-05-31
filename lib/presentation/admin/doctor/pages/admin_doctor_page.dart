@@ -33,6 +33,7 @@ class _AdminDoctorPageState extends State<AdminDoctorPage> {
       backgroundColor: AppColors.lightBackground,
       body: SafeArea(
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Container(
               width: context.deviceWidth,
@@ -84,19 +85,26 @@ class _AdminDoctorPageState extends State<AdminDoctorPage> {
                     child: CircularProgressIndicator(),
                   );
                 }, success: (doctors) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.all(20),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: doctors.data.length,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const SpaceHeight(10);
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<GetDoctorBloc>().add(
+                            GetDoctorEvent.getDoctor(),
+                          );
                     },
-                    itemBuilder: (BuildContext context, int index) {
-                      return CardDoctorWidget(
-                        doctor: doctors.data[index],
-                      );
-                    },
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(20),
+                      shrinkWrap: true,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: doctors.data.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SpaceHeight(10);
+                      },
+                      itemBuilder: (BuildContext context, int index) {
+                        return CardDoctorWidget(
+                          doctor: doctors.data[index],
+                        );
+                      },
+                    ),
                   );
                 });
               },
