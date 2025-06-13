@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/presentation/patient/doctors/doctors_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const DoctorsPage(),
     const TelemedisPage(),
-    const ChatPage(),
+    const ChatPage(isDoctor: false,),
     const HistoryPage(),
     const ProfilePage(),
   ];
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             NavItem(
-              iconPath: Assets.icons.telemedis.path,
+              iconPath: Assets.icons.profileCircle.path,
               label: 'Doctors',
               isActive: _selectedIndex == 0,
               onTap: () {

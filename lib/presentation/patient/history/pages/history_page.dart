@@ -1,18 +1,16 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
+import 'package:clinic_mobile_apps/core/services/firebase_services.dart';
 import 'package:clinic_mobile_apps/presentation/admin/home/blocs/get_history/get_history_order_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/doctor/history/widgets/card_doctor_history.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/pages/chat_with_doctor_page.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/payment_url_page.dart';
+import 'package:clinic_mobile_apps/presentation/patient/orders/pages/payment_url_page.dart';
 import 'package:clinic_mobile_apps/presentation/patient/history/widgets/card_history.dart';
-import 'package:clinic_mobile_apps/presentation/patient/telemedis/pages/telemedis_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/history/widgets/empty_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -23,25 +21,31 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  final _firebaseServices = FirebaseServices();
+
   @override
   void initState() {
-    context
-        .read<GetHistoryOrderBloc>()
-        .add(GetHistoryOrderEvent.getHistoryOrders());
+    context.read<GetHistoryOrderBloc>().add(
+      GetHistoryOrderEvent.getHistoryOrders(),
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff1469F0),
-      statusBarBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff1469F0),
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
       appBar: AppBar(
-        title: Text('History Orders',
-            style: TextStyle(color: Colors.white, fontSize: 20)),
+        title: Text(
+          'History Orders',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
         backgroundColor: AppColors.primary,
         elevation: 0,
         centerTitle: true,
@@ -51,55 +55,83 @@ class _HistoryPageState extends State<HistoryPage> {
           builder: (context, state) {
             return state.maybeWhen(
               orElse: () {
-                return ListView(children: [
-                  Container(
-                    width: context.deviceWidth,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 16),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.secondary,
-                          Color(0xff1469F0),
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
+                return ListView(
+                  children: [
+                    Container(
+                      width: context.deviceWidth,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Chat Premium",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.white,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [AppColors.secondary, Color(0xff1469F0)],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Chat Premium",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SpaceHeight(14),
-                  Center(
-                    child: Text(
-                      "Error fetching history orders",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: AppColors.gray,
+                    const SpaceHeight(14),
+                    Center(
+                      child: Text(
+                        "Error fetching history orders",
+                        style: TextStyle(fontSize: 16.0, color: AppColors.gray),
                       ),
                     ),
-                  )
-                ]);
+                  ],
+                );
               },
-              loading: () => Center(
-                child: CircularProgressIndicator(),
-              ),
+              loading: () {
+                return FutureBuilder(
+                  future: Future.delayed(const Duration(seconds: 10)),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Timeout'),
+                                content: const Text(
+                                  'Loading is taking too long. Please refresh.',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      context.read<GetHistoryOrderBloc>().add(
+                                        GetHistoryOrderEvent.getHistoryOrders(),
+                                      );
+                                    },
+                                    child: const Text('Refresh'),
+                                  ),
+                                ],
+                              ),
+                        );
+                      });
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                );
+              },
               success: (data) {
                 if (data.data.isEmpty) {
                   return Center(
                     child: RefreshIndicator(
                       onRefresh: () async {
-                        context
-                            .read<GetHistoryOrderBloc>()
-                            .add(GetHistoryOrderEvent.getHistoryOrders());
+                        context.read<GetHistoryOrderBloc>().add(
+                          GetHistoryOrderEvent.getHistoryOrders(),
+                        );
                       },
                       child: SingleChildScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),
@@ -128,9 +160,9 @@ class _HistoryPageState extends State<HistoryPage> {
                 }
                 return RefreshIndicator(
                   onRefresh: () async {
-                    context
-                        .read<GetHistoryOrderBloc>()
-                        .add(GetHistoryOrderEvent.getHistoryOrders());
+                    context.read<GetHistoryOrderBloc>().add(
+                      GetHistoryOrderEvent.getHistoryOrders(),
+                    );
                   },
                   child: ListView.builder(
                     itemCount: data.data.length,
@@ -148,15 +180,32 @@ class _HistoryPageState extends State<HistoryPage> {
                           }
                           if (dataOrder.chatRooms.status == "open" &&
                               dataOrder.service.toLowerCase() == "chat") {
-                            context.push(ChatWithDoctorPage(
-                              name: dataOrder.doctor.name,
-                              chatRoom: dataOrder.chatRooms,
-                            ));
+                            _firebaseServices
+                                .checkDocumentExists(
+                                  documentId: dataOrder.chatRooms.id,
+                                )
+                                .then((exists) {
+                                  if (exists) {
+                                    context.mounted
+                                        ? context.push(
+                                          ChatWithDoctorPage(
+                                            name: dataOrder.patient.name,
+                                            chatRoom: dataOrder.chatRooms,
+                                            doctorName: dataOrder.doctor.name,
+                                          ),
+                                        )
+                                        : null;
+                                  } else {
+                                    context.mounted
+                                        ? context.showSnackBar(
+                                          "Chat Room Not Found",
+                                        )
+                                        : null;
+                                  }
+                                });
                           }
                         },
-                        child: CardHistory(
-                          orders: dataOrder,
-                        ),
+                        child: CardHistory(orders: dataOrder),
                       );
                     },
                   ),

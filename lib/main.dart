@@ -1,13 +1,16 @@
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/services/firebase_services.dart';
 import 'package:clinic_mobile_apps/core/utils/shared_preferences_utils.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_remote_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/create_order_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/doctor_remote_datasource.dart';
+import 'package:clinic_mobile_apps/data/datasources/get_list_message_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/order_history_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/specalist_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/summary_clinic.dart';
+import 'package:clinic_mobile_apps/data/models/response/list_message_response.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/add_doctor/add_doctor_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/edit_doctor/edit_doctor_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/get_doctor/bloc/get_doctor_bloc.dart';
@@ -18,9 +21,12 @@ import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_main_page
 import 'package:clinic_mobile_apps/presentation/auth/blocs/bloc_login_google/login_google_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/auth/blocs/check_auth/check_auth_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/blocs/get_order_doctor/get_order_doctor_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/doctor/chat/bloc/get_all_message_doctor_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/home/pages/doctor_home_page.dart';
-import 'package:clinic_mobile_apps/presentation/patient/blocs/load_doctor_active/load_doctor_active_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/create_order/create_order_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/chat_room/chat_room_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/get_all_message_patient/get_all_message_patient_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/create_order/create_order_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +46,6 @@ void main() async {
   await SharedPreferencesUtils.init();
   await initializeDateFormatting('id_ID', null);
   await dotenv.load(fileName: ".env");
-  // Initialize with your OneSignal App ID
   OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID'] ?? '');
   OneSignal.Notifications.requestPermission(true);
 
@@ -95,6 +100,17 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetOrderDoctorBloc(DoctorRemoteDatasource()),
+        ),
+        BlocProvider(
+          create:
+              (context) => GetAllMessagePatientBloc(GetAllMessageDatasource()),
+        ),
+        BlocProvider(
+          create:
+              (context) => GetAllMessageDoctorBloc(GetAllMessageDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ChatRoomBloc(FirebaseServices()),
         ),
       ],
       child: MaterialApp(

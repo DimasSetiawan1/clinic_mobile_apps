@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/utils/images_usecase.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/pages/onboarding_page.dart';
@@ -13,7 +14,6 @@ import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -72,19 +72,15 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Row(
                 children: [
                   _user?.image != null
-                      ? Image.network(
-                        _user!.image!.contains("http")
-                            ? _user!.image!
-                            : dotenv.env['BASE_URL']! + _user!.image!,
+                      ? showImageNetworkProfileUser(
+                        imageUrl: _user!.image ?? '',
                         width: 72.0,
                         height: 72.0,
-                        fit: BoxFit.cover,
                       )
-                      : Image.asset(
-                        Assets.images.doctor1.path,
+                      : showImageNetworkProfileUser(
+                        imageUrl: Assets.images.doctor1.path,
                         width: 72.0,
                         height: 72.0,
-                        fit: BoxFit.cover,
                       ),
                   const SpaceWidth(16),
                   Column(

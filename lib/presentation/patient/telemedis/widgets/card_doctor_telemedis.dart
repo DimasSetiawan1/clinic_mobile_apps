@@ -4,7 +4,6 @@
 import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
 import 'package:clinic_mobile_apps/data/models/response/doctor_response_model.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/detail_doctor_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';

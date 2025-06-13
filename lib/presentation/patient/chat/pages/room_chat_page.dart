@@ -1,4 +1,6 @@
+import 'package:clinic_mobile_apps/data/models/request/chat_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/chat_room/chat_room_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -6,17 +8,37 @@ import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/widgets/chat_bubble.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class RoomChatPage extends StatefulWidget {
-  final ChatRooms? chatRoom;
-  final String? name;
-  const RoomChatPage({super.key, this.chatRoom, this.name});
+  final String chatRoomId;
+  final int senderId;
+  final int receiverId;
+  final String? doctorName;
+  final String? patientName;
+  const RoomChatPage({
+    super.key,
+    required this.chatRoomId,
+    required this.senderId,
+    required this.receiverId,
+    this.doctorName,
+    this.patientName,
+  });
 
   @override
   State<RoomChatPage> createState() => _RoomChatPageState();
 }
 
 class _RoomChatPageState extends State<RoomChatPage> {
+  final TextEditingController _messageController = TextEditingController();
+
+  @override
+  void initState() {
+    context.read<ChatRoomBloc>().add(ChatRoomEvent.watch(widget.chatRoomId));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -62,8 +84,8 @@ class _RoomChatPageState extends State<RoomChatPage> {
                     ),
                   ),
                   const SpaceWidth(8),
-                  const Text(
-                    "dr Kiara Tasbiha",
+                  Text(
+                    widget.doctorName ?? "Doctor",
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
@@ -74,71 +96,68 @@ class _RoomChatPageState extends State<RoomChatPage> {
               ),
             ),
             const SpaceHeight(12),
-            const Center(
-              child: Text(
-                "16, November 2024",
-                style: TextStyle(
-                  fontSize: 10.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
+            Expanded(
+              child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => const SizedBox.shrink(),
+                    loading:
+                        () => const Center(child: CircularProgressIndicator()),
+                    loaded: (messages) {
+                      if (messages.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            "Tidak ada pesan",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        );
+                      }
+                      final chats = messages.reversed.toList();
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        itemCount: chats.length,
+                        itemBuilder: (context, index) {
+                          final message = chats[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: ChatBubble(
+                              direction:
+                                  message.senderId == widget.senderId
+                                      ? Direction.right
+                                      : Direction.left,
+                              message: message.message,
+                              type: BubbleType.top,
+                              clock: DateFormat(
+                                'HH:mm',
+                              ).format(message.timestamp),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    error:
+                        (error) => Center(
+                          child: Text(
+                            error,
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                  );
+                },
               ),
             ),
-            const SpaceHeight(12),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ChatBubble(
-                direction: Direction.right,
-                message: 'Dok, sering pusing dan mual ketika pagi, kenapa ya?',
-                type: BubbleType.top,
-                clock: "10.05 WIB",
-              ),
-            ),
-            const SpaceHeight(20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ChatBubble(
-                direction: Direction.left,
-                message: 'Apakah sudah sarapan?',
-                type: BubbleType.top,
-                clock: "10.10 WIB",
-              ),
-            ),
-            const SpaceHeight(20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ChatBubble(
-                direction: Direction.right,
-                message: 'Belum dok, biasanya saya sarapan jam 12 siang',
-                type: BubbleType.top,
-                clock: "10.11 WIB",
-              ),
-            ),
-            const SpaceHeight(20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ChatBubble(
-                direction: Direction.left,
-                message: 'Coba mulai sarapan jam 7 pagi, dan minum air putih',
-                type: BubbleType.top,
-                clock: "10.12 WIB",
-              ),
-            ),
-            const SpaceHeight(20),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ChatBubble(
-                direction: Direction.left,
-                message: 'Sesi konsultasi ditutup oleh aplikasi',
-                type: BubbleType.top,
-                clock: "10.30 WIB",
-              ),
-            ),
-            const Spacer(),
+            // const Spacer(),
             Container(
               width: context.deviceWidth,
               height: 80.0,
-              padding: const EdgeInsets.all(16.0),
+              // color: Colors.black,
+              // padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   Expanded(
@@ -151,8 +170,9 @@ class _RoomChatPageState extends State<RoomChatPage> {
                       child: Row(
                         children: [
                           const SpaceWidth(16),
-                          const Expanded(
+                          Expanded(
                             child: TextField(
+                              controller: _messageController,
                               decoration: InputDecoration(
                                 hintText: "Type a message",
                                 border: InputBorder.none,
@@ -160,7 +180,20 @@ class _RoomChatPageState extends State<RoomChatPage> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              context.read<ChatRoomBloc>().add(
+                                ChatRoomEvent.sendMessage(
+                                  widget.chatRoomId,
+                                  ChatRequestModel(
+                                    senderId: widget.senderId,
+                                    reciverId: widget.receiverId,
+                                    timestamp: DateTime.now(),
+                                    message: _messageController.text.trim(),
+                                  ),
+                                ),
+                              );
+                              _messageController.clear();
+                            },
                             child: const Icon(
                               Icons.send,
                               color: AppColors.primary,

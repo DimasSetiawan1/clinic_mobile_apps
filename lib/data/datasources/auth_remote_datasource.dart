@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/services/firebase_services.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/blocs/bloc_login_google/login_google_bloc.dart';
@@ -77,6 +78,8 @@ class AuthRemoteDatasource {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+    final firebaseAuth = FirebaseServices();
+
     if (googleUser == null) {
       throw Exception('Google sign-in aborted by user');
     }
@@ -97,6 +100,6 @@ class AuthRemoteDatasource {
       idToken: googleAuth?.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return firebaseAuth.signInWithCredentials(credentials: credential);
   }
 }

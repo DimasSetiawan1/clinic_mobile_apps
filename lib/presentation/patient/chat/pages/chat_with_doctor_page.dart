@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:clinic_mobile_apps/data/datasources/firebase_datasource.dart';
+import 'package:clinic_mobile_apps/core/services/firebase_services.dart';
 import 'package:clinic_mobile_apps/data/datasources/onesignal_notification_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/request/chat_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/pages/room_chat_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/components/buttons.dart';
@@ -13,12 +14,17 @@ import 'package:clinic_mobile_apps/core/components/custom_text_field_height.dart
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/chat_list_page.dart';
 
 class ChatWithDoctorPage extends StatefulWidget {
   final String? name;
+  final String? doctorName;
   final ChatRooms? chatRoom;
-  const ChatWithDoctorPage({super.key, this.name, this.chatRoom});
+  const ChatWithDoctorPage({
+    super.key,
+    this.name,
+    required this.doctorName,
+    required this.chatRoom,
+  });
 
   @override
   State<ChatWithDoctorPage> createState() => _ChatWithDoctorPageState();
@@ -177,7 +183,8 @@ class _ChatWithDoctorPageState extends State<ChatWithDoctorPage> {
                   const SpaceHeight(20),
                   Button.filled(
                     onPressed: () async {
-                      // context.push(const ChatListPage());
+                      final FirebaseServices firebaseServices =
+                          FirebaseServices();
                       if (_nameController.text.isEmpty ||
                           _chatController.text.isEmpty) {
                         context.showSnackBar(
@@ -185,34 +192,25 @@ class _ChatWithDoctorPageState extends State<ChatWithDoctorPage> {
                         );
                         return;
                       }
-                      final chatRoomRef = FirebaseDatasource()
-                          .chatRoomsCollection
-                          .doc(widget.chatRoom?.id ?? '');
-                      final docSnapshot = await chatRoomRef.get();
-
-                      if (!docSnapshot.exists) {
-                        await chatRoomRef.set({
-                          'chat_room_name': _nameController.text,
+                      await firebaseServices.startChatRoom(
+                        chatRoomId: widget.chatRoom!.id,
+                        chatRoomData: {
                           'last_message': _chatController.text,
                           'last_message_time': DateTime.now().toIso8601String(),
-                          'participants': [
-                            widget.chatRoom?.doctorsId,
-                            widget.chatRoom?.usersId,
-                          ],
-                        });
-                      }
-                      await chatRoomRef.update(
-                        ChatRequestModel(
-                          lastMessage: _chatController.text,
-                          lastMessageTime: DateTime.now().toIso8601String(),
-                          messages: Messages(
-                            senderId: widget.chatRoom?.usersId,
-                            reciverId: widget.chatRoom?.doctorsId,
-                            message: _chatController.text,
-                            timestamp: DateTime.now().toIso8601String(),
-                          ),
-                        ).toJson(),
+                        },
                       );
+
+                      await firebaseServices.addMessageToChatRoom(
+                        chatRoomId: widget.chatRoom!.id,
+                        messageData: ChatRequestModel(
+                          senderId: widget.chatRoom!.usersId,
+                          reciverId: widget.chatRoom!.doctorsId,
+                          message: _chatController.text,
+                          timestamp: DateTime.now(),
+                          isRead: false,
+                        ),
+                      );
+                      
                       if (context.mounted) {
                         context.showSnackBar("Pesan berhasil dikirim!");
                         OnesignalNotificationDatasource().sendNotification(
@@ -224,8 +222,10 @@ class _ChatWithDoctorPageState extends State<ChatWithDoctorPage> {
                         _nameController.clear();
                         context.pushReplacement(
                           RoomChatPage(
-                            chatRoom: widget.chatRoom,
-                            name: _nameController.text,
+                            chatRoomId: widget.chatRoom!.id,
+                            doctorName: widget.doctorName,
+                            senderId: widget.chatRoom!.usersId,
+                            receiverId: widget.chatRoom!.doctorsId,
                           ),
                         );
                       }

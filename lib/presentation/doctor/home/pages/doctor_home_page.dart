@@ -1,3 +1,4 @@
+import 'package:clinic_mobile_apps/presentation/patient/chat/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
@@ -19,14 +20,11 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const ChatDoctorPage(),
+    const ChatPage(isDoctor: true,),
     const TelemedisDoctorPage(),
     HistoryDoctorPage(),
     const ProfileDoctorPage(),
-    // const HomePage(),
-    // const OrdersPage(),
-    // const Placeholder(),
-    // const ManageMenuPage(),
+   
   ];
 
   void _onItemTapped(int index) {
@@ -64,12 +62,13 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
               onTap: () => _onItemTapped(0),
             ),
             NavItem(
-                iconPath: Assets.icons.telemedis.path,
-                label: 'Telemedis',
-                isActive: _selectedIndex == 1,
-                onTap: () {
-                  _onItemTapped(1);
-                }),
+              iconPath: Assets.icons.telemedis.path,
+              label: 'Telemedis',
+              isActive: _selectedIndex == 1,
+              onTap: () {
+                _onItemTapped(1);
+              },
+            ),
             NavItem(
               iconPath: Assets.icons.note.path,
               label: 'History',

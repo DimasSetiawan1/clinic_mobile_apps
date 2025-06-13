@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
-import 'package:clinic_mobile_apps/presentation/patient/blocs/load_doctor_active/load_doctor_active_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/detail_doctor_page.dart';
+import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/shared_pages/detail_doctor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -48,6 +48,7 @@ class _DoctorsPageState extends State<DoctorsPage> {
         );
       },
       child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Stack(
           children: [
             Column(

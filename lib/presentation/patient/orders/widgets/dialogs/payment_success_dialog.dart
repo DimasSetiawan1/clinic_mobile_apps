@@ -5,7 +5,6 @@ import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dar
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 
-
 class PaymentSuccessDialog extends StatelessWidget {
   const PaymentSuccessDialog({super.key});
 
@@ -13,9 +12,7 @@ class PaymentSuccessDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       content: SizedBox(
         height: 382,
         child: Column(
@@ -40,9 +37,10 @@ class PaymentSuccessDialog extends StatelessWidget {
               "Terima kasih atas pembayaran Anda. Dokter akan segera menghubungi Anda untuk konsultasi lebih lanjut.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xffB2B2B2)),
+                fontSize: 14.0,
+                fontWeight: FontWeight.w400,
+                color: Color(0xffB2B2B2),
+              ),
             ),
             const SpaceHeight(16),
             Button.filled(
@@ -53,8 +51,10 @@ class PaymentSuccessDialog extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const HomePage(initialIndex: 2)),
+                    builder:
+                        (BuildContext context) =>
+                            const HomePage(initialIndex: 3),
+                  ),
                   ModalRoute.withName('/historyOrder'),
                 );
               },

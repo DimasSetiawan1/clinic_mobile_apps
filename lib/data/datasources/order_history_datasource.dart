@@ -55,4 +55,26 @@ class OrderHistoryDatasource {
       return Left("Error fetching order history");
     }
   }
+
+  Future<Either<String, OrdersResponseModel>> getOrderDoctorHistory() async {
+    final userData = AuthLocalDatasource().getUserData();
+    final request = await http.get(
+      Uri.parse(
+        "${dotenv.env['BASE_URL']}/api/orders/doctor/${userData?.data?.user?.id}",
+      ),
+      headers: {
+        'Authorization': 'Bearer ${userData?.data?.token}',
+        'Accept': 'application/json',
+      },
+    );
+    if (request.statusCode == 200) {
+      final jsonResponse = json.decode(request.body);
+      return Right(OrdersResponseModel.fromMap(jsonResponse));
+    } else {
+      log(
+        "Error fetching order history: ${request.statusCode} - ${request.body}",
+      );
+      return Left("Error fetching order history");
+    }
+  }
 }

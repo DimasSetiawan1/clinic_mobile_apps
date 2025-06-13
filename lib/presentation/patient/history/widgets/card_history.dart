@@ -1,18 +1,20 @@
-import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
+import 'package:clinic_mobile_apps/core/utils/images_usecase.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:flutter/material.dart';
-import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 
 class CardHistory extends StatelessWidget {
   final HistoryOrders orders;
-  const CardHistory({super.key, required this.orders});
+  final bool isHistoryDoctor;
+  const CardHistory({
+    super.key,
+    required this.orders,
+    this.isHistoryDoctor = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,78 +44,47 @@ class CardHistory extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child:
-                      orders.doctor.image.contains("http")
-                          ? Image.network(
-                            orders.doctor.image,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                Assets.images.doctor1.path,
-                                width: 87.0,
-                                height: 87.0,
-                                fit: BoxFit.cover,
-                              );
-                            },
-                            width: 87.0,
-                            height: 87.0,
-                            fit: BoxFit.cover,
+                      isHistoryDoctor
+                          ? showImageNetworkProfileUser(
+                            imageUrl: orders.patient.image,
                           )
-                          : Image.network(
-                            dotenv.env['BASE_URL']! + orders.doctor.image,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                Assets.images.doctor1.path,
-                                width: 87.0,
-                                height: 87.0,
-                                fit: BoxFit.cover,
-                              );
-                            },
-                            width: 87.0,
-                            height: 87.0,
-                            fit: BoxFit.cover,
+                          : showImageNetworkProfileUser(
+                            imageUrl: orders.doctor.image,
                           ),
                 ),
                 const SpaceWidth(20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment:
+                        isHistoryDoctor
+                            ? MainAxisAlignment.spaceBetween
+                            : MainAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            orders.service.toLowerCase().contains("chat")
-                                ? 'Chat Premium'
-                                : orders.service,
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            orders.chatRooms.status == "open"
-                                ? "Chat Berlangsung"
-                                : "Chat Selesai",
-                            style: TextStyle(
-                              fontSize: 10.0,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  orders.chatRooms.status == "open"
-                                      ? Color(0xff219653)
-                                      : Color.fromARGB(255, 255, 0, 0),
-                            ),
-                          ),
-                        ],
-                      ),
                       Text(
-                        orders.doctor.name,
+                        isHistoryDoctor == true
+                            ? orders.patient.name
+                            : orders.doctor.name,
                         style: TextStyle(
-                          fontSize: 10.0,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xffB0BEC3),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
                         ),
                       ),
-                      const SpaceHeight(8),
+                      Text(
+                        orders.service.toLowerCase().contains("chat")
+                            ? 'Chat Premium'
+                            : orders.service,
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                      ),
+
+                      isHistoryDoctor
+                          ? const SpaceHeight(20)
+                          : const SpaceHeight(8),
                       Text(
                         DateFormat(
                           "EEEE, dd MM yyyy - hh:mm a",
@@ -126,58 +97,61 @@ class CardHistory extends StatelessWidget {
                         ),
                       ),
                       const SpaceHeight(8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
+                      isHistoryDoctor
+                          ? const SizedBox()
+                          : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Total Bayar",
-                                style: TextStyle(
-                                  fontSize: 10.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.primary,
-                                ),
+                              Column(
+                                children: [
+                                  const Text(
+                                    "Total Bayar",
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                  Text(
+                                    orders.price.toString().currencyFormatRpV2,
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xff677294),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                orders.price.toString().currencyFormatRpV2,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xff677294),
+
+                              switch (orders.status) {
+                                "PAID" => StatusOrderWigdet(
+                                  width: 60,
+                                  textColor: Color(0xff219653),
+                                  backgroundColor: Color(
+                                    0xff219653,
+                                  ).withOpacity(0.15),
+                                  status: orders.status,
                                 ),
-                              ),
+                                "PENDING" => StatusOrderWigdet(
+                                  width: 80,
+                                  textColor: Color(0xffF2994A),
+                                  backgroundColor: Color(
+                                    0xffF2994A,
+                                  ).withOpacity(0.15),
+                                  status: orders.status,
+                                ),
+                                "EXPIRED" => StatusOrderWigdet(
+                                  width: 80,
+                                  textColor: Color(0xffEB5757),
+                                  backgroundColor: Color(
+                                    0xffEB5757,
+                                  ).withOpacity(0.15),
+                                  status: orders.status,
+                                ),
+                                _ => Container(),
+                              },
                             ],
                           ),
-                          switch (orders.status) {
-                            "PAID" => StatusOrderWigdet(
-                              width: 60,
-                              textColor: Color(0xff219653),
-                              backgroundColor: Color(
-                                0xff219653,
-                              ).withOpacity(0.15),
-                              status: orders.status,
-                            ),
-                            "PENDING" => StatusOrderWigdet(
-                              width: 80,
-                              textColor: Color(0xffF2994A),
-                              backgroundColor: Color(
-                                0xffF2994A,
-                              ).withOpacity(0.15),
-                              status: orders.status,
-                            ),
-                            "EXPIRED" => StatusOrderWigdet(
-                              width: 80,
-                              textColor: Color(0xffEB5757),
-                              backgroundColor: Color(
-                                0xffEB5757,
-                              ).withOpacity(0.15),
-                              status: orders.status,
-                            ),
-                            _ => Container(),
-                          },
-                        ],
-                      ),
                     ],
                   ),
                 ),

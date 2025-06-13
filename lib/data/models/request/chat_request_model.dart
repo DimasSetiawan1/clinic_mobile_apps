@@ -1,50 +1,58 @@
+// To parse this JSON data, do
+//
+//     final chatRequestModel = chatRequestModelFromJson(jsonString);
+
+import 'dart:convert';
+
+ChatRequestModel chatRequestModelFromJson(String str) =>
+    ChatRequestModel.fromJson(json.decode(str));
+
+String chatRequestModelToJson(ChatRequestModel data) =>
+    json.encode(data.toJson());
+
 class ChatRequestModel {
-  final String? lastMessage;
-  final String? lastMessageTime;
-  final Messages? messages;
+  final int senderId;
+  final int reciverId;
+  final String message;
+  final DateTime timestamp;
+  bool isRead = false;
 
-  ChatRequestModel({this.lastMessage, this.lastMessageTime, this.messages});
-  Map<String, dynamic> toJson() {
-    return {
-      'last_message': lastMessage,
-      'last_message_time': lastMessageTime,
-      'messages': messages?.toJson(),
-    };
-  }
+  ChatRequestModel({
+    required this.senderId,
+    required this.reciverId,
+    required this.message,
+    required this.timestamp,
+    this.isRead = false,
+  });
 
-  factory ChatRequestModel.fromJson(Map<String, dynamic> json) {
-    return ChatRequestModel(
-      lastMessage: json['last_message'],
-      lastMessageTime: json['last_message_time'],
-      messages:
-          json['messages'] != null ? Messages.fromJson(json['messages']) : null,
-    );
-  }
-}
+  ChatRequestModel copyWith({
+    int? senderId,
+    int? reciverId,
+    String? message,
+    DateTime? timestamp,
+    bool? isRead,
+  }) => ChatRequestModel(
+    senderId: senderId ?? this.senderId,
+    reciverId: reciverId ?? this.reciverId,
+    message: message ?? this.message,
+    timestamp: timestamp ?? this.timestamp,
+    isRead: isRead ?? this.isRead,
+  );
 
-class Messages {
-  final int? senderId;
-  final int? reciverId;
-  final String? message;
-  final String? timestamp;
+  factory ChatRequestModel.fromJson(Map<String, dynamic> json) =>
+      ChatRequestModel(
+        senderId: json["sender_id"],
+        reciverId: json["reciver_id"],
+        message: json["message"],
+        timestamp: DateTime.parse(json["timestamp"]),
+        isRead: json["is_read"],
+      );
 
-  Messages({this.senderId, this.reciverId, this.message, this.timestamp});
-
-  Map<String, dynamic> toJson() {
-    return {
-      'sender_id': senderId,
-      'reciver_id': reciverId,
-      'message': message,
-      'timestamp': timestamp,
-    };
-  }
-
-  factory Messages.fromJson(Map<String, dynamic> json) {
-    return Messages(
-      senderId: json['sender_id'],
-      reciverId: json['reciver_id'],
-      message: json['message'],
-      timestamp: json['timestamp'],
-    );
-  }
+  Map<String, dynamic> toJson() => {
+    "sender_id": senderId,
+    "reciver_id": reciverId,
+    "message": message,
+    "timestamp": timestamp.toIso8601String(),
+    "is_read": isRead,
+  };
 }

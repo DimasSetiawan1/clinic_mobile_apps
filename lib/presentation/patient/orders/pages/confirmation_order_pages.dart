@@ -4,22 +4,21 @@ import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/request/create_order_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/doctor_response_model.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/create_order/create_order_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/payment_url_page.dart';
+import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/create_order/create_order_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/orders/pages/payment_url_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/components/buttons.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/pages/payment_page.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/widgets/card_premium_chat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PremiumChatPage extends StatelessWidget {
+class ConfirmationOrderPages extends StatelessWidget {
   final User doctor;
   final bool isTelemedis;
-  const PremiumChatPage({
+  const ConfirmationOrderPages({
     super.key,
     required this.doctor,
     required this.isTelemedis,

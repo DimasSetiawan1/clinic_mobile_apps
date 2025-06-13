@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/chat/dialogs/payment_success_dialog.dart';
+import 'package:clinic_mobile_apps/presentation/patient/orders/widgets/dialogs/payment_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -52,17 +52,6 @@ class _PaymentWebviewState extends State<PaymentWebview> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            log('WebView is loading (progress : $progress%)');
-          },
-          onPageStarted: (String url) {
-            setState(() => _isLoading = true);
-            log('Page started loading: $url');
-          },
-          onPageFinished: (String url) {
-            setState(() => _isLoading = false);
-            log('Page finished loading: $url');
-          },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.contains('flutter/success')) {
               _handlePaymentSuccess();

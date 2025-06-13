@@ -22,7 +22,6 @@ class CardTelemedisDoctor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('CardTelemedisDoctor: ${order.statusService}');
     return Container(
       width: context.deviceWidth,
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
