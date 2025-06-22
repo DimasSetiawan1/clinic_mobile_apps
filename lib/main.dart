@@ -6,11 +6,10 @@ import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_remote_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/create_order_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/doctor_remote_datasource.dart';
-import 'package:clinic_mobile_apps/data/datasources/get_list_message_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/order_history_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/specalist_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/summary_clinic.dart';
-import 'package:clinic_mobile_apps/data/models/response/list_message_response.dart';
+import 'package:clinic_mobile_apps/data/models/response/room_chat_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/add_doctor/add_doctor_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/edit_doctor/edit_doctor_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/get_doctor/bloc/get_doctor_bloc.dart';
@@ -25,6 +24,7 @@ import 'package:clinic_mobile_apps/presentation/doctor/chat/bloc/get_all_message
 import 'package:clinic_mobile_apps/presentation/doctor/home/pages/doctor_home_page.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/chat_room/chat_room_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/get_all_message_patient/get_all_message_patient_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/cubits/validation_message_cubit.dart';
 import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/create_order/create_order_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
@@ -102,16 +102,13 @@ class MyApp extends StatelessWidget {
           create: (context) => GetOrderDoctorBloc(DoctorRemoteDatasource()),
         ),
         BlocProvider(
-          create:
-              (context) => GetAllMessagePatientBloc(GetAllMessageDatasource()),
+          create: (context) => GetAllMessagePatientBloc(FirebaseServices()),
         ),
         BlocProvider(
-          create:
-              (context) => GetAllMessageDoctorBloc(GetAllMessageDatasource()),
+          create: (context) => GetAllMessageDoctorBloc(FirebaseServices()),
         ),
-        BlocProvider(
-          create: (context) => ChatRoomBloc(FirebaseServices()),
-        ),
+        BlocProvider(create: (context) => ChatRoomBloc(FirebaseServices())),
+        BlocProvider(create: (context) => ValidationMessageCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

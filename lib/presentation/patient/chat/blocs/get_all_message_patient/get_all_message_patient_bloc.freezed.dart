@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../get_all_message_doctor_bloc.dart';
+part of 'get_all_message_patient_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,63 +16,69 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$GetAllMessageDoctorEvent {
+mixin _$GetAllMessagePatientEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getAllMessage,
+    required TResult Function(int patientId, String role) watchListMessage,
+    required TResult Function(List<RoomChatResponseModel> messages) received,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getAllMessage,
+    TResult? Function(int patientId, String role)? watchListMessage,
+    TResult? Function(List<RoomChatResponseModel> messages)? received,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getAllMessage,
+    TResult Function(int patientId, String role)? watchListMessage,
+    TResult Function(List<RoomChatResponseModel> messages)? received,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllMessage value) getAllMessage,
+    required TResult Function(_WatchListMessage value) watchListMessage,
+    required TResult Function(_Received value) received,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllMessage value)? getAllMessage,
+    TResult? Function(_WatchListMessage value)? watchListMessage,
+    TResult? Function(_Received value)? received,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllMessage value)? getAllMessage,
+    TResult Function(_WatchListMessage value)? watchListMessage,
+    TResult Function(_Received value)? received,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetAllMessageDoctorEventCopyWith<$Res> {
-  factory $GetAllMessageDoctorEventCopyWith(
-    GetAllMessageDoctorEvent value,
-    $Res Function(GetAllMessageDoctorEvent) then,
-  ) = _$GetAllMessageDoctorEventCopyWithImpl<$Res, GetAllMessageDoctorEvent>;
+abstract class $GetAllMessagePatientEventCopyWith<$Res> {
+  factory $GetAllMessagePatientEventCopyWith(
+    GetAllMessagePatientEvent value,
+    $Res Function(GetAllMessagePatientEvent) then,
+  ) = _$GetAllMessagePatientEventCopyWithImpl<$Res, GetAllMessagePatientEvent>;
 }
 
 /// @nodoc
-class _$GetAllMessageDoctorEventCopyWithImpl<
+class _$GetAllMessagePatientEventCopyWithImpl<
   $Res,
-  $Val extends GetAllMessageDoctorEvent
+  $Val extends GetAllMessagePatientEvent
 >
-    implements $GetAllMessageDoctorEventCopyWith<$Res> {
-  _$GetAllMessageDoctorEventCopyWithImpl(this._value, this._then);
+    implements $GetAllMessagePatientEventCopyWith<$Res> {
+  _$GetAllMessagePatientEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllMessageDoctorEvent
+  /// Create a copy of GetAllMessagePatientEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -86,14 +92,14 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$GetAllMessagePatientEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
     _$StartedImpl _value,
     $Res Function(_$StartedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorEvent
+  /// Create a copy of GetAllMessagePatientEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -104,7 +110,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorEvent.started()';
+    return 'GetAllMessagePatientEvent.started()';
   }
 
   @override
@@ -120,7 +126,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getAllMessage,
+    required TResult Function(int patientId, String role) watchListMessage,
+    required TResult Function(List<RoomChatResponseModel> messages) received,
   }) {
     return started();
   }
@@ -129,7 +136,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getAllMessage,
+    TResult? Function(int patientId, String role)? watchListMessage,
+    TResult? Function(List<RoomChatResponseModel> messages)? received,
   }) {
     return started?.call();
   }
@@ -138,7 +146,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getAllMessage,
+    TResult Function(int patientId, String role)? watchListMessage,
+    TResult Function(List<RoomChatResponseModel> messages)? received,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -151,7 +160,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllMessage value) getAllMessage,
+    required TResult Function(_WatchListMessage value) watchListMessage,
+    required TResult Function(_Received value) received,
   }) {
     return started(this);
   }
@@ -160,7 +170,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllMessage value)? getAllMessage,
+    TResult? Function(_WatchListMessage value)? watchListMessage,
+    TResult? Function(_Received value)? received,
   }) {
     return started?.call(this);
   }
@@ -169,7 +180,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllMessage value)? getAllMessage,
+    TResult Function(_WatchListMessage value)? watchListMessage,
+    TResult Function(_Received value)? received,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -179,77 +191,119 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements GetAllMessageDoctorEvent {
+abstract class _Started implements GetAllMessagePatientEvent {
   const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$GetAllMessageImplCopyWith<$Res> {
-  factory _$$GetAllMessageImplCopyWith(
-    _$GetAllMessageImpl value,
-    $Res Function(_$GetAllMessageImpl) then,
-  ) = __$$GetAllMessageImplCopyWithImpl<$Res>;
+abstract class _$$WatchListMessageImplCopyWith<$Res> {
+  factory _$$WatchListMessageImplCopyWith(
+    _$WatchListMessageImpl value,
+    $Res Function(_$WatchListMessageImpl) then,
+  ) = __$$WatchListMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int patientId, String role});
 }
 
 /// @nodoc
-class __$$GetAllMessageImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorEventCopyWithImpl<$Res, _$GetAllMessageImpl>
-    implements _$$GetAllMessageImplCopyWith<$Res> {
-  __$$GetAllMessageImplCopyWithImpl(
-    _$GetAllMessageImpl _value,
-    $Res Function(_$GetAllMessageImpl) _then,
+class __$$WatchListMessageImplCopyWithImpl<$Res>
+    extends
+        _$GetAllMessagePatientEventCopyWithImpl<$Res, _$WatchListMessageImpl>
+    implements _$$WatchListMessageImplCopyWith<$Res> {
+  __$$WatchListMessageImplCopyWithImpl(
+    _$WatchListMessageImpl _value,
+    $Res Function(_$WatchListMessageImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorEvent
+  /// Create a copy of GetAllMessagePatientEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? patientId = null, Object? role = null}) {
+    return _then(
+      _$WatchListMessageImpl(
+        null == patientId
+            ? _value.patientId
+            : patientId // ignore: cast_nullable_to_non_nullable
+                as int,
+        null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
-class _$GetAllMessageImpl implements _GetAllMessage {
-  const _$GetAllMessageImpl();
+class _$WatchListMessageImpl implements _WatchListMessage {
+  const _$WatchListMessageImpl(this.patientId, this.role);
+
+  @override
+  final int patientId;
+  @override
+  final String role;
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorEvent.getAllMessage()';
+    return 'GetAllMessagePatientEvent.watchListMessage(patientId: $patientId, role: $role)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetAllMessageImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$WatchListMessageImpl &&
+            (identical(other.patientId, patientId) ||
+                other.patientId == patientId) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, patientId, role);
+
+  /// Create a copy of GetAllMessagePatientEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WatchListMessageImplCopyWith<_$WatchListMessageImpl> get copyWith =>
+      __$$WatchListMessageImplCopyWithImpl<_$WatchListMessageImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getAllMessage,
+    required TResult Function(int patientId, String role) watchListMessage,
+    required TResult Function(List<RoomChatResponseModel> messages) received,
   }) {
-    return getAllMessage();
+    return watchListMessage(patientId, role);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getAllMessage,
+    TResult? Function(int patientId, String role)? watchListMessage,
+    TResult? Function(List<RoomChatResponseModel> messages)? received,
   }) {
-    return getAllMessage?.call();
+    return watchListMessage?.call(patientId, role);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getAllMessage,
+    TResult Function(int patientId, String role)? watchListMessage,
+    TResult Function(List<RoomChatResponseModel> messages)? received,
     required TResult orElse(),
   }) {
-    if (getAllMessage != null) {
-      return getAllMessage();
+    if (watchListMessage != null) {
+      return watchListMessage(patientId, role);
     }
     return orElse();
   }
@@ -258,59 +312,228 @@ class _$GetAllMessageImpl implements _GetAllMessage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllMessage value) getAllMessage,
+    required TResult Function(_WatchListMessage value) watchListMessage,
+    required TResult Function(_Received value) received,
   }) {
-    return getAllMessage(this);
+    return watchListMessage(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllMessage value)? getAllMessage,
+    TResult? Function(_WatchListMessage value)? watchListMessage,
+    TResult? Function(_Received value)? received,
   }) {
-    return getAllMessage?.call(this);
+    return watchListMessage?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllMessage value)? getAllMessage,
+    TResult Function(_WatchListMessage value)? watchListMessage,
+    TResult Function(_Received value)? received,
     required TResult orElse(),
   }) {
-    if (getAllMessage != null) {
-      return getAllMessage(this);
+    if (watchListMessage != null) {
+      return watchListMessage(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetAllMessage implements GetAllMessageDoctorEvent {
-  const factory _GetAllMessage() = _$GetAllMessageImpl;
+abstract class _WatchListMessage implements GetAllMessagePatientEvent {
+  const factory _WatchListMessage(final int patientId, final String role) =
+      _$WatchListMessageImpl;
+
+  int get patientId;
+  String get role;
+
+  /// Create a copy of GetAllMessagePatientEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WatchListMessageImplCopyWith<_$WatchListMessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$GetAllMessageDoctorState {
+abstract class _$$ReceivedImplCopyWith<$Res> {
+  factory _$$ReceivedImplCopyWith(
+    _$ReceivedImpl value,
+    $Res Function(_$ReceivedImpl) then,
+  ) = __$$ReceivedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<RoomChatResponseModel> messages});
+}
+
+/// @nodoc
+class __$$ReceivedImplCopyWithImpl<$Res>
+    extends _$GetAllMessagePatientEventCopyWithImpl<$Res, _$ReceivedImpl>
+    implements _$$ReceivedImplCopyWith<$Res> {
+  __$$ReceivedImplCopyWithImpl(
+    _$ReceivedImpl _value,
+    $Res Function(_$ReceivedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of GetAllMessagePatientEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? messages = null}) {
+    return _then(
+      _$ReceivedImpl(
+        null == messages
+            ? _value._messages
+            : messages // ignore: cast_nullable_to_non_nullable
+                as List<RoomChatResponseModel>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ReceivedImpl implements _Received {
+  const _$ReceivedImpl(final List<RoomChatResponseModel> messages)
+    : _messages = messages;
+
+  final List<RoomChatResponseModel> _messages;
+  @override
+  List<RoomChatResponseModel> get messages {
+    if (_messages is EqualUnmodifiableListView) return _messages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_messages);
+  }
+
+  @override
+  String toString() {
+    return 'GetAllMessagePatientEvent.received(messages: $messages)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReceivedImpl &&
+            const DeepCollectionEquality().equals(other._messages, _messages));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_messages));
+
+  /// Create a copy of GetAllMessagePatientEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ReceivedImplCopyWith<_$ReceivedImpl> get copyWith =>
+      __$$ReceivedImplCopyWithImpl<_$ReceivedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(int patientId, String role) watchListMessage,
+    required TResult Function(List<RoomChatResponseModel> messages) received,
+  }) {
+    return received(messages);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(int patientId, String role)? watchListMessage,
+    TResult? Function(List<RoomChatResponseModel> messages)? received,
+  }) {
+    return received?.call(messages);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(int patientId, String role)? watchListMessage,
+    TResult Function(List<RoomChatResponseModel> messages)? received,
+    required TResult orElse(),
+  }) {
+    if (received != null) {
+      return received(messages);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_WatchListMessage value) watchListMessage,
+    required TResult Function(_Received value) received,
+  }) {
+    return received(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_WatchListMessage value)? watchListMessage,
+    TResult? Function(_Received value)? received,
+  }) {
+    return received?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_WatchListMessage value)? watchListMessage,
+    TResult Function(_Received value)? received,
+    required TResult orElse(),
+  }) {
+    if (received != null) {
+      return received(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Received implements GetAllMessagePatientEvent {
+  const factory _Received(final List<RoomChatResponseModel> messages) =
+      _$ReceivedImpl;
+
+  List<RoomChatResponseModel> get messages;
+
+  /// Create a copy of GetAllMessagePatientEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReceivedImplCopyWith<_$ReceivedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$GetAllMessagePatientState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ChatRoom> messages) loaded,
+    required TResult Function(List<RoomChatResponseModel> messages) loaded,
     required TResult Function(String message) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ChatRoom> messages)? loaded,
+    TResult? Function(List<RoomChatResponseModel> messages)? loaded,
     TResult? Function(String message)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ChatRoom> messages)? loaded,
+    TResult Function(List<RoomChatResponseModel> messages)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -339,27 +562,27 @@ mixin _$GetAllMessageDoctorState {
 }
 
 /// @nodoc
-abstract class $GetAllMessageDoctorStateCopyWith<$Res> {
-  factory $GetAllMessageDoctorStateCopyWith(
-    GetAllMessageDoctorState value,
-    $Res Function(GetAllMessageDoctorState) then,
-  ) = _$GetAllMessageDoctorStateCopyWithImpl<$Res, GetAllMessageDoctorState>;
+abstract class $GetAllMessagePatientStateCopyWith<$Res> {
+  factory $GetAllMessagePatientStateCopyWith(
+    GetAllMessagePatientState value,
+    $Res Function(GetAllMessagePatientState) then,
+  ) = _$GetAllMessagePatientStateCopyWithImpl<$Res, GetAllMessagePatientState>;
 }
 
 /// @nodoc
-class _$GetAllMessageDoctorStateCopyWithImpl<
+class _$GetAllMessagePatientStateCopyWithImpl<
   $Res,
-  $Val extends GetAllMessageDoctorState
+  $Val extends GetAllMessagePatientState
 >
-    implements $GetAllMessageDoctorStateCopyWith<$Res> {
-  _$GetAllMessageDoctorStateCopyWithImpl(this._value, this._then);
+    implements $GetAllMessagePatientStateCopyWith<$Res> {
+  _$GetAllMessagePatientStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -373,14 +596,14 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$GetAllMessagePatientStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
     _$InitialImpl _value,
     $Res Function(_$InitialImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -391,7 +614,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorState.initial()';
+    return 'GetAllMessagePatientState.initial()';
   }
 
   @override
@@ -408,7 +631,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ChatRoom> messages) loaded,
+    required TResult Function(List<RoomChatResponseModel> messages) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -419,7 +642,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ChatRoom> messages)? loaded,
+    TResult? Function(List<RoomChatResponseModel> messages)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -430,7 +653,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ChatRoom> messages)? loaded,
+    TResult Function(List<RoomChatResponseModel> messages)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -478,7 +701,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetAllMessageDoctorState {
+abstract class _Initial implements GetAllMessagePatientState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -492,14 +715,14 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$GetAllMessagePatientStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
     _$LoadingImpl _value,
     $Res Function(_$LoadingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -510,7 +733,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorState.loading()';
+    return 'GetAllMessagePatientState.loading()';
   }
 
   @override
@@ -527,7 +750,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ChatRoom> messages) loaded,
+    required TResult Function(List<RoomChatResponseModel> messages) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -538,7 +761,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ChatRoom> messages)? loaded,
+    TResult? Function(List<RoomChatResponseModel> messages)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -549,7 +772,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ChatRoom> messages)? loaded,
+    TResult Function(List<RoomChatResponseModel> messages)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -597,7 +820,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetAllMessageDoctorState {
+abstract class _Loading implements GetAllMessagePatientState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -608,19 +831,19 @@ abstract class _$$LoadedImplCopyWith<$Res> {
     $Res Function(_$LoadedImpl) then,
   ) = __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ChatRoom> messages});
+  $Res call({List<RoomChatResponseModel> messages});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$GetAllMessagePatientStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
     _$LoadedImpl _value,
     $Res Function(_$LoadedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -630,7 +853,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
         null == messages
             ? _value._messages
             : messages // ignore: cast_nullable_to_non_nullable
-                as List<ChatRoom>,
+                as List<RoomChatResponseModel>,
       ),
     );
   }
@@ -639,11 +862,12 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(final List<ChatRoom> messages) : _messages = messages;
+  const _$LoadedImpl(final List<RoomChatResponseModel> messages)
+    : _messages = messages;
 
-  final List<ChatRoom> _messages;
+  final List<RoomChatResponseModel> _messages;
   @override
-  List<ChatRoom> get messages {
+  List<RoomChatResponseModel> get messages {
     if (_messages is EqualUnmodifiableListView) return _messages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_messages);
@@ -651,7 +875,7 @@ class _$LoadedImpl implements _Loaded {
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorState.loaded(messages: $messages)';
+    return 'GetAllMessagePatientState.loaded(messages: $messages)';
   }
 
   @override
@@ -666,7 +890,7 @@ class _$LoadedImpl implements _Loaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_messages));
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -679,7 +903,7 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ChatRoom> messages) loaded,
+    required TResult Function(List<RoomChatResponseModel> messages) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(messages);
@@ -690,7 +914,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ChatRoom> messages)? loaded,
+    TResult? Function(List<RoomChatResponseModel> messages)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(messages);
@@ -701,7 +925,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ChatRoom> messages)? loaded,
+    TResult Function(List<RoomChatResponseModel> messages)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -749,12 +973,13 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements GetAllMessageDoctorState {
-  const factory _Loaded(final List<ChatRoom> messages) = _$LoadedImpl;
+abstract class _Loaded implements GetAllMessagePatientState {
+  const factory _Loaded(final List<RoomChatResponseModel> messages) =
+      _$LoadedImpl;
 
-  List<ChatRoom> get messages;
+  List<RoomChatResponseModel> get messages;
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -773,14 +998,14 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$GetAllMessageDoctorStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$GetAllMessagePatientStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
     _$ErrorImpl _value,
     $Res Function(_$ErrorImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -806,7 +1031,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'GetAllMessageDoctorState.error(message: $message)';
+    return 'GetAllMessagePatientState.error(message: $message)';
   }
 
   @override
@@ -820,7 +1045,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -833,7 +1058,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<ChatRoom> messages) loaded,
+    required TResult Function(List<RoomChatResponseModel> messages) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -844,7 +1069,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ChatRoom> messages)? loaded,
+    TResult? Function(List<RoomChatResponseModel> messages)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -855,7 +1080,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ChatRoom> messages)? loaded,
+    TResult Function(List<RoomChatResponseModel> messages)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -903,12 +1128,12 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements GetAllMessageDoctorState {
+abstract class _Error implements GetAllMessagePatientState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of GetAllMessageDoctorState
+  /// Create a copy of GetAllMessagePatientState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>

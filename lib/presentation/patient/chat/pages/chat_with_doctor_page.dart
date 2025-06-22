@@ -192,11 +192,13 @@ class _ChatWithDoctorPageState extends State<ChatWithDoctorPage> {
                         );
                         return;
                       }
-                      await firebaseServices.startChatRoom(
+                      await firebaseServices.setFieldRoom(
                         chatRoomId: widget.chatRoom!.id,
                         chatRoomData: {
-                          'last_message': _chatController.text,
-                          'last_message_time': DateTime.now().toIso8601String(),
+                          "particiapant_id": {
+                            "doctor_id": widget.chatRoom!.doctorsId,
+                            "patient_id": widget.chatRoom!.usersId,
+                          },
                         },
                       );
 
@@ -210,25 +212,25 @@ class _ChatWithDoctorPageState extends State<ChatWithDoctorPage> {
                           isRead: false,
                         ),
                       );
-                      
-                      if (context.mounted) {
-                        context.showSnackBar("Pesan berhasil dikirim!");
-                        OnesignalNotificationDatasource().sendNotification(
-                          _chatController.text,
-                          widget.chatRoom!.doctorsId,
-                          widget.chatRoom!.usersId,
-                        );
-                        _chatController.clear();
-                        _nameController.clear();
-                        context.pushReplacement(
-                          RoomChatPage(
-                            chatRoomId: widget.chatRoom!.id,
-                            doctorName: widget.doctorName,
-                            senderId: widget.chatRoom!.usersId,
-                            receiverId: widget.chatRoom!.doctorsId,
-                          ),
-                        );
-                      }
+
+                      // if (context.mounted) {
+                      //   context.showSnackBar("Pesan berhasil dikirim!");
+                      //   OnesignalNotificationDatasource().sendNotification(
+                      //     _chatController.text,
+                      //     widget.chatRoom!.doctorsId,
+                      //     widget.chatRoom!.usersId,
+                      //   );
+                      //   _chatController.clear();
+                      //   _nameController.clear();
+                      //   context.pushReplacement(
+                      //     RoomChatPage(
+                      //       chatRoomId: widget.chatRoom!.id,
+                      //       doctorName: widget.doctorName,
+                      //       senderId: widget.chatRoom!.usersId,
+                      //       receiverId: widget.chatRoom!.doctorsId,
+                      //     ),
+                      //   );
+                      // }
                     },
                     label: 'Kirim Pertanyaan',
                     color: AppColors.primary,

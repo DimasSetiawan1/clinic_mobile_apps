@@ -1,5 +1,5 @@
+import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
-import 'package:clinic_mobile_apps/core/utils/images_usecase.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/components/spaces.dart';
@@ -45,10 +45,10 @@ class CardHistory extends StatelessWidget {
                   ),
                   child:
                       isHistoryDoctor
-                          ? showImageNetworkProfileUser(
+                          ? CustomAvatar(
                             imageUrl: orders.patient.image,
                           )
-                          : showImageNetworkProfileUser(
+                          : CustomAvatar(
                             imageUrl: orders.doctor.image,
                           ),
                 ),

@@ -22,22 +22,48 @@ mixin _$ChatRoomEvent {
     required TResult Function() started,
     required TResult Function(String roomId) watch,
     required TResult Function(List<ChatRequestModel> messages) received,
-    required TResult Function(String roomId, ChatRequestModel messages)
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
     sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String roomId)? watch,
     TResult? Function(List<ChatRequestModel> messages)? received,
-    TResult? Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String roomId)? watch,
     TResult Function(List<ChatRequestModel> messages)? received,
-    TResult Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +72,8 @@ mixin _$ChatRoomEvent {
     required TResult Function(_Watch value) watch,
     required TResult Function(_Received value) received,
     required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -53,6 +81,8 @@ mixin _$ChatRoomEvent {
     TResult? Function(_Watch value)? watch,
     TResult? Function(_Received value)? received,
     TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -60,6 +90,8 @@ mixin _$ChatRoomEvent {
     TResult Function(_Watch value)? watch,
     TResult Function(_Received value)? received,
     TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -132,8 +164,16 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(String roomId) watch,
     required TResult Function(List<ChatRequestModel> messages) received,
-    required TResult Function(String roomId, ChatRequestModel messages)
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
     sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
   }) {
     return started();
   }
@@ -144,7 +184,16 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(String roomId)? watch,
     TResult? Function(List<ChatRequestModel> messages)? received,
-    TResult? Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
   }) {
     return started?.call();
   }
@@ -155,7 +204,16 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(String roomId)? watch,
     TResult Function(List<ChatRequestModel> messages)? received,
-    TResult Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -171,6 +229,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Watch value) watch,
     required TResult Function(_Received value) received,
     required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
   }) {
     return started(this);
   }
@@ -182,6 +242,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Watch value)? watch,
     TResult? Function(_Received value)? received,
     TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
   }) {
     return started?.call(this);
   }
@@ -193,6 +255,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_Watch value)? watch,
     TResult Function(_Received value)? received,
     TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -279,8 +343,16 @@ class _$WatchImpl implements _Watch {
     required TResult Function() started,
     required TResult Function(String roomId) watch,
     required TResult Function(List<ChatRequestModel> messages) received,
-    required TResult Function(String roomId, ChatRequestModel messages)
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
     sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
   }) {
     return watch(roomId);
   }
@@ -291,7 +363,16 @@ class _$WatchImpl implements _Watch {
     TResult? Function()? started,
     TResult? Function(String roomId)? watch,
     TResult? Function(List<ChatRequestModel> messages)? received,
-    TResult? Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
   }) {
     return watch?.call(roomId);
   }
@@ -302,7 +383,16 @@ class _$WatchImpl implements _Watch {
     TResult Function()? started,
     TResult Function(String roomId)? watch,
     TResult Function(List<ChatRequestModel> messages)? received,
-    TResult Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (watch != null) {
@@ -318,6 +408,8 @@ class _$WatchImpl implements _Watch {
     required TResult Function(_Watch value) watch,
     required TResult Function(_Received value) received,
     required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
   }) {
     return watch(this);
   }
@@ -329,6 +421,8 @@ class _$WatchImpl implements _Watch {
     TResult? Function(_Watch value)? watch,
     TResult? Function(_Received value)? received,
     TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
   }) {
     return watch?.call(this);
   }
@@ -340,6 +434,8 @@ class _$WatchImpl implements _Watch {
     TResult Function(_Watch value)? watch,
     TResult Function(_Received value)? received,
     TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (watch != null) {
@@ -441,8 +537,16 @@ class _$ReceivedImpl implements _Received {
     required TResult Function() started,
     required TResult Function(String roomId) watch,
     required TResult Function(List<ChatRequestModel> messages) received,
-    required TResult Function(String roomId, ChatRequestModel messages)
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
     sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
   }) {
     return received(messages);
   }
@@ -453,7 +557,16 @@ class _$ReceivedImpl implements _Received {
     TResult? Function()? started,
     TResult? Function(String roomId)? watch,
     TResult? Function(List<ChatRequestModel> messages)? received,
-    TResult? Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
   }) {
     return received?.call(messages);
   }
@@ -464,7 +577,16 @@ class _$ReceivedImpl implements _Received {
     TResult Function()? started,
     TResult Function(String roomId)? watch,
     TResult Function(List<ChatRequestModel> messages)? received,
-    TResult Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (received != null) {
@@ -480,6 +602,8 @@ class _$ReceivedImpl implements _Received {
     required TResult Function(_Watch value) watch,
     required TResult Function(_Received value) received,
     required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
   }) {
     return received(this);
   }
@@ -491,6 +615,8 @@ class _$ReceivedImpl implements _Received {
     TResult? Function(_Watch value)? watch,
     TResult? Function(_Received value)? received,
     TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
   }) {
     return received?.call(this);
   }
@@ -502,6 +628,8 @@ class _$ReceivedImpl implements _Received {
     TResult Function(_Watch value)? watch,
     TResult Function(_Received value)? received,
     TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (received != null) {
@@ -531,7 +659,13 @@ abstract class _$$SendMessageImplCopyWith<$Res> {
     $Res Function(_$SendMessageImpl) then,
   ) = __$$SendMessageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String roomId, ChatRequestModel messages});
+  $Res call({
+    String roomId,
+    ChatRequestModel messages,
+    int senderId,
+    int receiverId,
+    String senderName,
+  });
 }
 
 /// @nodoc
@@ -547,7 +681,13 @@ class __$$SendMessageImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? roomId = null, Object? messages = null}) {
+  $Res call({
+    Object? roomId = null,
+    Object? messages = null,
+    Object? senderId = null,
+    Object? receiverId = null,
+    Object? senderName = null,
+  }) {
     return _then(
       _$SendMessageImpl(
         null == roomId
@@ -558,6 +698,18 @@ class __$$SendMessageImplCopyWithImpl<$Res>
             ? _value.messages
             : messages // ignore: cast_nullable_to_non_nullable
                 as ChatRequestModel,
+        null == senderId
+            ? _value.senderId
+            : senderId // ignore: cast_nullable_to_non_nullable
+                as int,
+        null == receiverId
+            ? _value.receiverId
+            : receiverId // ignore: cast_nullable_to_non_nullable
+                as int,
+        null == senderName
+            ? _value.senderName
+            : senderName // ignore: cast_nullable_to_non_nullable
+                as String,
       ),
     );
   }
@@ -566,16 +718,28 @@ class __$$SendMessageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SendMessageImpl implements _SendMessage {
-  const _$SendMessageImpl(this.roomId, this.messages);
+  const _$SendMessageImpl(
+    this.roomId,
+    this.messages,
+    this.senderId,
+    this.receiverId,
+    this.senderName,
+  );
 
   @override
   final String roomId;
   @override
   final ChatRequestModel messages;
+  @override
+  final int senderId;
+  @override
+  final int receiverId;
+  @override
+  final String senderName;
 
   @override
   String toString() {
-    return 'ChatRoomEvent.sendMessage(roomId: $roomId, messages: $messages)';
+    return 'ChatRoomEvent.sendMessage(roomId: $roomId, messages: $messages, senderId: $senderId, receiverId: $receiverId, senderName: $senderName)';
   }
 
   @override
@@ -585,11 +749,24 @@ class _$SendMessageImpl implements _SendMessage {
             other is _$SendMessageImpl &&
             (identical(other.roomId, roomId) || other.roomId == roomId) &&
             (identical(other.messages, messages) ||
-                other.messages == messages));
+                other.messages == messages) &&
+            (identical(other.senderId, senderId) ||
+                other.senderId == senderId) &&
+            (identical(other.receiverId, receiverId) ||
+                other.receiverId == receiverId) &&
+            (identical(other.senderName, senderName) ||
+                other.senderName == senderName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roomId, messages);
+  int get hashCode => Object.hash(
+    runtimeType,
+    roomId,
+    messages,
+    senderId,
+    receiverId,
+    senderName,
+  );
 
   /// Create a copy of ChatRoomEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -605,10 +782,18 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function() started,
     required TResult Function(String roomId) watch,
     required TResult Function(List<ChatRequestModel> messages) received,
-    required TResult Function(String roomId, ChatRequestModel messages)
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
     sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
   }) {
-    return sendMessage(roomId, messages);
+    return sendMessage(roomId, messages, senderId, receiverId, senderName);
   }
 
   @override
@@ -617,9 +802,24 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function()? started,
     TResult? Function(String roomId)? watch,
     TResult? Function(List<ChatRequestModel> messages)? received,
-    TResult? Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
   }) {
-    return sendMessage?.call(roomId, messages);
+    return sendMessage?.call(
+      roomId,
+      messages,
+      senderId,
+      receiverId,
+      senderName,
+    );
   }
 
   @override
@@ -628,11 +828,20 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function()? started,
     TResult Function(String roomId)? watch,
     TResult Function(List<ChatRequestModel> messages)? received,
-    TResult Function(String roomId, ChatRequestModel messages)? sendMessage,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
-      return sendMessage(roomId, messages);
+      return sendMessage(roomId, messages, senderId, receiverId, senderName);
     }
     return orElse();
   }
@@ -644,6 +853,8 @@ class _$SendMessageImpl implements _SendMessage {
     required TResult Function(_Watch value) watch,
     required TResult Function(_Received value) received,
     required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
   }) {
     return sendMessage(this);
   }
@@ -655,6 +866,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult? Function(_Watch value)? watch,
     TResult? Function(_Received value)? received,
     TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
   }) {
     return sendMessage?.call(this);
   }
@@ -666,6 +879,8 @@ class _$SendMessageImpl implements _SendMessage {
     TResult Function(_Watch value)? watch,
     TResult Function(_Received value)? received,
     TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (sendMessage != null) {
@@ -679,10 +894,16 @@ abstract class _SendMessage implements ChatRoomEvent {
   const factory _SendMessage(
     final String roomId,
     final ChatRequestModel messages,
+    final int senderId,
+    final int receiverId,
+    final String senderName,
   ) = _$SendMessageImpl;
 
   String get roomId;
   ChatRequestModel get messages;
+  int get senderId;
+  int get receiverId;
+  String get senderName;
 
   /// Create a copy of ChatRoomEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -692,49 +913,382 @@ abstract class _SendMessage implements ChatRoomEvent {
 }
 
 /// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+    _$ErrorImpl value,
+    $Res Function(_$ErrorImpl) then,
+  ) = __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$ChatRoomEventCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+    _$ErrorImpl _value,
+    $Res Function(_$ErrorImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ChatRoomEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? message = null}) {
+    return _then(
+      _$ErrorImpl(
+        null == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ChatRoomEvent.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of ChatRoomEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String roomId) watch,
+    required TResult Function(List<ChatRequestModel> messages) received,
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
+    sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String roomId)? watch,
+    TResult? Function(List<ChatRequestModel> messages)? received,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String roomId)? watch,
+    TResult Function(List<ChatRequestModel> messages)? received,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Watch value) watch,
+    required TResult Function(_Received value) received,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Watch value)? watch,
+    TResult? Function(_Received value)? received,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Watch value)? watch,
+    TResult Function(_Received value)? received,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements ChatRoomEvent {
+  const factory _Error(final String message) = _$ErrorImpl;
+
+  String get message;
+
+  /// Create a copy of ChatRoomEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+    _$LoadingImpl value,
+    $Res Function(_$LoadingImpl) then,
+  ) = __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$ChatRoomEventCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+    _$LoadingImpl _value,
+    $Res Function(_$LoadingImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of ChatRoomEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements _Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'ChatRoomEvent.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String roomId) watch,
+    required TResult Function(List<ChatRequestModel> messages) received,
+    required TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )
+    sendMessage,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String roomId)? watch,
+    TResult? Function(List<ChatRequestModel> messages)? received,
+    TResult? Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String roomId)? watch,
+    TResult Function(List<ChatRequestModel> messages)? received,
+    TResult Function(
+      String roomId,
+      ChatRequestModel messages,
+      int senderId,
+      int receiverId,
+      String senderName,
+    )?
+    sendMessage,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Watch value) watch,
+    required TResult Function(_Received value) received,
+    required TResult Function(_SendMessage value) sendMessage,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Watch value)? watch,
+    TResult? Function(_Received value)? received,
+    TResult? Function(_SendMessage value)? sendMessage,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Watch value)? watch,
+    TResult Function(_Received value)? received,
+    TResult Function(_SendMessage value)? sendMessage,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements ChatRoomEvent {
+  const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
 mixin _$ChatRoomState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function(List<ChatRequestModel> messages) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(String message) failed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function(List<ChatRequestModel> messages)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(String message)? failed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function(List<ChatRequestModel> messages)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_Failed value) failed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_Failed value)? failed,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -805,9 +1359,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function(List<ChatRequestModel> messages) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(String message) failed,
   }) {
     return initial();
   }
@@ -816,9 +1369,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function(List<ChatRequestModel> messages)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(String message)? failed,
   }) {
     return initial?.call();
   }
@@ -827,9 +1379,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function(List<ChatRequestModel> messages)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -842,9 +1393,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_Failed value) failed,
   }) {
     return initial(this);
   }
@@ -853,9 +1403,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_Failed value)? failed,
   }) {
     return initial?.call(this);
   }
@@ -864,9 +1413,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -878,125 +1426,6 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements ChatRoomState {
   const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ChatRoomStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of ChatRoomState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'ChatRoomState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<ChatRequestModel> messages) loaded,
-    required TResult Function(String message) error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<ChatRequestModel> messages)? loaded,
-    TResult? Function(String message)? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<ChatRequestModel> messages)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements ChatRoomState {
-  const factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
@@ -1077,9 +1506,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function(List<ChatRequestModel> messages) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(String message) failed,
   }) {
     return loaded(messages);
   }
@@ -1088,9 +1516,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function(List<ChatRequestModel> messages)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(String message)? failed,
   }) {
     return loaded?.call(messages);
   }
@@ -1099,9 +1526,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function(List<ChatRequestModel> messages)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1114,9 +1540,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_Failed value) failed,
   }) {
     return loaded(this);
   }
@@ -1125,9 +1550,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_Failed value)? failed,
   }) {
     return loaded?.call(this);
   }
@@ -1136,9 +1560,8 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1161,22 +1584,22 @@ abstract class _Loaded implements ChatRoomState {
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-    _$ErrorImpl value,
-    $Res Function(_$ErrorImpl) then,
-  ) = __$$ErrorImplCopyWithImpl<$Res>;
+abstract class _$$FailedImplCopyWith<$Res> {
+  factory _$$FailedImplCopyWith(
+    _$FailedImpl value,
+    $Res Function(_$FailedImpl) then,
+  ) = __$$FailedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$ChatRoomStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-    _$ErrorImpl _value,
-    $Res Function(_$ErrorImpl) _then,
+class __$$FailedImplCopyWithImpl<$Res>
+    extends _$ChatRoomStateCopyWithImpl<$Res, _$FailedImpl>
+    implements _$$FailedImplCopyWith<$Res> {
+  __$$FailedImplCopyWithImpl(
+    _$FailedImpl _value,
+    $Res Function(_$FailedImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of ChatRoomState
@@ -1185,7 +1608,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @override
   $Res call({Object? message = null}) {
     return _then(
-      _$ErrorImpl(
+      _$FailedImpl(
         null == message
             ? _value.message
             : message // ignore: cast_nullable_to_non_nullable
@@ -1197,22 +1620,22 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
+class _$FailedImpl implements _Failed {
+  const _$FailedImpl(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'ChatRoomState.error(message: $message)';
+    return 'ChatRoomState.failed(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
+            other is _$FailedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -1224,42 +1647,39 @@ class _$ErrorImpl implements _Error {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
+      __$$FailedImplCopyWithImpl<_$FailedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function(List<ChatRequestModel> messages) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(String message) failed,
   }) {
-    return error(message);
+    return failed(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function(List<ChatRequestModel> messages)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(String message)? failed,
   }) {
-    return error?.call(message);
+    return failed?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function(List<ChatRequestModel> messages)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(String message)? failed,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(message);
+    if (failed != null) {
+      return failed(message);
     }
     return orElse();
   }
@@ -1268,48 +1688,45 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_Failed value) failed,
   }) {
-    return error(this);
+    return failed(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_Failed value)? failed,
   }) {
-    return error?.call(this);
+    return failed?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_Failed value)? failed,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (failed != null) {
+      return failed(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error implements ChatRoomState {
-  const factory _Error(final String message) = _$ErrorImpl;
+abstract class _Failed implements ChatRoomState {
+  const factory _Failed(final String message) = _$FailedImpl;
 
   String get message;
 
   /// Create a copy of ChatRoomState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+  _$$FailedImplCopyWith<_$FailedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

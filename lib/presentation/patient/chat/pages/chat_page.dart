@@ -1,7 +1,7 @@
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
-import 'package:clinic_mobile_apps/core/utils/images_usecase.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/doctor/chat/pages/room_chat_doctor_page.dart';
@@ -31,13 +31,20 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   UserModel? _user;
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     _user = AuthLocalDatasource().getUserData()?.data?.user;
     context.read<GetAllMessagePatientBloc>().add(
-      GetAllMessagePatientEvent.getAllMessage(),
+      GetAllMessagePatientEvent.watchListMessage(_user!.id!, _user!.role!),
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -48,158 +55,153 @@ class _ChatPageState extends State<ChatPage> {
         statusBarBrightness: Brightness.dark,
       ),
     );
-    return RefreshIndicator(
-      onRefresh: () async {
-        context.read<GetAllMessagePatientBloc>().add(
-          GetAllMessagePatientEvent.getAllMessage(),
-        );
-      },
-      child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Container(
-                  height: 120,
-                  width: context.deviceWidth,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [AppColors.secondary, Color(0xff1469F0)],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            Assets.images.logoHorizontal.path,
-                            width: 104.0,
-                            height: 22.0,
-                            fit: BoxFit.cover,
-                          ),
-                          _user?.image != null
-                              ? showImageNetworkProfileUser(
-                                imageUrl: _user!.image!,
-                                width: 40.0,
-                                height: 40.0,
-                              )
-                              : Image.asset(
-                                Assets.images.doctorCircle.path,
-                                width: 40.0,
-                                height: 40.0,
-                                fit: BoxFit.cover,
-                              ),
-                        ],
-                      ),
-                    ],
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Container(
+                height: 120,
+                width: context.deviceWidth,
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColors.secondary, Color(0xff1469F0)],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
                   ),
                 ),
-                const SpaceHeight(20),
-                FilterTelemedisStatus(),
-                const SpaceHeight(20),
-                BlocBuilder<
-                  GetAllMessagePatientBloc,
-                  GetAllMessagePatientState
-                >(
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      orElse: () => const SizedBox.shrink(),
-                      loading:
-                          () =>
-                              const Center(child: CircularProgressIndicator()),
-                      loaded: (messages) {
-                        if (messages.isEmpty) {
-                          return const Center(
-                            child: Text(
-                              "Tidak ada pesan",
-                              style: TextStyle(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          Assets.images.logoHorizontal.path,
+                          width: 104.0,
+                          height: 22.0,
+                          fit: BoxFit.cover,
+                        ),
+                        CustomAvatar(
+                          imageUrl: _user?.image ?? '',
+                          width: 48.0,
+                          height: 48.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SpaceHeight(20),
+              FilterTelemedisStatus(),
+              const SpaceHeight(20),
+              BlocBuilder<GetAllMessagePatientBloc, GetAllMessagePatientState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => const SizedBox.shrink(),
+                    loading:
+                        () => const Center(child: CircularProgressIndicator()),
+                    loaded: (messages) {
+                      if (messages.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            "Tidak ada pesan",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: messages.length,
+                        controller: _scrollController,
+                        itemBuilder: (context, index) {
+                          final message = messages[index];
+                          final role =
+                              widget.isDoctor!
+                                  ? message.doctorImage
+                                  : message.patientImage;
+                          return ListTile(
+                            leading: CustomAvatar(
+                              imageUrl:
+                                  role.isNotEmpty
+                                      ? message.doctorImage
+                                      : message.patientImage,
+                              width: 48.0,
+                              height: 48.0,
+                            ),
+                            title: Text(
+                              role.isNotEmpty
+                                  ? message.patientImage
+                                  : message.doctorName,
+                              style: const TextStyle(
                                 fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            subtitle: Text(
+                              message.lastMessage!.isEmpty
+                                  ? 'Mulai percakapan'
+                                  : message.lastMessage!,
+                              style: const TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.grey,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: Text(
+                              message.lastMessageTime != null
+                                  ? message.lastMessageTime
+                                      .toString()
+                                      .split(' ')[1]
+                                      .substring(0, 5)
+                                  : message.createdAt
+                                      .toString()
+                                      .split(' ')[1]
+                                      .substring(0, 5),
+
+                              style: const TextStyle(
+                                fontSize: 12.0,
                                 color: Colors.grey,
                               ),
                             ),
+                            onTap: () {
+                              context.push(
+                                RoomChatPage(
+                                  chatRoomId: message.id,
+                                  doctorName: message.doctorName,
+                                  // lastMessageTime: DateFormat(
+                                  //   'EEEE, d MMMM y',
+                                  // ).format(message.lastMessageTime!),
+                                  isDoctor: widget.isDoctor,
+                                  patientName: message.patientName,
+                                  receiverId:
+                                      widget.isDoctor!
+                                          ? message.participants.patientId
+                                          : message.participants.doctorId,
+                                  senderId: _user?.id ?? 0,
+                                ),
+                              );
+                            },
                           );
-                        }
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: messages.length,
-                          itemBuilder: (context, index) {
-                            final message = messages[index].details;
-                            return ListTile(
-                              leading: CircleAvatar(
-                                radius: 24.0,
-                                backgroundImage:
-                                    message.imageUrl != null
-                                        ? NetworkImage(
-                                          message.imageUrl!.contains("http")
-                                              ? message.imageUrl!
-                                              : dotenv.env['BASE_URL']! +
-                                                  message.imageUrl!,
-                                        )
-                                        : AssetImage(
-                                              Assets.images.doctorCircle.path,
-                                            )
-                                            as ImageProvider,
-                              ),
-                              title: Text(
-                                message.name,
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              subtitle: Text(
-                                message.lastMessage ?? 'Start a conversation',
-                                style: const TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: Text(
-                                message.lastMessageTime
-                                        ?.toString()
-                                        .split(' ')[1]
-                                        .substring(0, 5) ??
-                                    "",
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              onTap: () {
-                                context.push(
-                                  RoomChatPage(
-                                    chatRoomId: messages[index].id,
-                                    doctorName: message.name,
-                                    // lastMessageTime: DateFormat(
-                                    //   'EEEE, d MMMM y',
-                                    // ).format(message.lastMessageTime!),
-                                    receiverId: message.id,
-                                    senderId: _user?.id ?? 0,
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        );
-                      },
-                      error: (error) {
-                        return Center(child: Text(error));
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+                        },
+                      );
+                    },
+                    error: (error) {
+                      return Center(child: Text(error));
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

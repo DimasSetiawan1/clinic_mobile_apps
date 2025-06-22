@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/data/models/request/chat_request_model.dart';
+import 'package:clinic_mobile_apps/data/models/response/room_chat_response_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -42,7 +43,7 @@ class FirebaseServices {
   }
 
   // start a chat room
-  Future<void> startChatRoom({
+  Future<void> setFieldRoom({
     required String chatRoomId,
     required Map<String, dynamic> chatRoomData,
   }) async {
@@ -56,7 +57,7 @@ class FirebaseServices {
             .doc(chatRoomId)
             .set(chatRoomData);
       } else {
-        log("Chat room already exists with ID: $chatRoomId, ");
+        log("Chat room already exists with ID: $chatRoomId ");
       }
     } catch (e) {
       log("Error starting chat room: $e");
@@ -74,6 +75,10 @@ class FirebaseServices {
           .doc(chatRoomId)
           .collection('messages')
           .add(messageData.toJson());
+      await _db.collection(_roomsCollection).doc(chatRoomId).update({
+        'last_message': messageData.message,
+        'last_message_time': messageData.timestamp,
+      });
     } catch (e) {
       log("Error adding message to chat room: $e");
       return Future.error("Failed to add message to chat room");
@@ -100,20 +105,59 @@ class FirebaseServices {
     }
   }
 
-  //add message to chat room
-  Future<void> addMessageToChatRoomWithId({
-    required String chatRoomId,
-    required ChatRequestModel messageData,
-  }) async {
+  // Get all chat rooms for a user
+  Stream<List<RoomChatResponseModel>> getAllChatRoomsForUser({
+    required int userId,
+    required String role,
+  }) {
+    final field =
+        role == "doctor" ? 'participants.doctor_id' : 'participants.patient_id';
     try {
-      await _db
+      return _db
           .collection(_roomsCollection)
-          .doc(chatRoomId)
-          .collection('messages')
-          .add(messageData.toJson());
+          .where(field, isEqualTo: userId)
+          .snapshots()
+          .asyncMap((snapshot) async {
+            List<RoomChatResponseModel> results = [];
+
+            for (var doc in snapshot.docs) {
+              final data = doc.data();
+
+              final result = RoomChatResponseModel(
+                id: doc.id,
+                doctorName: data['doctor_name'] ?? '',
+                doctorImage: data['doctor_image'] ?? '',
+                patientName: data['patient_name'] ?? '',
+                patientImage: data['patient_image'] ?? '',
+                createdAt:
+                    data['created_at'] != null
+                        ? (data['created_at'] is Timestamp
+                            ? (data['created_at'] as Timestamp).toDate()
+                            : DateTime.parse(data['created_at']))
+                        : DateTime.now(),
+                participants:
+                    data['participants'] != null
+                        ? Participants.fromJson(data['participants'])
+                        : Participants(doctorId: 0, patientId: 0),
+                lastMessage: data['last_message'] ?? "",
+                lastMessageTime:
+                    data['last_message_time'] == null
+                        ? null
+                        : (data['last_message_time'] is Timestamp
+                            ? (data['last_message_time'] as Timestamp).toDate()
+                            : DateTime.tryParse(
+                              data['last_message_time'].toString(),
+                            )),
+              );
+
+              results.add(result);
+            }
+
+            return results;
+          });
     } catch (e) {
-      log("Error adding message to chat room: $e");
-      return Future.error("Failed to add message to chat room");
+      log("Error getting all chat rooms for user: $e");
+      return Stream.error("Failed to get chat rooms for user");
     }
   }
 }

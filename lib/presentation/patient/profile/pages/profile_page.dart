@@ -1,7 +1,7 @@
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
-import 'package:clinic_mobile_apps/core/utils/images_usecase.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/pages/onboarding_page.dart';
@@ -72,12 +72,12 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Row(
                 children: [
                   _user?.image != null
-                      ? showImageNetworkProfileUser(
+                      ? CustomAvatar(
                         imageUrl: _user!.image ?? '',
                         width: 72.0,
                         height: 72.0,
                       )
-                      : showImageNetworkProfileUser(
+                      : CustomAvatar(
                         imageUrl: Assets.images.doctor1.path,
                         width: 72.0,
                         height: 72.0,

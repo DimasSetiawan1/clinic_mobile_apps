@@ -1,6 +1,7 @@
 import 'package:clinic_mobile_apps/data/models/request/chat_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/chat_room/chat_room_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/cubits/validation_message_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -13,6 +14,7 @@ import 'package:intl/intl.dart';
 
 class RoomChatPage extends StatefulWidget {
   final String chatRoomId;
+  final bool? isDoctor;
   final int senderId;
   final int receiverId;
   final String? doctorName;
@@ -23,6 +25,7 @@ class RoomChatPage extends StatefulWidget {
     required this.senderId,
     required this.receiverId,
     this.doctorName,
+    this.isDoctor,
     this.patientName,
   });
 
@@ -32,6 +35,13 @@ class RoomChatPage extends StatefulWidget {
 
 class _RoomChatPageState extends State<RoomChatPage> {
   final TextEditingController _messageController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -51,6 +61,9 @@ class _RoomChatPageState extends State<RoomChatPage> {
       backgroundColor: AppColors.lightBackground,
       body: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               width: context.deviceWidth,
@@ -101,8 +114,8 @@ class _RoomChatPageState extends State<RoomChatPage> {
                 builder: (context, state) {
                   return state.maybeWhen(
                     orElse: () => const SizedBox.shrink(),
-                    loading:
-                        () => const Center(child: CircularProgressIndicator()),
+                    // loading:
+                    //     () => const Center(child: CircularProgressIndicator()),
                     loaded: (messages) {
                       if (messages.isEmpty) {
                         return const Center(
@@ -138,7 +151,7 @@ class _RoomChatPageState extends State<RoomChatPage> {
                         },
                       );
                     },
-                    error:
+                    failed:
                         (error) => Center(
                           child: Text(
                             error,
@@ -152,51 +165,86 @@ class _RoomChatPageState extends State<RoomChatPage> {
                 },
               ),
             ),
-            // const Spacer(),
-            Container(
+            SizedBox(
               width: context.deviceWidth,
               height: 80.0,
-              // color: Colors.black,
-              // padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 234, 242, 242),
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SpaceWidth(16),
-                          Expanded(
-                            child: TextField(
-                              controller: _messageController,
-                              decoration: InputDecoration(
-                                hintText: "Type a message",
-                                border: InputBorder.none,
+                          Form(
+                            key: _formKey,
+                            child: Expanded(
+                              child: TextFormField(
+                                onChanged: (value) {
+                                  if (value.isEmpty) {
+                                    context
+                                        .read<ValidationMessageCubit>()
+                                        .isNotValidMessage();
+                                  } else {
+                                    context
+                                        .read<ValidationMessageCubit>()
+                                        .isValidMessage();
+                                  }
+                                },
+                                controller: _messageController,
+                                // validator:
+                                //     (value) =>
+                                //         value!.isEmpty
+                                //             ? "Message cannot be empty"
+                                //             : null,
+                                decoration: InputDecoration(
+                                  hintText: "Type a message",
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
-                              context.read<ChatRoomBloc>().add(
-                                ChatRoomEvent.sendMessage(
-                                  widget.chatRoomId,
-                                  ChatRequestModel(
-                                    senderId: widget.senderId,
-                                    reciverId: widget.receiverId,
-                                    timestamp: DateTime.now(),
-                                    message: _messageController.text.trim(),
+                              if (_formKey.currentState!.validate()) {
+                                context.read<ChatRoomBloc>().add(
+                                  ChatRoomEvent.sendMessage(
+                                    widget.chatRoomId,
+                                    ChatRequestModel(
+                                      senderId: widget.senderId,
+                                      reciverId: widget.receiverId,
+                                      timestamp: DateTime.now(),
+                                      message: _messageController.text.trim(),
+                                    ),
+                                    widget.senderId,
+                                    widget.receiverId,
+                                    widget.isDoctor != null
+                                        ? widget.doctorName ?? "Doctor"
+                                        : widget.patientName ?? "Patient",
+                                    // widget.isDoctor ?? false,
                                   ),
-                                ),
-                              );
-                              _messageController.clear();
+                                );
+                                _messageController.clear();
+                              } else {
+                                context
+                                    .read<ValidationMessageCubit>()
+                                    .isNotValidMessage();
+                              }
                             },
-                            child: const Icon(
-                              Icons.send,
-                              color: AppColors.primary,
+                            child: BlocBuilder<ValidationMessageCubit, bool>(
+                              builder: (context, state) {
+                                return Icon(
+                                  state ? Icons.send : Icons.send,
+                                  color:
+                                      state ? AppColors.primary : Colors.grey,
+                                );
+                              },
                             ),
                           ),
                         ],

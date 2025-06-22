@@ -7,17 +7,19 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class OnesignalNotificationDatasource {
-  Future<void> sendNotification(
+  Future<void> sendMessageNotification(
     String message,
-    int doctorId,
-    int patientId,
+    int senderId,
+    int receiverId,
+    String senderName,
   ) async {
     try {
       final localData = AuthLocalDatasource().getUserData();
       final Map<String, dynamic> requestBody = {
         'message': message,
-        'doctor_id': doctorId,
-        'patient_id': patientId,
+        'recipient_id': receiverId,
+        'sender_id': senderId,
+        'sender_name': senderName,
       };
       final response = await http.post(
         Uri.parse('${dotenv.env['BASE_URL']}/api/notification/send'),
