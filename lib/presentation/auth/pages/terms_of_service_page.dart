@@ -1,8 +1,8 @@
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/auth/pages/data_pengguna_page.dart';

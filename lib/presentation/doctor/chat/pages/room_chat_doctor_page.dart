@@ -1,7 +1,7 @@
 import 'package:clinic_mobile_apps/presentation/patient/chat/widgets/chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 

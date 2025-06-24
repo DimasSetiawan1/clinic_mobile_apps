@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
@@ -8,7 +9,7 @@ import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/filter
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/card_doctor_telemedis.dart';
@@ -74,21 +75,11 @@ class _TelemedisPageState extends State<TelemedisPage> {
                             height: 22.0,
                             fit: BoxFit.cover,
                           ),
-                          _user?.image != null
-                              ? Image.network(
-                                _user!.image!.contains("http")
-                                    ? _user!.image!
-                                    : dotenv.env['BASE_URL']! + _user!.image!,
-                                width: 40.0,
-                                height: 40.0,
-                                fit: BoxFit.cover,
-                              )
-                              : Image.asset(
-                                Assets.images.doctorCircle.path,
-                                width: 40.0,
-                                height: 40.0,
-                                fit: BoxFit.cover,
-                              ),
+                          CustomAvatar(
+                            imageUrl: _user!.image ?? '',
+                            width: 40.0,
+                            height: 40.0,
+                          ),
                         ],
                       ),
                     ],
@@ -105,25 +96,24 @@ class _TelemedisPageState extends State<TelemedisPage> {
                       },
                       success: (doctors) {
                         if (doctors.isEmpty) {
-                          return const Center(child: Text('Data not found'));
+                          return const Center(
+                            child: Text('No doctors available'),
+                          );
                         }
-                        return ListView.separated(
-                          padding: const EdgeInsets.all(20),
+                        return ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: doctors.length,
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SpaceHeight(10);
-                          },
-                          itemBuilder: (BuildContext context, int index) {
-                            if (doctors[index].status == 'active' &&
-                                doctors[index].role == 'doctor') {
-                              return CardDoctorTelemedis(user: doctors[index]);
-                            } else {
-                              return Container();
-                            }
+                          itemBuilder: (context, index) {
+                            // final doctor = doctors[index];
+                            // return CardDoctorTelemedis(doctor: doctor);
+                            log(doctors[index].toMap().toString());
                           },
                         );
+                      },
+                      failure: (message) {
+                        log(message);
+                        return Center(child: Text('Error: $message'));
                       },
                     );
                   },

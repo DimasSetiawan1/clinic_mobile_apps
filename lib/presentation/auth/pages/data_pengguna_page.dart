@@ -1,12 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
+import 'package:go_router/go_router.dart';
 
 class DataPenggunaPage extends StatefulWidget {
   const DataPenggunaPage({super.key});
@@ -20,14 +22,15 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> _doctorFormKey = GlobalKey<FormState>();
-  
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff1469F0),
-      statusBarBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Color(0xff1469F0),
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -37,10 +40,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    AppColors.secondary,
-                    Color(0xff1469F0),
-                  ],
+                  colors: [AppColors.secondary, Color(0xff1469F0)],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
@@ -49,7 +49,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      context.pop();
+                      // context.goNamed(AppRouter.homePatientPage.name);
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,
@@ -69,12 +69,11 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
             ),
             const SpaceHeight(12),
             Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
+              margin: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 10,
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               width: context.deviceWidth,
               decoration: BoxDecoration(
                 color: AppColors.white,
@@ -94,31 +93,27 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                     const Text(
                       "Nama Sesuai KTP",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: TextEditingController(),
                       label: 'Sinta Saras',
                       // textInputAction: TextInputAction.next,
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Tanggal Lahir",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: _dateController,
                       label: 'dd-mm-yyyy',
@@ -144,19 +139,16 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                         ),
                       ),
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Jenis Kelamin",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -185,9 +177,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(
-                                    0xff677294,
-                                  ),
+                                  color: Color(0xff677294),
                                 ),
                               ),
                             ),
@@ -219,9 +209,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(
-                                    0xff677294,
-                                  ),
+                                  color: Color(0xff677294),
                                 ),
                               ),
                             ),
@@ -229,19 +217,16 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                         ),
                       ],
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "No Handphone",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: phoneController,
                       label: '',
@@ -258,9 +243,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w400,
-                                color: Color(
-                                  0xff677294,
-                                ),
+                                color: Color(0xff677294),
                               ),
                             ),
                           ],
@@ -268,26 +251,23 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                       ),
                       textInputAction: TextInputAction.next,
                     ),
-                    const SpaceHeight(
-                      16,
-                    ),
+                    const SpaceHeight(16),
                     const Text(
                       "Alamat Domisili",
                       style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SpaceHeight(
-                      8,
-                    ),
+                    const SpaceHeight(8),
                     CustomTextField(
                       controller: TextEditingController(),
                       label: 'Jl. Jago Flutter No. 32',
                       maxLines: 3,
                       textInputAction: TextInputAction.done,
                     ),
-                    const SpaceHeight(10)
+                    const SpaceHeight(10),
                   ],
                 ),
               ),
@@ -313,7 +293,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Button.filled(
                   onPressed: () {
-                    context.push(const HomePage());
+                    context.goNamed(AppRouter.homePatientPage.name);
                   },
                   label: 'Lanjut',
                   fontSize: 16.0,
@@ -324,7 +304,7 @@ class _DataPenggunaPageState extends State<DataPenggunaPage> {
               title: 'Berhasil',
               desc: 'Data berhasil disimpan',
               btnOkOnPress: () {
-                context.push(const HomePage());
+                context.goNamed(AppRouter.homePatientPage.name);
               },
             ).show();
           },

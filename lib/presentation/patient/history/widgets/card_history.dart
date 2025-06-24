@@ -1,8 +1,8 @@
-import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
 import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:flutter/material.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:intl/intl.dart';

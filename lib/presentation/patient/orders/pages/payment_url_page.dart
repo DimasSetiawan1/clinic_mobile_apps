@@ -18,7 +18,7 @@ class PaymentWebview extends StatefulWidget {
 
 class _PaymentWebviewState extends State<PaymentWebview> {
   late final WebViewController _controller;
-  bool _isLoading = false;
+  final bool _isLoading = false;
   Future<void> _handlePaymentSuccess() async {
     showDialog(context: context, builder: (_) => const PaymentSuccessDialog());
   }

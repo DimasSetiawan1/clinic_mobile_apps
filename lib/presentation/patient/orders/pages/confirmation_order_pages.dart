@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/request/create_order_request_model.dart';
 import 'package:clinic_mobile_apps/data/models/response/doctor_response_model.dart';
@@ -8,12 +9,13 @@ import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/create_ord
 import 'package:clinic_mobile_apps/presentation/patient/orders/pages/payment_url_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/widgets/card_premium_chat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ConfirmationOrderPages extends StatelessWidget {
   final User doctor;
@@ -73,11 +75,18 @@ class ConfirmationOrderPages extends StatelessWidget {
                   },
                   orElse: () {},
                   success: (order) {
-                    context.push(
-                      PaymentWebview(
-                        invoiceUrl: order.data!.paymentUrl!,
-                        orderId: order.data!.id!,
-                      ),
+                    // context.push(
+                    //   PaymentWebview(
+                    //     invoiceUrl: order.data!.paymentUrl!,
+                    //     orderId: order.data!.id!,
+                    //   ),
+                    // );
+                    GoRouter.of(context).pushNamed(
+                      AppRouter.paymentWebviewPage.name,
+                      queryParameters: {
+                        'invoice': order.data!.paymentUrl!.toString(),
+                        'orderId': order.data!.id!.toString(),
+                      },
                     );
                   },
                 );
@@ -95,16 +104,17 @@ class ConfirmationOrderPages extends StatelessWidget {
                           patientId: localData!.data!.user!.id!,
                           doctorId: doctor.id,
                           service: isTelemedis ? "Telemedicine" : "Chat",
-                          price: isTelemedis
-                              ? doctor.telemedicineFee!
-                              : doctor.chatFee!,
+                          price:
+                              isTelemedis
+                                  ? doctor.telemedicineFee!
+                                  : doctor.chatFee!,
                           duration: 30,
                           clinicId: doctor.clinic!.id,
                           schedule: DateTime.now(),
                         );
                         context.read<CreateOrderBloc>().add(
-                              CreateOrderEvent.createOrder(model),
-                            );
+                          CreateOrderEvent.createOrder(model),
+                        );
                       },
                       label: isTelemedis ? 'Order Telemedis' : 'Order Chat',
                       fontSize: 12.0,
@@ -134,7 +144,7 @@ class ConfirmationOrderPages extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      context.pop();
+                      GoRouter.of(context).pop();
                     },
                     icon: const Icon(
                       Icons.arrow_back_ios,

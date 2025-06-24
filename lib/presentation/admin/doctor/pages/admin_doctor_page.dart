@@ -1,7 +1,7 @@
 import 'package:clinic_mobile_apps/presentation/admin/doctor/blocs/get_doctor/bloc/get_doctor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/admin/doctor/pages/add_doctor_page.dart';

@@ -8,10 +8,10 @@ import 'package:clinic_mobile_apps/presentation/patient/chat/pages/room_chat_pag
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field_height.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field_height.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 

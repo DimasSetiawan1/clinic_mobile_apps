@@ -29,25 +29,11 @@ class AuthRemoteDatasource {
     if (request.statusCode == 200 || request.statusCode == 201) {
       return Right(LoginResponseModel.fromMap(jsonDecode(request.body)));
     } else {
-      return Left('Failed to login with Google');
+      return Left("Failed login to clinic app");
     }
   }
 
-  Future<Either<bool, bool>> checkAuth(String idToken) async {
-    final request = await http.post(
-      Uri.parse("${dotenv.env['BASE_URL']}/api/login/google"),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: jsonEncode({"id_token": idToken}),
-    );
-    if (request.statusCode == 200 || request.statusCode == 201) {
-      return Right(true);
-    } else {
-      return Left(false);
-    }
-  }
+  
 
   Future<Either<String, String>> updateOneSignalToken(
     String oneSignalToken,

@@ -1,19 +1,23 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/shared_pages/detail_doctor_page.dart';
+import 'package:clinic_mobile_apps/core/shared/detail_doctor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/card_doctor_telemedis.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
 
 class DoctorsPage extends StatefulWidget {
   const DoctorsPage({super.key});
@@ -75,21 +79,13 @@ class _DoctorsPageState extends State<DoctorsPage> {
                             height: 22.0,
                             fit: BoxFit.cover,
                           ),
-                          _user?.image != null
-                              ? Image.network(
-                                _user!.image!.contains("http")
-                                    ? _user!.image!
-                                    : dotenv.env['BASE_URL']! + _user!.image!,
-                                width: 40.0,
-                                height: 40.0,
-                                fit: BoxFit.cover,
-                              )
-                              : Image.asset(
-                                Assets.images.doctorCircle.path,
-                                width: 40.0,
-                                height: 40.0,
-                                fit: BoxFit.cover,
-                              ),
+                          CustomAvatar(
+                            imageUrl: _user?.image,
+                            width: 40.0,
+                            height: 40.0,
+                            radius: 20.0,
+                            fit: BoxFit.cover,
+                          ),
                         ],
                       ),
                     ],
@@ -119,11 +115,13 @@ class _DoctorsPageState extends State<DoctorsPage> {
                                 doctors[index].role == 'doctor') {
                               return InkWell(
                                 onTap: () {
-                                  context.push(
-                                    DetailDoctorPage(
-                                      doctor: doctors[index],
-                                      isTelemedis: true,
-                                    ),
+                                  GoRouter.of(context).pushNamed(
+                                    AppRouter.detailDoctorPage.name,
+                                    queryParameters: {
+                                      'doctor': jsonEncode(
+                                        doctors[index].toMap(),
+                                      ),
+                                    },
                                   );
                                 },
                                 child: CardDoctorTelemedis(

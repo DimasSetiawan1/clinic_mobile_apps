@@ -1,25 +1,20 @@
 import 'dart:developer';
 
-import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
-import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
-import 'package:clinic_mobile_apps/presentation/doctor/chat/pages/room_chat_doctor_page.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/get_all_message_patient/get_all_message_patient_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/pages/room_chat_page.dart';
-import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/filter_telemedis_status.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/card_doctor_telemedis.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatPage extends StatefulWidget {
   final bool? isDoctor;
@@ -44,6 +39,8 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
+
     super.dispose();
   }
 
@@ -172,21 +169,21 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                             ),
                             onTap: () {
-                              context.push(
-                                RoomChatPage(
-                                  chatRoomId: message.id,
-                                  doctorName: message.doctorName,
-                                  // lastMessageTime: DateFormat(
-                                  //   'EEEE, d MMMM y',
-                                  // ).format(message.lastMessageTime!),
-                                  isDoctor: widget.isDoctor,
-                                  patientName: message.patientName,
-                                  receiverId:
+                              GoRouter.of(context).pushNamed(
+                                AppRouter.roomChatPage.name,
+                                queryParameters: {
+                                  'chatRoomId': message.id.toString(),
+                                  'doctorName': message.doctorName,
+                                  'isDoctor': widget.isDoctor.toString(),
+                                  'patientName': message.patientName,
+                                  'receiverId':
                                       widget.isDoctor!
                                           ? message.participants.patientId
-                                          : message.participants.doctorId,
-                                  senderId: _user?.id ?? 0,
-                                ),
+                                              .toString()
+                                          : message.participants.doctorId
+                                              .toString(),
+                                  'senderId': _user?.id.toString() ?? '0',
+                                },
                               );
                             },
                           );

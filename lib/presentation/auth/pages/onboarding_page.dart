@@ -1,23 +1,22 @@
 import 'dart:developer';
 
+import 'package:clinic_mobile_apps/core/enums/user_role.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_remote_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/blocs/bloc_login_google/login_google_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/auth/blocs/check_auth/check_auth_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/auth/cubits/check_auth_cubit.dart';
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_main_page.dart';
-import 'package:clinic_mobile_apps/presentation/auth/pages/privacy_policy_page.dart';
-import 'package:clinic_mobile_apps/presentation/doctor/home/pages/doctor_home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:go_router/go_router.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 // import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -94,43 +93,49 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         listener: (context, state) {
                           state.maybeWhen(
                             orElse: () {},
-                            success: (LoginResponseModel data) async {
-                              await AuthLocalDatasource().savedUserData(data);
-                              if (data.data!.user!.role == 'admin') {
-                                WidgetsBinding.instance.addPostFrameCallback((
-                                  _,
-                                ) {
-                                  context.pushReplacement(AdminMainPage(0));
-                                });
-                                return;
-                              } else if (data.data!.user!.role == 'doctor') {
-                                WidgetsBinding.instance.addPostFrameCallback((
-                                  _,
-                                ) {
-                                  context.pushReplacement(
-                                    const DoctorHomePage(),
-                                  );
-                                });
-                                return;
-                              }
-
-                              if (data.data!.isNew!) {
-                                WidgetsBinding.instance.addPostFrameCallback((
-                                  _,
-                                ) {
-                                  context.pushReplacement(PrivacyPolicyPage());
-                                });
-                                return;
-                              } else {
-                                WidgetsBinding.instance.addPostFrameCallback((
-                                  _,
-                                ) {
-                                  context.pushReplacement(HomePage());
-                                });
-                              }
+                            authenticated: () async {
+                              final data = AuthLocalDatasource().getRoleUser();
+                              final isPatientOrNewUser =
+                                  AuthLocalDatasource().isNewUser();
                               await AuthRemoteDatasource().updateOneSignalToken(
                                 OneSignal.User.pushSubscription.id!,
                               );
+                              switch (data) {
+                                case UserRole.admin:
+                                  if (context.mounted) {
+                                    context.goNamed(
+                                      AppRouter.homeAdminPage.name,
+                                    );
+                                  }
+                                  return;
+                                case UserRole.doctor:
+                                  if (context.mounted) {
+                                    context.goNamed(
+                                      AppRouter.homeDoctorPage.name,
+                                    );
+                                  }
+                                  return;
+                                default:
+                                  if (isPatientOrNewUser) {
+                                    if (context.mounted) {
+                                      context.goNamed(
+                                        AppRouter.privacyPolicyPage.name,
+                                      );
+                                    }
+                                  } else if (!isPatientOrNewUser &&
+                                      data == UserRole.patient) {
+                                    if (context.mounted) {
+                                      log(
+                                        'User is patient, navigating to home page',
+                                      );
+                                      context.goNamed(
+                                        AppRouter.homePatientPage.name,
+                                        queryParameters: {"initialIndex": "0"},
+                                      );
+                                    }
+                                  }
+                                  return;
+                              }
                             },
                             error: (errorMessage) {
                               return ScaffoldMessenger.of(context).showSnackBar(
@@ -148,6 +153,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                   await AuthRemoteDatasource().signInWithGoogle(
                                     context,
                                   );
+                                  if (context.mounted) {
+                                    context.read<CheckAuthCubit>().checkAuth();
+                                  }
                                 },
                                 label: 'Masuk dengan Google',
                                 icon: Image.asset(

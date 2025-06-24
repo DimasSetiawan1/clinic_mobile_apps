@@ -1,5 +1,5 @@
-import 'package:clinic_mobile_apps/core/components/custom_pick_image.dart';
-import 'package:clinic_mobile_apps/core/components/custom_select_date.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_pick_image.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_select_date.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
 import 'package:clinic_mobile_apps/core/extensions/time_ext.dart';
 import 'package:clinic_mobile_apps/data/models/request/doctor_request_model.dart';
@@ -11,15 +11,15 @@ import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_home_page
 import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field_height.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field_height.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:clinic_mobile_apps/core/components/custom_radio.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_radio.dart';
 
 class AddDoctorPage extends StatefulWidget {
   const AddDoctorPage({super.key});

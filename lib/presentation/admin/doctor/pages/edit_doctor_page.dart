@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:clinic_mobile_apps/core/components/custom_pick_image.dart';
-import 'package:clinic_mobile_apps/core/components/custom_radio.dart';
-import 'package:clinic_mobile_apps/core/components/custom_select_date.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_pick_image.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_radio.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_select_date.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
 import 'package:clinic_mobile_apps/core/extensions/time_ext.dart';
@@ -16,10 +16,10 @@ import 'package:clinic_mobile_apps/presentation/admin/home/pages/admin_main_page
 import 'package:clinic_mobile_apps/presentation/doctor/home/pages/doctor_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field.dart';
-import 'package:clinic_mobile_apps/core/components/custom_text_field_height.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_text_field_height.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';

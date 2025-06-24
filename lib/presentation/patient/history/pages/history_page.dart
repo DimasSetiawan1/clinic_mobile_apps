@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/core/services/firebase_services.dart';
 import 'package:clinic_mobile_apps/presentation/admin/home/blocs/get_history/get_history_order_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/pages/chat_with_doctor_page.dart';
@@ -8,10 +9,11 @@ import 'package:clinic_mobile_apps/presentation/patient/orders/pages/payment_url
 import 'package:clinic_mobile_apps/presentation/patient/history/widgets/card_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -96,7 +98,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   future: Future.delayed(const Duration(seconds: 10)),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (context.mounted) {
                         showDialog(
                           context: context,
                           builder:
@@ -118,7 +120,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                 ],
                               ),
                         );
-                      });
+                      }
                     }
                     return const Center(child: CircularProgressIndicator());
                   },
@@ -171,11 +173,12 @@ class _HistoryPageState extends State<HistoryPage> {
                       return InkWell(
                         onTap: () {
                           if (dataOrder.status.toLowerCase() == "pending") {
-                            context.push(
-                              PaymentWebview(
-                                invoiceUrl: dataOrder.paymentUrl,
-                                orderId: dataOrder.id,
-                              ),
+                            GoRouter.of(context).pushNamed(
+                              AppRouter.paymentWebviewPage.name,
+                              queryParameters: {
+                                'invoice': dataOrder.paymentUrl.toString(),
+                                'orderId': dataOrder.id.toString(),
+                              },
                             );
                           }
                           if (dataOrder.chatRooms.status == "open" &&
@@ -186,21 +189,28 @@ class _HistoryPageState extends State<HistoryPage> {
                                 )
                                 .then((exists) {
                                   if (exists) {
-                                    context.mounted
-                                        ? context.push(
-                                          ChatWithDoctorPage(
-                                            name: dataOrder.patient.name,
-                                            chatRoom: dataOrder.chatRooms,
-                                            doctorName: dataOrder.doctor.name,
-                                          ),
-                                        )
-                                        : null;
+                                    if (context.mounted) {
+                                      GoRouter.of(context).pushNamed(
+                                        AppRouter.chatWithDoctorPage.name,
+                                        queryParameters: {
+                                          'name': dataOrder.patient.name,
+                                          'chatRoom': dataOrder.chatRooms.id,
+                                          'doctorName': dataOrder.doctor.name,
+                                        },
+                                      );
+                                    }
                                   } else {
-                                    context.mounted
-                                        ? context.showSnackBar(
-                                          "Chat Room Not Found",
-                                        )
-                                        : null;
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Chat room not found. Please try again later.',
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   }
                                 });
                           }

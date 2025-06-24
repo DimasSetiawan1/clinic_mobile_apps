@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 
 class EmptyDoctorWidget extends StatelessWidget {
   const EmptyDoctorWidget({super.key});

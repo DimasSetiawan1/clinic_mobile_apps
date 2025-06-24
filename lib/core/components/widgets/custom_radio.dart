@@ -1,4 +1,4 @@
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:flutter/material.dart';
 
 Widget buildRadioOptions(

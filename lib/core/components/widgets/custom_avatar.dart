@@ -22,9 +22,6 @@ class CustomAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isNetworkImage =
-        (imageUrl!.startsWith('http') || imageUrl!.startsWith('https'));
-    final placeholders = Assets.images.doctor1.path;
     if (imageUrl == null || imageUrl!.contains('doctor-')) {
       return Container(
         width: width,
@@ -38,7 +35,11 @@ class CustomAvatar extends StatelessWidget {
           ),
         ),
       );
-    } else if (imageUrl!.contains('images')) {
+    }
+    final isNetworkImage =
+        (imageUrl!.startsWith('http') || imageUrl!.startsWith('https'));
+    final placeholders = Assets.images.doctor1.path;
+    if (imageUrl!.contains('images')) {
       return _buildNetworkImage(
         imageUrl: "${dotenv.env['BASE_URL']!}/$imageUrl",
         width: width,

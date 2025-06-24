@@ -1,9 +1,11 @@
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentSuccessDialog extends StatelessWidget {
   const PaymentSuccessDialog({super.key});
@@ -48,14 +50,9 @@ class PaymentSuccessDialog extends StatelessWidget {
               borderRadius: 8,
               fontSize: 15.0,
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (BuildContext context) =>
-                            const HomePage(initialIndex: 3),
-                  ),
-                  ModalRoute.withName('/historyOrder'),
+                GoRouter.of(context).goNamed(
+                  AppRouter.homePatientPage.name,
+                  queryParameters: {"initialIndex": "3"},
                 );
               },
               label: 'Konsultasi Sekarang',

@@ -1,22 +1,21 @@
-import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
+import 'dart:convert';
+
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/extensions/string_ext.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/models/response/doctor_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/buttons.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/orders/pages/confirmation_order_pages.dart';
+import 'package:go_router/go_router.dart';
 
 class DetailDoctorPage extends StatelessWidget {
   final User doctor;
-  final bool isTelemedis;
-  const DetailDoctorPage({
-    super.key,
-    required this.doctor,
-    required this.isTelemedis,
-  });
+  const DetailDoctorPage({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +68,12 @@ class DetailDoctorPage extends StatelessWidget {
                   height: 40,
                   borderRadius: 10,
                   onPressed: () {
-                    context.push(
-                      ConfirmationOrderPages(doctor: doctor, isTelemedis: index != 0),
+                    GoRouter.of(context).pushNamed(
+                      AppRouter.confirmationOrderPage.name,
+                      queryParameters: {
+                        'doctor': jsonEncode(doctor.toMap()),
+                        'isTelemedis': index != 0 ? 'true' : 'false',
+                      },
                     );
                   },
                   label: index == 0 ? 'Chat Sekarang' : 'Telemedis',

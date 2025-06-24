@@ -1,11 +1,10 @@
 import 'package:clinic_mobile_apps/data/models/request/chat_request_model.dart';
-import 'package:clinic_mobile_apps/data/models/response/orders_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/chat_room/chat_room_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/cubits/validation_message_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/widgets/chat_bubble.dart';
@@ -35,7 +34,6 @@ class RoomChatPage extends StatefulWidget {
 
 class _RoomChatPageState extends State<RoomChatPage> {
   final TextEditingController _messageController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -182,70 +180,66 @@ class _RoomChatPageState extends State<RoomChatPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Form(
-                            key: _formKey,
-                            child: Expanded(
-                              child: TextFormField(
-                                onChanged: (value) {
-                                  if (value.isEmpty) {
-                                    context
-                                        .read<ValidationMessageCubit>()
-                                        .isNotValidMessage();
-                                  } else {
-                                    context
-                                        .read<ValidationMessageCubit>()
-                                        .isValidMessage();
-                                  }
-                                },
-                                controller: _messageController,
-                                // validator:
-                                //     (value) =>
-                                //         value!.isEmpty
-                                //             ? "Message cannot be empty"
-                                //             : null,
-                                decoration: InputDecoration(
-                                  hintText: "Type a message",
-                                  border: InputBorder.none,
-                                ),
+                          Expanded(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                if (value.isEmpty) {
+                                  context
+                                      .read<ValidationMessageCubit>()
+                                      .setNotValid();
+                                } else {
+                                  context
+                                      .read<ValidationMessageCubit>()
+                                      .setValid();
+                                }
+                              },
+                              controller: _messageController,
+                              decoration: InputDecoration(
+                                hintText: "Type a message",
+                                border: InputBorder.none,
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<ChatRoomBloc>().add(
-                                  ChatRoomEvent.sendMessage(
-                                    widget.chatRoomId,
-                                    ChatRequestModel(
-                                      senderId: widget.senderId,
-                                      reciverId: widget.receiverId,
-                                      timestamp: DateTime.now(),
-                                      message: _messageController.text.trim(),
-                                    ),
-                                    widget.senderId,
-                                    widget.receiverId,
-                                    widget.isDoctor != null
-                                        ? widget.doctorName ?? "Doctor"
-                                        : widget.patientName ?? "Patient",
-                                    // widget.isDoctor ?? false,
-                                  ),
-                                );
-                                _messageController.clear();
-                              } else {
-                                context
-                                    .read<ValidationMessageCubit>()
-                                    .isNotValidMessage();
-                              }
-                            },
-                            child: BlocBuilder<ValidationMessageCubit, bool>(
-                              builder: (context, state) {
-                                return Icon(
-                                  state ? Icons.send : Icons.send,
+                          BlocBuilder<
+                            ValidationMessageCubit,
+                            ValidationMessageState
+                          >(
+                            builder: (context, state) {
+                              return GestureDetector(
+                                onTap: () {
+                                  if (state == ValidationMessageState.valid) {
+                                    context.read<ChatRoomBloc>().add(
+                                      ChatRoomEvent.sendMessage(
+                                        widget.chatRoomId,
+                                        ChatRequestModel(
+                                          senderId: widget.senderId,
+                                          reciverId: widget.receiverId,
+                                          timestamp: DateTime.now(),
+                                          message:
+                                              _messageController.text.trim(),
+                                        ),
+                                        widget.senderId,
+                                        widget.receiverId,
+                                        widget.isDoctor != null
+                                            ? widget.doctorName ?? "Doctor"
+                                            : widget.patientName ?? "Patient",
+                                        // widget.isDoctor ?? false,
+                                      ),
+                                    );
+                                    _messageController.clear();
+                                  }
+                                },
+                                child: Icon(
+                                  state == ValidationMessageState.valid
+                                      ? Icons.send
+                                      : Icons.send,
                                   color:
-                                      state ? AppColors.primary : Colors.grey,
-                                );
-                              },
-                            ),
+                                      state == ValidationMessageState.valid
+                                          ? AppColors.primary
+                                          : Colors.grey,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

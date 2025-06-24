@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:clinic_mobile_apps/core/components/custom_avatar.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/pages/onboarding_page.dart';
@@ -9,9 +10,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -71,17 +73,11 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
-                  _user?.image != null
-                      ? CustomAvatar(
-                        imageUrl: _user!.image ?? '',
-                        width: 72.0,
-                        height: 72.0,
-                      )
-                      : CustomAvatar(
-                        imageUrl: Assets.images.doctor1.path,
-                        width: 72.0,
-                        height: 72.0,
-                      ),
+                  CustomAvatar(
+                    imageUrl: _user!.image ?? '',
+                    width: 72.0,
+                    height: 72.0,
+                  ),
                   const SpaceWidth(16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,16 +120,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 FirebaseAuth.instance.signOut();
                 await GoogleSignIn().signOut();
                 await AuthLocalDatasource().removeUserData();
-
-                context.mounted
-                    ? Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OnboardingPage(),
-                      ),
-                      (route) => false,
-                    )
-                    : null;
+                if (context.mounted) {
+                  GoRouter.of(context).goNamed(AppRouter.onboardingPage.name);
+                }
               },
               child: _menuItem(Assets.icons.logout.path, 'Keluar'),
             ),

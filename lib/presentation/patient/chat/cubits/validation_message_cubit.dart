@@ -1,8 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ValidationMessageCubit extends Cubit<bool> {
-  ValidationMessageCubit() : super(false);
+class ValidationMessageCubit extends Cubit<ValidationMessageState> {
+  ValidationMessageCubit() : super(ValidationMessageState.initial);
+  
+  void setValid() {
+    emit(ValidationMessageState.valid);
+  }
+  void setNotValid() {
+    emit(ValidationMessageState.notValid);
+  }
+}
 
-  void isValidMessage() => emit(true);
-  void isNotValidMessage() => emit(false);
+enum ValidationMessageState {
+  initial,
+  valid,
+  notValid,
 }

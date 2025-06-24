@@ -4,7 +4,7 @@ import 'package:clinic_mobile_apps/data/models/response/orders_response_model.da
 import 'package:flutter/material.dart';
 
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
-import 'package:clinic_mobile_apps/core/components/spaces.dart';
+import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
 import 'package:intl/intl.dart';

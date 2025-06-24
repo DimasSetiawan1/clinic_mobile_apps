@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:clinic_mobile_apps/core/shared/cubits/stack_navigation_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../core/components/spaces.dart';
+import '../../../../core/components/widgets/spaces.dart';
 import '../../../../../core/constants/colors.dart';
 
 class NavItem extends StatelessWidget {

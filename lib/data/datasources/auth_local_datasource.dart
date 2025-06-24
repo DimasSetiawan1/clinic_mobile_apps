@@ -17,6 +17,22 @@ class AuthLocalDatasource {
     return null;
   }
 
+  int getUserId() {
+    final userData = getUserData();
+    if (userData != null) {
+      return userData.data?.user?.id ?? 0;
+    }
+    return 0;
+  }
+
+  bool isNewUser() {
+    final userData = getUserData();
+    if (userData != null) {
+      return userData.data?.isNew ?? false;
+    }
+    return true;
+  }
+
   Future<void> removeUserData() async {
     await SharedPreferencesUtils.instance.remove('user');
   }
@@ -32,7 +48,5 @@ class AuthLocalDatasource {
       return UserRole.fromString(userData.data?.user?.role ?? "");
     }
     return UserRole.patient;
-    // if(userData.) {
-    // }
   }
 }
