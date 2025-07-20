@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_call_rooms_bloc.dart';
+part of 'video_call_telemedis_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,60 +16,70 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$GetCallRoomsEvent {
+mixin _$VideoCallTelemedisEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCallRooms,
+    required TResult Function(String channelName, String token, int id)
+    joinCall,
+    required TResult Function() userLeft,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCallRooms,
+    TResult? Function(String channelName, String token, int id)? joinCall,
+    TResult? Function()? userLeft,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCallRooms,
+    TResult Function(String channelName, String token, int id)? joinCall,
+    TResult Function()? userLeft,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCallRooms value) getCallRooms,
+    required TResult Function(_JoinCall value) joinCall,
+    required TResult Function(_UserLeft value) userLeft,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCallRooms value)? getCallRooms,
+    TResult? Function(_JoinCall value)? joinCall,
+    TResult? Function(_UserLeft value)? userLeft,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCallRooms value)? getCallRooms,
+    TResult Function(_JoinCall value)? joinCall,
+    TResult Function(_UserLeft value)? userLeft,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetCallRoomsEventCopyWith<$Res> {
-  factory $GetCallRoomsEventCopyWith(
-    GetCallRoomsEvent value,
-    $Res Function(GetCallRoomsEvent) then,
-  ) = _$GetCallRoomsEventCopyWithImpl<$Res, GetCallRoomsEvent>;
+abstract class $VideoCallTelemedisEventCopyWith<$Res> {
+  factory $VideoCallTelemedisEventCopyWith(
+    VideoCallTelemedisEvent value,
+    $Res Function(VideoCallTelemedisEvent) then,
+  ) = _$VideoCallTelemedisEventCopyWithImpl<$Res, VideoCallTelemedisEvent>;
 }
 
 /// @nodoc
-class _$GetCallRoomsEventCopyWithImpl<$Res, $Val extends GetCallRoomsEvent>
-    implements $GetCallRoomsEventCopyWith<$Res> {
-  _$GetCallRoomsEventCopyWithImpl(this._value, this._then);
+class _$VideoCallTelemedisEventCopyWithImpl<
+  $Res,
+  $Val extends VideoCallTelemedisEvent
+>
+    implements $VideoCallTelemedisEventCopyWith<$Res> {
+  _$VideoCallTelemedisEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetCallRoomsEvent
+  /// Create a copy of VideoCallTelemedisEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -83,14 +93,14 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$VideoCallTelemedisEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
     _$StartedImpl _value,
     $Res Function(_$StartedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsEvent
+  /// Create a copy of VideoCallTelemedisEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -101,7 +111,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'GetCallRoomsEvent.started()';
+    return 'VideoCallTelemedisEvent.started()';
   }
 
   @override
@@ -117,7 +127,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCallRooms,
+    required TResult Function(String channelName, String token, int id)
+    joinCall,
+    required TResult Function() userLeft,
   }) {
     return started();
   }
@@ -126,7 +138,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCallRooms,
+    TResult? Function(String channelName, String token, int id)? joinCall,
+    TResult? Function()? userLeft,
   }) {
     return started?.call();
   }
@@ -135,7 +148,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCallRooms,
+    TResult Function(String channelName, String token, int id)? joinCall,
+    TResult Function()? userLeft,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -148,7 +162,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCallRooms value) getCallRooms,
+    required TResult Function(_JoinCall value) joinCall,
+    required TResult Function(_UserLeft value) userLeft,
   }) {
     return started(this);
   }
@@ -157,7 +172,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCallRooms value)? getCallRooms,
+    TResult? Function(_JoinCall value)? joinCall,
+    TResult? Function(_UserLeft value)? userLeft,
   }) {
     return started?.call(this);
   }
@@ -166,7 +182,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCallRooms value)? getCallRooms,
+    TResult Function(_JoinCall value)? joinCall,
+    TResult Function(_UserLeft value)? userLeft,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -176,45 +193,226 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements GetCallRoomsEvent {
+abstract class _Started implements VideoCallTelemedisEvent {
   const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$GetCallRoomsImplCopyWith<$Res> {
-  factory _$$GetCallRoomsImplCopyWith(
-    _$GetCallRoomsImpl value,
-    $Res Function(_$GetCallRoomsImpl) then,
-  ) = __$$GetCallRoomsImplCopyWithImpl<$Res>;
+abstract class _$$JoinCallImplCopyWith<$Res> {
+  factory _$$JoinCallImplCopyWith(
+    _$JoinCallImpl value,
+    $Res Function(_$JoinCallImpl) then,
+  ) = __$$JoinCallImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String channelName, String token, int id});
 }
 
 /// @nodoc
-class __$$GetCallRoomsImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsEventCopyWithImpl<$Res, _$GetCallRoomsImpl>
-    implements _$$GetCallRoomsImplCopyWith<$Res> {
-  __$$GetCallRoomsImplCopyWithImpl(
-    _$GetCallRoomsImpl _value,
-    $Res Function(_$GetCallRoomsImpl) _then,
+class __$$JoinCallImplCopyWithImpl<$Res>
+    extends _$VideoCallTelemedisEventCopyWithImpl<$Res, _$JoinCallImpl>
+    implements _$$JoinCallImplCopyWith<$Res> {
+  __$$JoinCallImplCopyWithImpl(
+    _$JoinCallImpl _value,
+    $Res Function(_$JoinCallImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsEvent
+  /// Create a copy of VideoCallTelemedisEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? channelName = null,
+    Object? token = null,
+    Object? id = null,
+  }) {
+    return _then(
+      _$JoinCallImpl(
+        channelName:
+            null == channelName
+                ? _value.channelName
+                : channelName // ignore: cast_nullable_to_non_nullable
+                    as String,
+        token:
+            null == token
+                ? _value.token
+                : token // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
-class _$GetCallRoomsImpl implements _GetCallRooms {
-  const _$GetCallRoomsImpl();
+class _$JoinCallImpl implements _JoinCall {
+  const _$JoinCallImpl({
+    required this.channelName,
+    required this.token,
+    required this.id,
+  });
+
+  @override
+  final String channelName;
+  @override
+  final String token;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'GetCallRoomsEvent.getCallRooms()';
+    return 'VideoCallTelemedisEvent.joinCall(channelName: $channelName, token: $token, id: $id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetCallRoomsImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$JoinCallImpl &&
+            (identical(other.channelName, channelName) ||
+                other.channelName == channelName) &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, channelName, token, id);
+
+  /// Create a copy of VideoCallTelemedisEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$JoinCallImplCopyWith<_$JoinCallImpl> get copyWith =>
+      __$$JoinCallImplCopyWithImpl<_$JoinCallImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String channelName, String token, int id)
+    joinCall,
+    required TResult Function() userLeft,
+  }) {
+    return joinCall(channelName, token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String channelName, String token, int id)? joinCall,
+    TResult? Function()? userLeft,
+  }) {
+    return joinCall?.call(channelName, token, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String channelName, String token, int id)? joinCall,
+    TResult Function()? userLeft,
+    required TResult orElse(),
+  }) {
+    if (joinCall != null) {
+      return joinCall(channelName, token, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_JoinCall value) joinCall,
+    required TResult Function(_UserLeft value) userLeft,
+  }) {
+    return joinCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_JoinCall value)? joinCall,
+    TResult? Function(_UserLeft value)? userLeft,
+  }) {
+    return joinCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_JoinCall value)? joinCall,
+    TResult Function(_UserLeft value)? userLeft,
+    required TResult orElse(),
+  }) {
+    if (joinCall != null) {
+      return joinCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _JoinCall implements VideoCallTelemedisEvent {
+  const factory _JoinCall({
+    required final String channelName,
+    required final String token,
+    required final int id,
+  }) = _$JoinCallImpl;
+
+  String get channelName;
+  String get token;
+  int get id;
+
+  /// Create a copy of VideoCallTelemedisEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$JoinCallImplCopyWith<_$JoinCallImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UserLeftImplCopyWith<$Res> {
+  factory _$$UserLeftImplCopyWith(
+    _$UserLeftImpl value,
+    $Res Function(_$UserLeftImpl) then,
+  ) = __$$UserLeftImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserLeftImplCopyWithImpl<$Res>
+    extends _$VideoCallTelemedisEventCopyWithImpl<$Res, _$UserLeftImpl>
+    implements _$$UserLeftImplCopyWith<$Res> {
+  __$$UserLeftImplCopyWithImpl(
+    _$UserLeftImpl _value,
+    $Res Function(_$UserLeftImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of VideoCallTelemedisEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UserLeftImpl implements _UserLeft {
+  const _$UserLeftImpl();
+
+  @override
+  String toString() {
+    return 'VideoCallTelemedisEvent.userLeft()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UserLeftImpl);
   }
 
   @override
@@ -224,29 +422,33 @@ class _$GetCallRoomsImpl implements _GetCallRooms {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCallRooms,
+    required TResult Function(String channelName, String token, int id)
+    joinCall,
+    required TResult Function() userLeft,
   }) {
-    return getCallRooms();
+    return userLeft();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCallRooms,
+    TResult? Function(String channelName, String token, int id)? joinCall,
+    TResult? Function()? userLeft,
   }) {
-    return getCallRooms?.call();
+    return userLeft?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCallRooms,
+    TResult Function(String channelName, String token, int id)? joinCall,
+    TResult Function()? userLeft,
     required TResult orElse(),
   }) {
-    if (getCallRooms != null) {
-      return getCallRooms();
+    if (userLeft != null) {
+      return userLeft();
     }
     return orElse();
   }
@@ -255,60 +457,81 @@ class _$GetCallRoomsImpl implements _GetCallRooms {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCallRooms value) getCallRooms,
+    required TResult Function(_JoinCall value) joinCall,
+    required TResult Function(_UserLeft value) userLeft,
   }) {
-    return getCallRooms(this);
+    return userLeft(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCallRooms value)? getCallRooms,
+    TResult? Function(_JoinCall value)? joinCall,
+    TResult? Function(_UserLeft value)? userLeft,
   }) {
-    return getCallRooms?.call(this);
+    return userLeft?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCallRooms value)? getCallRooms,
+    TResult Function(_JoinCall value)? joinCall,
+    TResult Function(_UserLeft value)? userLeft,
     required TResult orElse(),
   }) {
-    if (getCallRooms != null) {
-      return getCallRooms(this);
+    if (userLeft != null) {
+      return userLeft(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetCallRooms implements GetCallRoomsEvent {
-  const factory _GetCallRooms() = _$GetCallRoomsImpl;
+abstract class _UserLeft implements VideoCallTelemedisEvent {
+  const factory _UserLeft() = _$UserLeftImpl;
 }
 
 /// @nodoc
-mixin _$GetCallRoomsState {
+mixin _$VideoCallTelemedisState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TelemedisResponseModel> callRooms) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )
+    loaded,
+    required TResult Function() error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult? Function()? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -336,24 +559,27 @@ mixin _$GetCallRoomsState {
 }
 
 /// @nodoc
-abstract class $GetCallRoomsStateCopyWith<$Res> {
-  factory $GetCallRoomsStateCopyWith(
-    GetCallRoomsState value,
-    $Res Function(GetCallRoomsState) then,
-  ) = _$GetCallRoomsStateCopyWithImpl<$Res, GetCallRoomsState>;
+abstract class $VideoCallTelemedisStateCopyWith<$Res> {
+  factory $VideoCallTelemedisStateCopyWith(
+    VideoCallTelemedisState value,
+    $Res Function(VideoCallTelemedisState) then,
+  ) = _$VideoCallTelemedisStateCopyWithImpl<$Res, VideoCallTelemedisState>;
 }
 
 /// @nodoc
-class _$GetCallRoomsStateCopyWithImpl<$Res, $Val extends GetCallRoomsState>
-    implements $GetCallRoomsStateCopyWith<$Res> {
-  _$GetCallRoomsStateCopyWithImpl(this._value, this._then);
+class _$VideoCallTelemedisStateCopyWithImpl<
+  $Res,
+  $Val extends VideoCallTelemedisState
+>
+    implements $VideoCallTelemedisStateCopyWith<$Res> {
+  _$VideoCallTelemedisStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -367,14 +593,14 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$VideoCallTelemedisStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
     _$InitialImpl _value,
     $Res Function(_$InitialImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -385,7 +611,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'GetCallRoomsState.initial()';
+    return 'VideoCallTelemedisState.initial()';
   }
 
   @override
@@ -402,8 +628,14 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TelemedisResponseModel> callRooms) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )
+    loaded,
+    required TResult Function() error,
   }) {
     return initial();
   }
@@ -413,8 +645,14 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult? Function()? error,
   }) {
     return initial?.call();
   }
@@ -424,8 +662,14 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -472,7 +716,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetCallRoomsState {
+abstract class _Initial implements VideoCallTelemedisState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -486,14 +730,14 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$VideoCallTelemedisStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
     _$LoadingImpl _value,
     $Res Function(_$LoadingImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -504,7 +748,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'GetCallRoomsState.loading()';
+    return 'VideoCallTelemedisState.loading()';
   }
 
   @override
@@ -521,8 +765,14 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TelemedisResponseModel> callRooms) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )
+    loaded,
+    required TResult Function() error,
   }) {
     return loading();
   }
@@ -532,8 +782,14 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult? Function()? error,
   }) {
     return loading?.call();
   }
@@ -543,8 +799,14 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -591,7 +853,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetCallRoomsState {
+abstract class _Loading implements VideoCallTelemedisState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -602,29 +864,46 @@ abstract class _$$LoadedImplCopyWith<$Res> {
     $Res Function(_$LoadedImpl) then,
   ) = __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TelemedisResponseModel> callRooms});
+  $Res call({RtcEngine engine, int? remoteUid, bool? localUserJoined, int id});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$VideoCallTelemedisStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
     _$LoadedImpl _value,
     $Res Function(_$LoadedImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? callRooms = null}) {
+  $Res call({
+    Object? engine = null,
+    Object? remoteUid = freezed,
+    Object? localUserJoined = freezed,
+    Object? id = null,
+  }) {
     return _then(
       _$LoadedImpl(
-        null == callRooms
-            ? _value._callRooms
-            : callRooms // ignore: cast_nullable_to_non_nullable
-                as List<TelemedisResponseModel>,
+        null == engine
+            ? _value.engine
+            : engine // ignore: cast_nullable_to_non_nullable
+                as RtcEngine,
+        freezed == remoteUid
+            ? _value.remoteUid
+            : remoteUid // ignore: cast_nullable_to_non_nullable
+                as int?,
+        freezed == localUserJoined
+            ? _value.localUserJoined
+            : localUserJoined // ignore: cast_nullable_to_non_nullable
+                as bool?,
+        null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                as int,
       ),
     );
   }
@@ -633,20 +912,25 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(final List<TelemedisResponseModel> callRooms)
-    : _callRooms = callRooms;
+  const _$LoadedImpl(
+    this.engine,
+    this.remoteUid,
+    this.localUserJoined,
+    this.id,
+  );
 
-  final List<TelemedisResponseModel> _callRooms;
   @override
-  List<TelemedisResponseModel> get callRooms {
-    if (_callRooms is EqualUnmodifiableListView) return _callRooms;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_callRooms);
-  }
+  final RtcEngine engine;
+  @override
+  final int? remoteUid;
+  @override
+  final bool? localUserJoined;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'GetCallRoomsState.loaded(callRooms: $callRooms)';
+    return 'VideoCallTelemedisState.loaded(engine: $engine, remoteUid: $remoteUid, localUserJoined: $localUserJoined, id: $id)';
   }
 
   @override
@@ -654,17 +938,19 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(
-              other._callRooms,
-              _callRooms,
-            ));
+            (identical(other.engine, engine) || other.engine == engine) &&
+            (identical(other.remoteUid, remoteUid) ||
+                other.remoteUid == remoteUid) &&
+            (identical(other.localUserJoined, localUserJoined) ||
+                other.localUserJoined == localUserJoined) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_callRooms));
+      Object.hash(runtimeType, engine, remoteUid, localUserJoined, id);
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -677,10 +963,16 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TelemedisResponseModel> callRooms) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )
+    loaded,
+    required TResult Function() error,
   }) {
-    return loaded(callRooms);
+    return loaded(engine, remoteUid, localUserJoined, id);
   }
 
   @override
@@ -688,10 +980,16 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult? Function()? error,
   }) {
-    return loaded?.call(callRooms);
+    return loaded?.call(engine, remoteUid, localUserJoined, id);
   }
 
   @override
@@ -699,12 +997,18 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(callRooms);
+      return loaded(engine, remoteUid, localUserJoined, id);
     }
     return orElse();
   }
@@ -747,13 +1051,20 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements GetCallRoomsState {
-  const factory _Loaded(final List<TelemedisResponseModel> callRooms) =
-      _$LoadedImpl;
+abstract class _Loaded implements VideoCallTelemedisState {
+  const factory _Loaded(
+    final RtcEngine engine,
+    final int? remoteUid,
+    final bool? localUserJoined,
+    final int id,
+  ) = _$LoadedImpl;
 
-  List<TelemedisResponseModel> get callRooms;
+  RtcEngine get engine;
+  int? get remoteUid;
+  bool? get localUserJoined;
+  int get id;
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -766,76 +1077,55 @@ abstract class _$$ErrorImplCopyWith<$Res> {
     _$ErrorImpl value,
     $Res Function(_$ErrorImpl) then,
   ) = __$$ErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$GetCallRoomsStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$VideoCallTelemedisStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
     _$ErrorImpl _value,
     $Res Function(_$ErrorImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of GetCallRoomsState
+  /// Create a copy of VideoCallTelemedisState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$ErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
-  }
 }
 
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
-
-  @override
-  final String message;
+  const _$ErrorImpl();
 
   @override
   String toString() {
-    return 'GetCallRoomsState.error(message: $message)';
+    return 'VideoCallTelemedisState.error()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
+        (other.runtimeType == runtimeType && other is _$ErrorImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of GetCallRoomsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<TelemedisResponseModel> callRooms) loaded,
-    required TResult Function(String message) error,
+    required TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )
+    loaded,
+    required TResult Function() error,
   }) {
-    return error(message);
+    return error();
   }
 
   @override
@@ -843,10 +1133,16 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult? Function()? error,
   }) {
-    return error?.call(message);
+    return error?.call();
   }
 
   @override
@@ -854,12 +1150,18 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<TelemedisResponseModel> callRooms)? loaded,
-    TResult Function(String message)? error,
+    TResult Function(
+      RtcEngine engine,
+      int? remoteUid,
+      bool? localUserJoined,
+      int id,
+    )?
+    loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error();
     }
     return orElse();
   }
@@ -902,14 +1204,6 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements GetCallRoomsState {
-  const factory _Error(final String message) = _$ErrorImpl;
-
-  String get message;
-
-  /// Create a copy of GetCallRoomsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Error implements VideoCallTelemedisState {
+  const factory _Error() = _$ErrorImpl;
 }

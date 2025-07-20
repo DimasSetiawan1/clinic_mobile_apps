@@ -69,7 +69,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       emit(ChatRoomState.failed(e.toString()));
     }
   }
-
+  
   @override
   Future<void> close() {
     _chatRoomSubscription?.cancel();

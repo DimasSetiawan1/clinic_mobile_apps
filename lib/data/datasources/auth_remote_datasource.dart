@@ -33,11 +33,10 @@ class AuthRemoteDatasource {
     }
   }
 
-  
-
   Future<Either<String, String>> updateOneSignalToken(
     String oneSignalToken,
   ) async {
+    log('OneSignal Token: $oneSignalToken');
     final userData = AuthLocalDatasource().getUserData();
     final Map<String, String> headers = {
       'Authorization': 'Bearer ${userData?.data?.token}',
@@ -48,9 +47,8 @@ class AuthRemoteDatasource {
         "${dotenv.env['BASE_URL']}/api/users/${userData?.data?.user?.id}/update-token",
       ),
       headers: headers,
-      body: jsonEncode({"one_signal_token": oneSignalToken}),
+      body: {"one_signal_token": oneSignalToken},
     );
-
     if (response.statusCode == 200) {
       final status = jsonDecode(response.body)['status'];
       return Right('$status');

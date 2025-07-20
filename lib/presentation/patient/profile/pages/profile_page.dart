@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
       body: SafeArea(
-        child: ListView(
+        child: Column(
           children: [
             Container(
               width: context.deviceWidth,
@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            const SpaceHeight(14),
+            // const SpaceHeight(14),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(

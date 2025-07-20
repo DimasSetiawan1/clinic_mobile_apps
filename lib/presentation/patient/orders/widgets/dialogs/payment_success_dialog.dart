@@ -12,54 +12,63 @@ class PaymentSuccessDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      scrollable: true,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      content: SizedBox(
-        height: 382,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              Assets.images.paymentSuccess.path,
-              width: context.deviceWidth,
-              fit: BoxFit.cover,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AlertDialog(
+          scrollable: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          content: SizedBox(
+            height: context.deviceHeight * 0.5,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  Assets.images.paymentSuccess.path,
+                  width: context.deviceWidth,
+                  fit: BoxFit.cover,
+                ),
+                // const Spacer(),
+                const Text(
+                  'Pembayaran Berhasil',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const Text(
+                  "Terima kasih atas pembayaran Anda. Dokter akan segera menghubungi Anda untuk konsultasi lebih lanjut.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xffB2B2B2),
+                  ),
+                ),
+                const SpaceHeight(16),
+              ],
             ),
-            const Spacer(),
-            const Text(
-              'Pembayaran Berhasil',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const Text(
-              "Terima kasih atas pembayaran Anda. Dokter akan segera menghubungi Anda untuk konsultasi lebih lanjut.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-                color: Color(0xffB2B2B2),
-              ),
-            ),
-            const SpaceHeight(16),
-            Button.filled(
-              height: 48,
-              borderRadius: 8,
-              fontSize: 15.0,
-              onPressed: () {
-                GoRouter.of(context).goNamed(
-                  AppRouter.homePatientPage.name,
-                  queryParameters: {"initialIndex": "3"},
-                );
-              },
-              label: 'Konsultasi Sekarang',
-            ),
-          ],
+          ),
         ),
-      ),
+        Button.filled(
+          height: context.deviceHeight * 0.06,
+          width: context.deviceWidth * 0.8,
+          borderRadius: 8,
+          fontSize: 15.0,
+          onPressed: () {
+            GoRouter.of(context).goNamed(
+              AppRouter.homePatientPage.name,
+              queryParameters: {"initialIndex": "0"},
+            );
+          },
+          label: 'Konsultasi Sekarang',
+        ),
+      ],
     );
   }
 }

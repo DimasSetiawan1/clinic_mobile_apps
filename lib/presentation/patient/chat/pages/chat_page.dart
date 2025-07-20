@@ -6,7 +6,7 @@ import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/get_all_message_patient/get_all_message_patient_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/chat/pages/room_chat_page.dart';
-import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/filter_telemedis_status.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/telemedis_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -92,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
               const SpaceHeight(20),
-              FilterTelemedisStatus(),
+              // FilterTelemedisStatus(),
               const SpaceHeight(20),
               BlocBuilder<GetAllMessagePatientBloc, GetAllMessagePatientState>(
                 builder: (context, state) {

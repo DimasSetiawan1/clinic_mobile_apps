@@ -2,10 +2,13 @@ import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/components/widgets/custom_avatar.dart';
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/enums/user_role.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/patient/doctors/blocs/load_doctor_active/load_doctor_active_bloc.dart';
-import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/filter_telemedis_status.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/blocs/get_call_rooms/get_call_rooms_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/cubits/telemedis_status_cubit.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/telemedis_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
@@ -27,8 +30,8 @@ class _TelemedisPageState extends State<TelemedisPage> {
   UserModel? _user;
   @override
   void initState() {
-    context.read<LoadDoctorActiveBloc>().add(
-      LoadDoctorActiveEvent.loadDoctor(),
+    context.read<GetCallRoomsBloc>().add(
+      GetCallRoomsEvent.getCallRooms(TelemedisStatusState.semua),
     );
     _user = AuthLocalDatasource().getUserData()?.data?.user;
     super.initState();
@@ -42,16 +45,18 @@ class _TelemedisPageState extends State<TelemedisPage> {
         statusBarBrightness: Brightness.dark,
       ),
     );
-    return RefreshIndicator(
-      onRefresh: () async {
-        context.read<LoadDoctorActiveBloc>().add(
-          LoadDoctorActiveEvent.loadDoctor(),
-        );
-      },
-      child: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          RefreshIndicator(
+            onRefresh: () async {
+              context.read<GetCallRoomsBloc>().add(
+                GetCallRoomsEvent.getCallRooms(TelemedisStatusState.semua),
+              );
+            },
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              shrinkWrap: true,
               children: [
                 Container(
                   height: 120,
@@ -86,18 +91,23 @@ class _TelemedisPageState extends State<TelemedisPage> {
                   ),
                 ),
                 const SpaceHeight(20),
-                FilterTelemedisStatus(),
+                TelemedisStatus(),
                 const SpaceHeight(5),
-                BlocBuilder<LoadDoctorActiveBloc, LoadDoctorActiveState>(
+                BlocBuilder<GetCallRoomsBloc, GetCallRoomsState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      orElse: () {
+                      loading: () {
                         return const Center(child: CircularProgressIndicator());
                       },
-                      success: (doctors) {
+                      orElse: () {
+                        return const Center(
+                          child: Text('No Call Rooms Available'),
+                        );
+                      },
+                      loaded: (doctors) {
                         if (doctors.isEmpty) {
                           return const Center(
-                            child: Text('No doctors available'),
+                            child: Text('No Telemedis Available'),
                           );
                         }
                         return ListView.builder(
@@ -105,23 +115,25 @@ class _TelemedisPageState extends State<TelemedisPage> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: doctors.length,
                           itemBuilder: (context, index) {
-                            // final doctor = doctors[index];
-                            // return CardDoctorTelemedis(doctor: doctor);
-                            log(doctors[index].toMap().toString());
+                            return CardDoctorTelemedis(
+                              isDoctor:
+                                  UserRole.fromString(_user!.role!) ==
+                                  UserRole.doctor,
+                              user: doctors[index],
+                            );
                           },
                         );
                       },
-                      failure: (message) {
-                        log(message);
-                        return Center(child: Text('Error: $message'));
+                      error: (message) {
+                        return Center(child: Text(message));
                       },
                     );
                   },
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

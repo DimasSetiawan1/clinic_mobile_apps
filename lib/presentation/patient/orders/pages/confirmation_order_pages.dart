@@ -37,35 +37,38 @@ class ConfirmationOrderPages extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-        height: 77,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        height: context.deviceHeight * 0.1,
         width: context.deviceWidth,
         decoration: const BoxDecoration(color: AppColors.white),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Biaya Konsultasi",
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.primary,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Biaya Konsultasi",
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.primary,
+                    ),
                   ),
-                ),
-                Text(
-                  isTelemedis
-                      ? doctor.telemedicineFee.toString().currencyFormatRpV2
-                      : doctor.chatFee.toString().currencyFormatRpV2,
-                  style: TextStyle(
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff677294),
+                  Text(
+                    isTelemedis
+                        ? doctor.telemedicineFee.toString().currencyFormatRpV2
+                        : doctor.chatFee.toString().currencyFormatRpV2,
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff677294),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             BlocConsumer<CreateOrderBloc, CreateOrderState>(
               listener: (context, state) {
@@ -94,30 +97,32 @@ class ConfirmationOrderPages extends StatelessWidget {
               builder: (context, state) {
                 return state.maybeWhen(
                   orElse: () {
-                    return Button.filled(
-                      width: 130,
-                      height: 40,
-                      borderRadius: 10,
-                      onPressed: () {
-                        final localData = AuthLocalDatasource().getUserData();
-                        final model = CreateOrderRequestModel(
-                          patientId: localData!.data!.user!.id!,
-                          doctorId: doctor.id,
-                          service: isTelemedis ? "Telemedicine" : "Chat",
-                          price:
-                              isTelemedis
-                                  ? doctor.telemedicineFee!
-                                  : doctor.chatFee!,
-                          duration: 30,
-                          clinicId: doctor.clinic!.id,
-                          schedule: DateTime.now(),
-                        );
-                        context.read<CreateOrderBloc>().add(
-                          CreateOrderEvent.createOrder(model),
-                        );
-                      },
-                      label: isTelemedis ? 'Order Telemedis' : 'Order Chat',
-                      fontSize: 12.0,
+                    return Expanded(
+                      child: Button.filled(
+                        width: context.deviceWidth * 0.4,
+                        height: 40,
+                        borderRadius: 10,
+                        onPressed: () {
+                          final localData = AuthLocalDatasource().getUserData();
+                          final model = CreateOrderRequestModel(
+                            patientId: localData!.data!.user!.id!,
+                            doctorId: doctor.id,
+                            service: isTelemedis ? "Telemedicine" : "Chat",
+                            price:
+                                isTelemedis
+                                    ? doctor.telemedicineFee!
+                                    : doctor.chatFee!,
+                            duration: 30,
+                            clinicId: doctor.clinic!.id,
+                            schedule: DateTime.now(),
+                          );
+                          context.read<CreateOrderBloc>().add(
+                            CreateOrderEvent.createOrder(model),
+                          );
+                        },
+                        label: isTelemedis ? 'Order Telemedis' : 'Order Chat',
+                        fontSize: 12.0,
+                      ),
                     );
                   },
                   loading: () => CircularProgressIndicator(),

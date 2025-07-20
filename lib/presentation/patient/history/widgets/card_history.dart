@@ -45,12 +45,8 @@ class CardHistory extends StatelessWidget {
                   ),
                   child:
                       isHistoryDoctor
-                          ? CustomAvatar(
-                            imageUrl: orders.patient.image,
-                          )
-                          : CustomAvatar(
-                            imageUrl: orders.doctor.image,
-                          ),
+                          ? CustomAvatar(imageUrl: orders.patient.image)
+                          : CustomAvatar(imageUrl: orders.doctor.image),
                 ),
                 const SpaceWidth(20),
                 Expanded(
@@ -125,27 +121,27 @@ class CardHistory extends StatelessWidget {
 
                               switch (orders.status) {
                                 "PAID" => StatusOrderWigdet(
-                                  width: 60,
+                                  width: context.deviceHeight * 0.1,
                                   textColor: Color(0xff219653),
                                   backgroundColor: Color(
                                     0xff219653,
-                                  ).withOpacity(0.15),
+                                  ).withValues(alpha: 0.15),
                                   status: orders.status,
                                 ),
                                 "PENDING" => StatusOrderWigdet(
-                                  width: 80,
+                                  width: context.deviceHeight * 0.15,
                                   textColor: Color(0xffF2994A),
                                   backgroundColor: Color(
                                     0xffF2994A,
-                                  ).withOpacity(0.15),
+                                  ).withValues(alpha: 0.15),
                                   status: orders.status,
                                 ),
                                 "EXPIRED" => StatusOrderWigdet(
-                                  width: 80,
+                                  width: context.deviceHeight * 0.15,
                                   textColor: Color(0xffEB5757),
                                   backgroundColor: Color(
                                     0xffEB5757,
-                                  ).withOpacity(0.15),
+                                  ).withValues(alpha: 0.15),
                                   status: orders.status,
                                 ),
                                 _ => Container(),
@@ -181,7 +177,7 @@ class StatusOrderWigdet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 24,
+      height: context.deviceHeight * 0.04,
       width: width,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
@@ -189,7 +185,7 @@ class StatusOrderWigdet extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
             height: 8,

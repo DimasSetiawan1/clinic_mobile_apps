@@ -49,10 +49,13 @@ import 'package:clinic_mobile_apps/presentation/patient/home/pages/home_page.dar
 import 'package:clinic_mobile_apps/presentation/patient/orders/pages/confirmation_order_pages.dart';
 import 'package:clinic_mobile_apps/presentation/patient/orders/pages/payment_url_page.dart';
 import 'package:clinic_mobile_apps/presentation/patient/profile/pages/profile_page.dart';
-import 'package:clinic_mobile_apps/presentation/patient/telemedis/blocs/bloc/get_call_rooms_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/blocs/get_call_rooms/get_call_rooms_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/blocs/video_call_telemedis/video_call_telemedis_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/cubits/telemedis_status_cubit.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/pages/video_call_page.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/widgets/telemedis_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -38,9 +38,9 @@ class RouterConfig {
         GoRoute(
           path: AppRouter.homeDoctorPage.path,
           name: AppRouter.homeDoctorPage.name,
-          builder: (context, state) => const DoctorHomePage(),
+          builder: (context, state) => const DoctorHomePage(initialIndex: 0),
         ),
-        GoRoute(
+      GoRoute(
           path: AppRouter.homeAdminPage.path,
           name: AppRouter.homeAdminPage.name,
           builder: (context, state) => AdminMainPage(0),
@@ -101,6 +101,20 @@ class RouterConfig {
             return PaymentWebview(
               invoiceUrl: url,
               orderId: int.tryParse(orderId)!,
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.videoCallPage.path,
+          name: AppRouter.videoCallPage.name,
+          builder: (_, state) {
+            final channelName = state.uri.queryParameters['channelName'] ?? '';
+            final token = state.uri.queryParameters['token'] ?? '';
+            final id = state.uri.queryParameters['id'] ?? '0';
+            return VideoCallPage(
+              channelName: channelName,
+              token: token,
+              id: int.parse(id),
             );
           },
         ),

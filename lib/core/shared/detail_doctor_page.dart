@@ -10,7 +10,6 @@ import 'package:clinic_mobile_apps/core/components/widgets/buttons.dart';
 import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
 import 'package:clinic_mobile_apps/core/constants/colors.dart';
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
-import 'package:clinic_mobile_apps/presentation/patient/orders/pages/confirmation_order_pages.dart';
 import 'package:go_router/go_router.dart';
 
 class DetailDoctorPage extends StatelessWidget {
@@ -49,7 +48,6 @@ class DetailDoctorPage extends StatelessWidget {
                     color: Color(0xff677294),
                   ),
                 ),
-                const SpaceHeight(6),
 
                 Text(
                   index == 0
@@ -63,21 +61,24 @@ class DetailDoctorPage extends StatelessWidget {
                 ),
                 const SpaceHeight(16),
 
-                Button.filled(
-                  width: 130,
-                  height: 40,
-                  borderRadius: 10,
-                  onPressed: () {
-                    GoRouter.of(context).pushNamed(
-                      AppRouter.confirmationOrderPage.name,
-                      queryParameters: {
-                        'doctor': jsonEncode(doctor.toMap()),
-                        'isTelemedis': index != 0 ? 'true' : 'false',
-                      },
-                    );
-                  },
-                  label: index == 0 ? 'Chat Sekarang' : 'Telemedis',
-                  fontSize: 12.0,
+                Expanded(
+                  flex: 1,
+                  child: Button.filled(
+                    width: context.deviceWidth * 0.4,
+                    height: 40,
+                    borderRadius: 10,
+                    onPressed: () {
+                      GoRouter.of(context).pushNamed(
+                        AppRouter.confirmationOrderPage.name,
+                        queryParameters: {
+                          'doctor': jsonEncode(doctor.toMap()),
+                          'isTelemedis': index != 0 ? 'true' : 'false',
+                        },
+                      );
+                    },
+                    label: index == 0 ? 'Chat Sekarang' : 'Telemedis',
+                    fontSize: 12.0,
+                  ),
                 ),
               ],
             ),

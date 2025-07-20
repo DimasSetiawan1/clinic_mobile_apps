@@ -1,7 +1,12 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/extensions/build_context_ext.dart';
+import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
+import 'package:clinic_mobile_apps/presentation/admin/home/blocs/get_history/get_history_order_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/chat/blocs/get_all_message_patient/get_all_message_patient_bloc.dart';
 import 'package:clinic_mobile_apps/presentation/patient/orders/widgets/dialogs/payment_success_dialog.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/blocs/get_call_rooms/get_call_rooms_bloc.dart';
+import 'package:clinic_mobile_apps/presentation/patient/telemedis/cubits/telemedis_status_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -9,8 +14,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 class PaymentWebview extends StatefulWidget {
   final String invoiceUrl;
   final int orderId;
-  const PaymentWebview(
-      {super.key, required this.invoiceUrl, required this.orderId});
+  const PaymentWebview({
+    super.key,
+    required this.invoiceUrl,
+    required this.orderId,
+  });
 
   @override
   State<PaymentWebview> createState() => _PaymentWebviewState();
@@ -20,6 +28,17 @@ class _PaymentWebviewState extends State<PaymentWebview> {
   late final WebViewController _controller;
   final bool _isLoading = false;
   Future<void> _handlePaymentSuccess() async {
+    final user = AuthLocalDatasource().getUserData()?.data?.user;
+    context.read<GetAllMessagePatientBloc>().add(
+      GetAllMessagePatientEvent.watchListMessage(user!.id!, user.role!),
+    );
+    context.read<GetCallRoomsBloc>().add(
+      GetCallRoomsEvent.getCallRooms(TelemedisStatusState.semua),
+    );
+    context.read<GetHistoryOrderBloc>().add(
+      GetHistoryOrderEvent.getHistoryOrders(),
+    );
+
     showDialog(context: context, builder: (_) => const PaymentSuccessDialog());
   }
 
@@ -35,9 +54,7 @@ class _PaymentWebviewState extends State<PaymentWebview> {
   }
 
   @override
-
   /// Disposes the WebViewController and cleans up any resources used by this widget.
-
   void dispose() {
     _controller.clearCache();
     super.dispose();
@@ -77,9 +94,9 @@ class _PaymentWebviewState extends State<PaymentWebview> {
       ..addJavaScriptChannel(
         'Toaster',
         onMessageReceived: (JavaScriptMessage message) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(message.message)));
         },
       )
       ..loadRequest(Uri.parse(widget.invoiceUrl));
@@ -89,9 +106,10 @@ class _PaymentWebviewState extends State<PaymentWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : SafeArea(child: WebViewWidget(controller: _controller)),
+      body:
+          _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : SafeArea(child: WebViewWidget(controller: _controller)),
     );
   }
 }

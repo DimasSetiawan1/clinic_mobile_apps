@@ -17,11 +17,11 @@ enum AppRouter {
   doctorListPage,
   chatListPage,
   chatPage,
-  telemedicineListPage,
   telemedicinePage,
   historyPatientPage,
   historyDoctorPage,
   roomChatPage,
+  videoCallPage,
   historyAdminPage,
 }
 
@@ -51,8 +51,8 @@ extension AppRouterExtension on AppRouter {
     AppRouter.doctorListPage: '/doctor/list',
     AppRouter.chatListPage: '/chat/list',
     AppRouter.chatPage: '/chat',
-    AppRouter.telemedicineListPage: '/telemedicine/list',
     AppRouter.telemedicinePage: '/telemedicine',
+    AppRouter.videoCallPage: '/telemedicine/video-call',
     AppRouter.historyPatientPage: '/history/patient',
     AppRouter.historyDoctorPage: '/history/doctor',
     AppRouter.historyAdminPage: '/history/admin',
@@ -60,8 +60,7 @@ extension AppRouterExtension on AppRouter {
     AppRouter.paymentWebviewPage: '/payment/webview',
     AppRouter.roomChatPage: '/chat/room',
     AppRouter.chatWithDoctorPage: '/chat/doctor',
-    
   };
-  
+
   String get path => _paths[this] ?? '';
 }

@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:clinic_mobile_apps/core/constants/global_variable.dart';
+import 'package:clinic_mobile_apps/core/route/app_route.dart';
 import 'package:clinic_mobile_apps/data/datasources/auth_local_datasource.dart';
 import 'package:clinic_mobile_apps/data/models/response/login_response_model.dart';
 import 'package:clinic_mobile_apps/presentation/auth/pages/onboarding_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_mobile_apps/core/assets/assets.gen.dart';
 import 'package:clinic_mobile_apps/core/components/widgets/spaces.dart';
@@ -125,19 +127,25 @@ class _ProfileDoctorPageState extends State<ProfileDoctorPage> {
             _menuItem(Assets.icons.help.path, 'Bantuan'), const SpaceHeight(16),
             InkWell(
               onTap: () async {
+                // FirebaseAuth.instance.signOut();
+                // await GoogleSignIn().signOut();
+                // await AuthLocalDatasource().removeUserData();
+
+                // context.mounted
+                //     ? Navigator.pushAndRemoveUntil(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const OnboardingPage(),
+                //       ),
+                //       (route) => false,
+                //     )
+                //     : null;
                 FirebaseAuth.instance.signOut();
                 await GoogleSignIn().signOut();
                 await AuthLocalDatasource().removeUserData();
-
-                context.mounted
-                    ? Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OnboardingPage(),
-                      ),
-                      (route) => false,
-                    )
-                    : null;
+                if (context.mounted) {
+                  GoRouter.of(context).goNamed(AppRouter.onboardingPage.name);
+                }
               },
               child: _menuItem(Assets.icons.logout.path, 'Keluar'),
             ),

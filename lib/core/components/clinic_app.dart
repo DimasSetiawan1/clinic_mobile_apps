@@ -19,6 +19,7 @@ class ClinicApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoadDoctorActiveBloc(DoctorRemoteDatasource()),
         ),
+        BlocProvider(create: (context) => TelemedisStatusCubit()),
         BlocProvider(create: (context) => CheckAuthCubit()),
         BlocProvider(
           create: (context) => LoginGoogleBloc(AuthRemoteDatasource()),
@@ -59,6 +60,7 @@ class ClinicApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => ChatRoomBloc(FirebaseServices())),
         BlocProvider(create: (context) => ValidationMessageCubit()),
+        BlocProvider(create: (context) => VideoCallTelemedisBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
